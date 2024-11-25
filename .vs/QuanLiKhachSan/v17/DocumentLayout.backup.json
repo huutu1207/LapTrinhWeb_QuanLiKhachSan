@@ -3,8 +3,16 @@
   "WorkspaceRootPath": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\views\\shared\\_footerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_footerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\views\\shared\\_sliderpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_sliderpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\content\\style.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -13,10 +21,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\controllers\\trangchucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\trangchucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\views\\shared\\_footerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_footerpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -54,51 +58,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Style.css",
               "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Content\\Style.css",
               "RelativeDocumentMoniker": "WebApplication1\\Content\\Style.css",
               "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Content\\Style.css",
               "RelativeToolTip": "WebApplication1\\Content\\Style.css",
-              "ViewState": "AgIAABEBAAAAAAAAAAAAADcBAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAAAgAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-11-24T23:40:14.511Z"
+              "WhenOpened": "2024-11-24T23:40:14.511Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
+              "Title": "_SliderPartial.cshtml",
+              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_SliderPartial.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_SliderPartial.cshtml",
+              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_SliderPartial.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_SliderPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAACHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-25T06:03:23.827Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "_FooterPartial.cshtml",
               "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_FooterPartial.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_FooterPartial.cshtml",
               "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_FooterPartial.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\Shared\\_FooterPartial.cshtml",
-              "ViewState": "AgIAABQAAAAAAAAAAAAQwC0AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-24T23:12:56.853Z"
+              "WhenOpened": "2024-11-24T23:12:56.853Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "_NavPartial.cshtml",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-24T16:06:40.821Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "TrangChuController.cs",
               "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\TrangChuController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\TrangChuController.cs",
               "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\TrangChuController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\TrangChuController.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAUwA8AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-24T16:03:57.061Z"
+              "WhenOpened": "2024-11-24T16:03:57.061Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -108,9 +116,22 @@
               "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-24T15:50:22.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "_NavPartial.cshtml",
+              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-24T16:06:40.821Z",
               "EditorCaption": ""
             }
           ]

@@ -22,5 +22,10 @@ namespace WebApplication1.Controllers
         {
             return PartialView("_FooterPartial");
         }
+
+        public ActionResult SliderPartial()
+        {
+            return PartialView("_SliderPartial");
+        }
     }
 }
