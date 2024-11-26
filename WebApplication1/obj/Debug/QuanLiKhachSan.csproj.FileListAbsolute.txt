@@ -160,3 +160,7 @@ C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\Web
 C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\obj\Debug\QuanLiKh.F7CD41EC.Up2Date
 C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\obj\Debug\WebApplication1.pdb
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.dll
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.xml
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
