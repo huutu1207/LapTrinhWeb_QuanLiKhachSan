@@ -198,7 +198,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\anh-sale-2.jpg" />
+    <Content Include="Images\anh-sale-3.png" />
+    <Content Include="Images\anh-sale-hang-1.jpg" />
     <Content Include="Images\Logo.png" />
+    <Content Include="Images\phong-don-1.jpg" />
+    <Content Include="Images\sale.png" />
     <Content Include="Images\Sliders\1.jpg" />
     <Content Include="Images\Sliders\2.jpg" />
     <Content Include="Images\Sliders\3.jpg" />
@@ -261,6 +266,8 @@
     <Content Include="Views\User\DangKy.cshtml" />
     <Content Include="Views\User\XacNhanEmail.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
+    <Content Include="Views\Shared\_DiscountPartial.cshtml" />
+    <Content Include="Views\Shared\_LoaiPhongPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
