@@ -136,6 +136,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
@@ -245,6 +246,10 @@
     <Content Include="Areas\Admin\Views\QuanLiPhong\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\DangNhap.cshtml" />
+    <Content Include="Areas\Admin\Views\Phong\Chitietphong.cshtml" />
+    <Content Include="Areas\Admin\Views\Phong\DanhSachPhong.cshtml" />
+    <Content Include="Areas\Admin\Views\Phong\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Phong\Create.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

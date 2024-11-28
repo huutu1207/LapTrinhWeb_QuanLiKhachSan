@@ -1,18 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\",
+  "WorkspaceRootPath": "D:\\BaoCaoQLKS\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\baocaoqlks\\webapplication1\\areas\\admin\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\areas\\admin\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\areas\\admin\\views\\phong\\danhsachphong.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\areas\\admin\\views\\phong\\danhsachphong.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\areas\\admin\\views\\phong\\chitietphong.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\areas\\admin\\views\\phong\\chitietphong.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\areas\\admin\\views\\phong\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\areas\\admin\\views\\phong\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\areas\\admin\\views\\phong\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\areas\\admin\\views\\phong\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|D:\\BaoCaoQLKS\\webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -45,25 +61,77 @@
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Create.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Create.cshtml",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Create.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Create.cshtml",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAgwEUAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T10:53:49.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Edit.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Edit.cshtml",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Edit.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Edit.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAAAgwFEAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T10:25:45.55Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PhongController.cs",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\PhongController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\PhongController.cs",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\PhongController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\PhongController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T07:49:54.228Z",
-              "EditorCaption": ""
+              "Title": "DanhSachPhong.cshtml",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\DanhSachPhong.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Admin\\Views\\Phong\\DanhSachPhong.cshtml",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\DanhSachPhong.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Admin\\Views\\Phong\\DanhSachPhong.cshtml",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAgwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T10:25:27.728Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Chitietphong.cshtml",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Chitietphong.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Chitietphong.cshtml",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Views\\Phong\\Chitietphong.cshtml",
+              "RelativeToolTip": "WebApplication1\\Areas\\Admin\\Views\\Phong\\Chitietphong.cshtml",
+              "ViewState": "AgIAACwAAAAAAAAAAAAAAEgAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T10:25:04.57Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PhongController.cs",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Controllers\\PhongController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Areas\\Admin\\Controllers\\PhongController.cs",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Areas\\Admin\\Controllers\\PhongController.cs",
+              "RelativeToolTip": "WebApplication1\\Areas\\Admin\\Controllers\\PhongController.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAAwIgAAABtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T10:24:15.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\UserController.cs",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Controllers\\UserController.cs",
               "RelativeToolTip": "WebApplication1\\Controllers\\UserController.cs",
               "ViewState": "AgIAAAwBAAAAAAAAAADwvxIBAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -71,16 +139,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "_NavPartial.cshtml",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "DocumentMoniker": "D:\\BaoCaoQLKS\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
               "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "ToolTip": "D:\\BaoCaoQLKS\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
               "RelativeToolTip": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
               "ViewState": "AgIAABsAAAAAAAAAAAAAADMAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-28T06:53:33.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-28T06:53:33.059Z"
             }
           ]
         }
