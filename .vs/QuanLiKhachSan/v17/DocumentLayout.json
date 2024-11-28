@@ -1,18 +1,38 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\",
+  "WorkspaceRootPath": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\phongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\views\\trangchu\\trangchuindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\trangchu\\trangchuindex.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\stylecss\\trangchu.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\stylecss\\trangchu.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|d:\\university\\hk_i_2024-2025\\laptrinhweb\\webcuoiki\\webapplication1\\webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\shared\\_navpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\controllers\\trangchucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\trangchucontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|c:\\users\\minh tri\\onedrive\\m\u00E1y t\u00EDnh\\laptrinhweb\\laptrinhweb_quanlikhachsan\\webapplication1\\views\\trangchu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\views\\trangchu\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CFFE0FDB-13B7-475C-BA02-CD19021FFFDF}|WebApplication1\\QuanLiKhachSan.csproj|solutionrelative:webapplication1\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +42,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TrangChu.css",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\StyleCSS\\TrangChu.css",
+              "RelativeDocumentMoniker": "WebApplication1\\StyleCSS\\TrangChu.css",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\StyleCSS\\TrangChu.css",
+              "RelativeToolTip": "WebApplication1\\StyleCSS\\TrangChu.css",
+              "ViewState": "AgIAAC8AAAAAAAAAAAAAwF8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-11-28T09:58:04.284Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -46,41 +79,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PhongController.cs",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\PhongController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\PhongController.cs",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\PhongController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\PhongController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T07:49:54.228Z",
+              "WhenOpened": "2024-11-28T09:37:06.984Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\UserController.cs",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Controllers\\UserController.cs",
-              "RelativeToolTip": "WebApplication1\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAwBAAAAAAAAAADwvxIBAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-28T07:23:20.089Z",
+              "DocumentIndex": 4,
+              "Title": "_NavPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAIwBAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T06:53:33.059Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_NavPartial.cshtml",
-              "DocumentMoniker": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "ToolTip": "D:\\University\\HK_I_2024-2025\\LapTrinhWeb\\WebCuoiKi\\WebApplication1\\WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_NavPartial.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAADMAAAAEAAAAAAAAAA==",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-28T06:53:33.059Z",
+              "WhenOpened": "2024-11-28T09:31:27.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TrangChuIndex.cshtml",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\TrangChu\\TrangChuIndex.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\TrangChu\\TrangChuIndex.cshtml",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\TrangChu\\TrangChuIndex.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\TrangChu\\TrangChuIndex.cshtml",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAQwOMAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T09:33:05.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\TrangChu\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplication1\\Views\\TrangChu\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Views\\TrangChu\\Index.cshtml",
+              "RelativeToolTip": "WebApplication1\\Views\\TrangChu\\Index.cshtml",
+              "ViewState": "AgIAAJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-28T09:35:06.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TrangChuController.cs",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\TrangChuController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\TrangChuController.cs",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\TrangChuController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\TrangChuController.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T09:30:05.535Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "WebApplication1\\Controllers\\UserController.cs",
+              "ToolTip": "C:\\Users\\Minh Tri\\OneDrive\\M\u00E1y t\u00EDnh\\LapTrinhWeb\\LapTrinhWeb_QuanLiKhachSan\\WebApplication1\\Controllers\\UserController.cs",
+              "RelativeToolTip": "WebApplication1\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAwBAAAAAAAAAADwvxIBAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-28T07:23:20.089Z",
               "EditorCaption": ""
             }
           ]

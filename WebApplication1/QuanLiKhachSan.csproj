@@ -212,6 +212,21 @@
     <Content Include="Images\anh-sale-hang-1.jpg" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\phong-don-1.jpg" />
+    <Content Include="Images\Places\6509545_seeding-bai-sau-vung-tau.jpg" />
+    <Content Include="Images\Places\bach-dinh-vung-tau-1.jpg" />
+    <Content Include="Images\Places\ban-ner-novaworld-ho-tram-the-tropican1.jpg" />
+    <Content Include="Images\Places\ben-thuyen-marina.jpg" />
+    <Content Include="Images\Places\Doi-Con-Heo-Vung-Tau-10.jpg" />
+    <Content Include="Images\Places\doi-cuu-suoi-nghe.jpg" />
+    <Content Include="Images\Places\hem-444-tran-phu-min.jpg" />
+    <Content Include="Images\Places\ho-coc-tai-vung-tau.jpg" />
+    <Content Include="Images\Places\ho-da-xanh-vung-tau.jpg" />
+    <Content Include="Images\Places\HoMay.jpg" />
+    <Content Include="Images\Places\hon-ba-vung-tau.jpg" />
+    <Content Include="Images\Places\Hồ-Tràm.jpg" />
+    <Content Include="Images\Places\nha_up_nguoc_o_vietnam_15.jpg" />
+    <Content Include="Images\Places\rung-quoc-gia-binh-chau-52hz.jpg" />
+    <Content Include="Images\Places\SuoiKhoang.jpg" />
     <Content Include="Images\sale.png" />
     <Content Include="Images\Sliders\1.jpg" />
     <Content Include="Images\Sliders\2.jpg" />
@@ -256,6 +271,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="StyleCSS\TrangChu.css" />
     <Content Include="StyleCSS\DanhSachPhong.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -279,6 +295,7 @@
     <Content Include="Views\User\XacNhanEmail.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Phong\DanhSachPhong.cshtml" />
+    <Content Include="Views\TrangChu\TrangChuIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

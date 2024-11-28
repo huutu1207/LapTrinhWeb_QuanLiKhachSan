@@ -255,3 +255,7 @@ D:\BAOCAO_QLKS\WebApplication1\obj\Debug\QuanLiKhachSan.csproj.CoreCompileInputs
 D:\BAOCAO_QLKS\WebApplication1\obj\Debug\QuanLiKh.F7CD41EC.Up2Date
 D:\BAOCAO_QLKS\WebApplication1\obj\Debug\WebApplication1.dll
 D:\BAOCAO_QLKS\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\bin\PagedList.dll
+C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\bin\PagedList.Mvc.dll
+C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\bin\PagedList.xml
+C:\Users\Minh Tri\OneDrive\Máy tính\LapTrinhWeb\LapTrinhWeb_QuanLiKhachSan\WebApplication1\bin\PagedList.Mvc.xml

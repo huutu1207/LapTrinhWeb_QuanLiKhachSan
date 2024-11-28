@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "TrangChuIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <!-- Phần LOẠI PHÒNG -->
+    <section id="roomSection" class="my-5 py-4">
+        <h2 class="mt-5 bold-title">LOẠI PHÒNG</h2> <!-- Tiêu đề in đậm -->
+        <div class="container my-4">
+            <div class="row">
+                <!-- Phòng đơn -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng đơn</h5>
+                        <p class="card-text">Phòng thoải mái với tiện nghi đầy đủ.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/phong-don-1.jpg" class="img-fluid w-50" alt="Room 1">
+                </div>
+                <!-- Phòng đôi -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng đôi</h5>
+                        <p class="card-text">Phòng sang trọng với tầm nhìn đẹp.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/phong-doi.jpg" class="img-fluid w-50" alt="Room 2">
+                </div>
+                <!-- Phòng VIP -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng VIP</h5>
+                        <p class="card-text">Không gian rộng rãi cho cả gia đình.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/room3.jpg" class="img-fluid w-50" alt="Room 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần ƯU ĐÃI -->
+    <section id="discountSection" class="my-5 py-4">
+        <link rel="stylesheet" href="~/StyleCSS/TrangChu.css" />
+
+        <h2 class="mt-4 title-ud">Ưu đãi</h2>
+        <p class="intro-text">Chúng tôi mang đến cho bạn những ưu đãi vô cùng hấp dẫn, không thể bỏ qua. Đặt phòng ngay hôm nay để tận hưởng các mức giá tốt nhất và nhiều phần quà đặc biệt.</p>
+
+        <!-- Carousel Section -->
+        <div id="discountCarousel" class="carousel slide my-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Giảm giá đặc biệt lên đến 30%</h5>
+                            <p class="large-text">Đặt phòng trước 30 ngày để nhận ưu đãi lên đến 30%. Đây là cơ hội tuyệt vời để bạn lên kế hoạch cho kỳ nghỉ hoàn hảo với giá ưu đãi nhất.</p>
+                            <p class="details-text">Ưu đãi này áp dụng cho tất cả các loại phòng từ đơn giản đến cao cấp. Đừng bỏ lỡ cơ hội này để tiết kiệm chi phí cho chuyến đi của bạn!</p>
+                            <p class="call-to-action">Nhanh tay đặt phòng để nhận ngay ưu đãi!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-hang-1.jpg" class="d-block w-50 ms-auto" alt="Discount 1">
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Khuyến mãi cuối tuần</h5>
+                            <p class="large-text">Đặt phòng cuối tuần nhận ngay ưu đãi giảm giá lên đến 20%. Chuyến đi cuối tuần thật tuyệt vời với mức giá cực hấp dẫn!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-hang-2.jpg" class="d-block w-50 ms-auto" alt="Discount 2">
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Ưu đãi đặc biệt cho nhóm</h5>
+                            <p class="large-text">Nếu bạn đặt phòng cho nhóm từ 4 người trở lên, bạn sẽ nhận được ưu đãi đặc biệt. Liên hệ để biết thêm chi tiết.</p>
+                        </div>
+                        <img src="~/Images/anh-sale-hang-3.jpg" class="d-block w-50 ms-auto" alt="Discount 3">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#discountCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#discountCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <section id="planSection" class="my-5 py-4">
+        <link rel="stylesheet" href="~/StyleCSS/TrangChu.css" />
+
+        <h3 class="section-title bold-title">Lên kế hoạch dễ dàng và nhanh chóng</h3>
+        <p class="section-subtitle">Khám phá các điểm đến hàng đầu theo cách bạn thích</p>
+
+        <!-- Tabs -->
+        <div class="plan-tabs">
+            <button class="tab active" data-category="beach">Bãi biển</button>
+            <button class="tab" data-category="nature">Thiên nhiên</button>
+            <button class="tab" data-category="city">Địa danh</button>
+        </div>
+
+        <!-- Grid Section -->
+        <div class="grid" id="gridContainer">
+            <!-- Dynamic content will be populated here -->
+        </div>
+    </section>
+</div>
+
+<script>
+    const plansData = {
+        beach: [
+            {
+                title: "Hòn Bà Vũng Tàu",
+                distance: "Một địa danh nổi tiếng với vẻ đẹp thiên nhiên hoang sơ, nước biển trong xanh và khung cảnh yên bình.",
+                image: "/Images/Places/hon-ba-vung-tau.jpg"
+            },
+            {
+                title: "Bãi sau Vũng Tàu",
+                distance: "Bãi biển dài và sạch với cát trắng mịn, lý tưởng để tắm biển và thư giãn.",
+                image: "/Images/Places/6509545_seeding-bai-sau-vung-tau.jpg"
+            },
+            {
+                title: "Bến thuyền Marina",
+                distance: "Địa điểm lãng mạn với bến thuyền độc đáo, là nơi chụp ảnh lý tưởng khi hoàng hôn buông xuống.",
+                image: "/Images/Places/ben-thuyen-marina.jpg"
+            }
+        ],
+        nature: [
+            {
+                title: "Rừng quốc gia Bình Châu",
+                distance: "Một khu rừng nguyên sinh với hệ sinh thái phong phú, lý tưởng cho các chuyến trekking và khám phá thiên nhiên.",
+                image: "/Images/Places/rung-quoc-gia-binh-chau-52hz.jpg"
+            },
+            {
+                title: "Hồ đá xanh",
+                distance: "Hồ nước xanh biếc nằm giữa núi non hùng vĩ, là điểm đến thư giãn và chụp ảnh tuyệt đẹp.",
+                image: "/Images/Places/ho-da-xanh-vung-tau.jpg"
+            },
+            {
+                title: "Hồ Cốc",
+                distance: "Khu du lịch thiên nhiên với biển xanh, bãi cát trắng và rừng dương bạt ngàn.",
+                image: "/Images/Places/ho-coc-tai-vung-tau.jpg"
+            },
+            {
+                title: "Hồ Mây",
+                distance: "Khu du lịch sinh thái và vui chơi giải trí trên núi cao, nổi tiếng với cảnh quan hùng vĩ.",
+                image: "/Images/Places/HoMay.jpg"
+            },
+            {
+                title: "Hồ Tràm",
+                distance: "Địa điểm du lịch lý tưởng với biển xanh, resort sang trọng và không gian yên bình.",
+                image: "/Images/Places/Hồ-Tràm.jpg"
+            }
+        ],
+        city: [
+            {
+                title: "Hẽm 444 Trần Phú",
+                distance: "Một con hẻm nhỏ với view hướng biển tuyệt đẹp, là nơi được giới trẻ yêu thích để check-in.",
+                image: "/Images/Places/hem-444-tran-phu-min.jpg"
+            },
+            {
+                title: "Bạch Dinh",
+                distance: "Biệt thự cổ kính thời Pháp, mang nét kiến trúc độc đáo và lịch sử lâu đời.",
+                image: "/Images/Places/bach-dinh-vung-tau-1.jpg"
+            },
+            {
+                title: "Đồi Con Heo",
+                distance: "Địa điểm cắm trại và ngắm cảnh lý tưởng với không gian thoáng đãng và view thành phố từ trên cao.",
+                image: "/Images/Places/Doi-Con-Heo-Vung-Tau-10.jpg"
+            },
+            {
+                title: "Nhà úp ngược Vũng Tàu",
+                distance: "Ngôi nhà độc đáo với thiết kế ngược, tạo nên trải nghiệm thú vị và những bức ảnh ấn tượng.",
+                image: "/Images/Places/nha_up_nguoc_o_vietnam_15.jpg"
+            },
+            {
+                title: "Khu suối khoáng",
+                distance: "Nơi thư giãn với các dịch vụ tắm suối khoáng nóng và spa, giúp tái tạo năng lượng.",
+                image: "/Images/Places/SuoiKhoang.jpg"
+            },
+            {
+                title: "Công viên giải trí Hồ Tràm",
+                distance: "Khu vui chơi giải trí hiện đại với nhiều hoạt động phù hợp cho gia đình và trẻ nhỏ.",
+                image: "/Images/Places/ban-ner-novaworld-ho-tram-the-tropican1.jpg"
+            }
+        ]
+    };
+
+ 
+
+    // Function to generate grid items dynamically
+    function generateGrid(category) {
+        const gridContainer = document.getElementById('gridContainer');
+        gridContainer.innerHTML = '';  // Clear existing content
+
+        const data = plansData[category];
+
+        data.forEach(item => {
+            const gridItem = document.createElement('div');
+            gridItem.classList.add('grid-item');
+            gridItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}" />
+            <h3>${item.title}</h3>
+            <p>${item.distance}</p>
+        `;
+            gridContainer.appendChild(gridItem);
+        });
+    }
+
+    // Event listeners for tabs
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            tab.classList.add('active');
+            const category = tab.getAttribute('data-category');
+            generateGrid(category);
+        });
+    });
+
+    // Initial load (default to beach)
+    generateGrid('beach');
+
+</script>
+
+

@@ -13,6 +13,12 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+        public ActionResult TrangChuIndex()
+        {
+
+            return View();
+        }
         public ActionResult NavPartial()
         {
             return PartialView("_NavPartial");
