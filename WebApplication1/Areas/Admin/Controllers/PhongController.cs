@@ -1,0 +1,165 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using WebApplication1.Models;
+
+namespace WebApplication1.Areas.Admin.Controllers
+{
+    public class PhongController : Controller
+    {
+        // GET: Admin/Phong
+        QL_KhachSanEntities db = new QL_KhachSanEntities();
+        public ActionResult DanhSachPhong()
+        {
+            var phongList = db.PHONGs.ToList();
+            return View(phongList);
+        }
+        public ActionResult Chitietphong(string MaPH)
+        {
+            // Tìm sách theo mã sách (id)
+            var phong = db.PHONGs.FirstOrDefault(s => s.MaPH == MaPH);
+
+            if (phong == null)
+            {
+                return HttpNotFound(); // Nếu không tìm thấy sách, trả về lỗi 404
+            }
+
+            return View(phong);
+        }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Create(PHONG phong, HttpPostedFileBase AnhUpload)
+        {
+            ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+
+            if (AnhUpload == null)
+            {
+                ViewBag.ThongBao = "Hãy chọn ảnh cho phòng.";
+                return View(phong);
+            }
+            var existingPhong = db.PHONGs.FirstOrDefault(p => p.MaPH == phong.MaPH || p.SoPH == phong.SoPH);
+            if (existingPhong != null)
+            {
+                ModelState.AddModelError("", "Mã phòng hoặc số phòng đã tồn tại. Vui lòng chọn mã khác.");
+                return View(phong);
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // Xử lý file upload
+                    string fileName = Path.GetFileName(AnhUpload.FileName);
+                    string path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    // Kiểm tra file đã tồn tại hay chưa
+                    if (!System.IO.File.Exists(path))
+                    {
+                        AnhUpload.SaveAs(path); // Lưu file lên server
+                    }
+
+                    phong.Anh = fileName; // Gán tên file vào thuộc tính Anh
+
+                    // Thêm vào cơ sở dữ liệu
+                    db.PHONGs.Add(phong);
+                    db.SaveChanges();
+
+                    return RedirectToAction("DanhSachPhong");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+                }
+            }
+
+            return View(phong);
+        }
+        [HttpGet]
+        public ActionResult Edit(string MaPH)
+        {
+            var phong = db.PHONGs.SingleOrDefault(n => n.MaPH == MaPH);
+            if (phong == null)
+            {
+                Response.StatusCode = 404;
+                return null;
+            }
+
+            ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+
+
+            return View(phong);
+        }
+
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(PHONG phong, HttpPostedFileBase AnhUpload)
+        {
+            ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+                return View(phong);
+            }
+
+            try
+            {
+                var phongDb = db.PHONGs.SingleOrDefault(n => n.MaPH == phong.MaPH);
+                if (phongDb == null)
+                {
+                    return HttpNotFound(); // Không tìm thấy phòng
+                }
+
+                // Xử lý upload ảnh mới (nếu có)
+                if (AnhUpload != null && AnhUpload.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(AnhUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    // Lưu ảnh nếu chưa tồn tại
+                    if (!System.IO.File.Exists(path))
+                    {
+                        AnhUpload.SaveAs(path);
+                    }
+
+                    // Gán tên ảnh mới
+                    phongDb.Anh = fileName;
+                }
+                var existingPhong = db.PHONGs.FirstOrDefault(p => p.SoPH == phong.SoPH && p.MaPH!=phong.MaPH);
+                if (existingPhong != null)
+                {
+                    ModelState.AddModelError("", "Số phòng đã tồn tại. Vui lòng chọn mã khác.");
+                    return View(phong);
+                }
+                // Cập nhật các thuộc tính khác
+                phongDb.SoPH = phong.SoPH;
+                phongDb.Mota = phong.Mota;
+                phongDb.TrangThai = phong.TrangThai;
+                phongDb.Gia = phong.Gia;
+                phongDb.MaLoai = phong.MaLoai;
+
+                // Lưu thay đổi vào cơ sở dữ liệu
+                db.SaveChanges();
+
+                return RedirectToAction("DanhSachPhong");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+                ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai", phong.MaLoai);
+                return View(phong);
+            }
+        }
+
+
+    }
+}
