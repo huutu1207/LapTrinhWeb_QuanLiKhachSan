@@ -25,5 +25,10 @@ namespace WebApplication1.Controllers
             int iPageNumber = (page ?? 1);
             return View(listPhong.ToPagedList(iPageNumber, iSize));
         }
+        public ActionResult ChiTietPhong()
+        {
+            return View();
+
+        }
     }
 }

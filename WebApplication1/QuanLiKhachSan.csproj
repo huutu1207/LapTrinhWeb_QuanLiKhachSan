@@ -279,6 +279,7 @@
     <Content Include="Views\User\XacNhanEmail.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Phong\DanhSachPhong.cshtml" />
+    <Content Include="Views\Phong\ChiTietPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
