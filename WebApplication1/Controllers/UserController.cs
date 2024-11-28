@@ -272,6 +272,17 @@ namespace WebApplication1.Controllers
             }
         }
 
+        public ActionResult DangXuat()
+        {
+            Session["User"] = null;
+            HttpCookie ckTaiKhoan = new HttpCookie("UserName"), ckMatKhau = new HttpCookie("Password");
+            ckTaiKhoan.Expires = DateTime.Now.AddDays(-1);
+            ckMatKhau.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(ckTaiKhoan);
+            Response.Cookies.Add(ckMatKhau);
+            return RedirectToAction("Index", "TrangChu");
+        }
 
     }
+
 }
