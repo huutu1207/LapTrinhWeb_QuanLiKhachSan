@@ -164,3 +164,7 @@ D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplicatio
 D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
 D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.xml
 D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\PagedList.dll
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\PagedList.Mvc.dll
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\PagedList.xml
+D:\University\HK_I_2024-2025\LapTrinhWeb\WebCuoiKi\WebApplication1\WebApplication1\bin\PagedList.Mvc.xml
