@@ -1,0 +1,109 @@
+﻿/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Rooms section styling */
+.rooms-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.room-item {
+    position: relative;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .room-item:hover {
+        transform: translateY(-10px);
+    }
+
+    .room-item img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .room-item .ri-text {
+        padding: 20px;
+    }
+
+        .room-item .ri-text h4 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .room-item .ri-text h3 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+            .room-item .ri-text h3 span {
+                font-size: 16px;
+                color: #888;
+                margin-left: 5px;
+            }
+
+    .room-item table {
+        width: 100%;
+        margin-bottom: 20px;
+        border-collapse: collapse;
+    }
+
+        .room-item table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+            .room-item table td.r-o {
+                font-weight: bold;
+                color: #555;
+            }
+
+    .room-item a.primary-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff6f61;
+        color: #fff;
+        font-size: 14px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-radius: 30px;
+        margin-top: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+        .room-item a.primary-btn:hover {
+            background-color: #e55a4e;
+        }
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .room-item {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .room-item {
+        margin-bottom: 15px;
+    }
+}

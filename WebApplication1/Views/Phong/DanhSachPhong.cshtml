@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "DanhSachPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using WebApplication1.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<PHONG>
+
+<!--<div class="container mt-4">
+    <h2 class="text-center">Danh Sách Phòng</h2>-->
+<!-- Table displaying rooms -->
+<!--<table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Số Phòng</th>
+            <th scope="col">Loại Phòng</th>
+            <th scope="col">Trạng Thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model)
+        {
+            <tr>
+                <td>@room.SoPH</td>
+                <td>@room.Gia </td>
+                <td>@room.TrangThai</td>
+            </tr>
+        }
+    </tbody>
+</table>-->
+<!-- Pagination -->
+<!--<div class="d-flex justify-content-center mt-4">
+        @if (Model.HasPreviousPage)
+        {
+            <a href="@Url.Action("DanhSachPhong", new { page = Model.PageNumber - 1 })" class="btn btn-primary me-2">Trang Trước</a>
+        }
+        @if (Model.HasNextPage)
+        {
+            <a href="@Url.Action("DanhSachPhong", new { page = Model.PageNumber + 1 })" class="btn btn-primary">Trang Sau</a>
+        }
+    </div>
+</div>-->
+<style>
+    <link rel="stylesheet" href="~/StyleCSS/DanhSachPhong.css" / >
+</style>
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="room-item">
+                    <img src="img/room/room-6.jpg" alt="">
+                    <div class="ri-text">
+                        <h4>Small View</h4>
+                        <h3>159$<span>/Pernight</span></h3>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>30 ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max persion 2</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>King Beds</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td>Wifi, Television, Bathroom,...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="#" class="primary-btn">More Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
