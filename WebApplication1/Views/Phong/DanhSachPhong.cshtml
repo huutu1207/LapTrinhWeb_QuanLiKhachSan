@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "DanhSachPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using WebApplication1.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<PHONG>
+@{
+    var i = 0;
+}
+<link rel="stylesheet" href="~/StyleCSS/DanhSachPhong.css" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<h2> Our Rooms</h2>
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            @foreach (var room in Model)
+            {
+                i++;
+                <div class="col-lg-4 col-md-6">
+                    <div class="room-item">
+                        <img src="~/Images/Sliders/@room.Anh" class=" w-100" alt="@room.SoPH">
+                        <div class="ri-text">
+                            <h4>Phòng @room.SoPH</h4>
+                            <h3>@room.Gia VND<span>/Per Night</span></h3>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="r-o">Mô tả:</td>
+                                        <td>@room.Mota</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Trạng thái:</td>
+                                        <td>@room.TrangThai</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Giá:</td>
+                                        <td>@room.Gia</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <a href="#" class="primary-btn">More Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("DanhSachPhong", new { page = page }))
+</div>
+
+
+

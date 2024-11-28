@@ -1,0 +1,52 @@
+﻿@using WebApplication1.Models
+
+<ul class="custom-navbar d-flex justify-content-center">
+    <li class="nav-item">
+        <a href="@Url.Action("Index", "TrangChu")" id="li-0" class="nav-link active" onclick="setActive(this)">Trang Chủ</a>
+    </li>
+    <li class="nav-item">
+        <a href="@Url.Action("DanhSachPhong", "Phong")" id="li-1" class="nav-link" onclick="setActive(this)">Phòng</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" id="news" class="nav-link" onclick="setActive(this)">Tin Tức</a>
+    </li>
+    <li class="nav-item">
+        <a href="#" id="contact" class="nav-link" onclick="setActive(this)">Liên Hệ</a>
+    </li>
+    <li class="nav-item dropdown">
+        @if (Session["User"] == null)
+        {
+            <a href="#" id="user" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="setActive(this)">
+                Người dùng
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="user">
+                <li><a class="dropdown-item" href="@Url.Action("DangNhap", "User")">Đăng Nhập</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("DangKy", "User")">Đăng Ký</a></li>
+
+            </ul>
+
+
+            <!-- Hiển thị khi người dùng chưa đăng nhập -->
+        }
+        else
+        {
+            <a href="#" id="user" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="setActive(this)">
+                @(((KHACHHANG)Session["User"]).HoTen)
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="user">
+                <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("DangXuat", "User")">Đăng xuất</a></li>
+            </ul>
+        }
+    </li>
+</ul>
+
+<script>
+    // Tự động thêm class "active" cho menu item khi có giá trị trong ViewBag.DiaChi
+    var li = document.getElementById('li-@ViewBag.DiaChi');
+    if (li) {
+        li.classList.add('active');
+    }
+</script>
+
+    
