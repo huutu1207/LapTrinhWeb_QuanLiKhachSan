@@ -1,0 +1,74 @@
+﻿@model WebApplication1.Models.PHONG
+
+@{
+    ViewBag.Title = "Chitietphong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chitietphong</h2>
+
+<div>
+    <h4>PHONG</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaPH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaPH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoPH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoPH)
+        </dd>
+
+        <dt>
+            Ảnh:
+        </dt>
+        <dd>
+            <img src="~/Images/@Model.Anh" alt=" @Model.SoPH">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mota)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaLoai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { MaPH = Model.MaPH }) |
+    @Html.ActionLink("Back to List", "DanhSachPhong")
+</p>
