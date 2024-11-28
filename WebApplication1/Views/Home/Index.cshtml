@@ -1,33 +1,235 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang chủ";
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+    <!-- Phần LOẠI PHÒNG -->
+    <section id="roomSection" class="my-5 py-4">
+        <h2 class="mt-5 bold-title">LOẠI PHÒNG</h2> <!-- Tiêu đề in đậm -->
+        <div class="container my-4">
+            <div class="row">
+                <!-- Phòng đơn -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng đơn</h5>
+                        <p class="card-text">Phòng thoải mái với tiện nghi đầy đủ.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/phong-don-1.jpg" class="img-fluid w-50" alt="Room 1">
+                </div>
+                <!-- Phòng đôi -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng đôi</h5>
+                        <p class="card-text">Phòng sang trọng với tầm nhìn đẹp.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/phong-doi.jpg" class="img-fluid w-50" alt="Room 2">
+                </div>
+                <!-- Phòng VIP -->
+                <div class="col-md-4 d-flex align-items-start mb-4">
+                    <div class="w-50 me-3">
+                        <h5 class="card-title">Phòng VIP</h5>
+                        <p class="card-text">Không gian rộng rãi cho cả gia đình.</p>
+                        <a href="#" class="btn btn-primary">Xem chi tiết</a>
+                    </div>
+                    <img src="~/Images/room3.jpg" class="img-fluid w-50" alt="Room 3">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
+    <!-- Phần ƯU ĐÃI -->
+    <section id="discountSection" class="my-5 py-4">
+        <h2 class="mt-4 title-ud">Ưu đãi</h2>
+        <p class="intro-text">Chúng tôi mang đến cho bạn những ưu đãi vô cùng hấp dẫn, không thể bỏ qua. Đặt phòng ngay hôm nay để tận hưởng các mức giá tốt nhất và nhiều phần quà đặc biệt.</p>
+
+        <div id="discountCarousel" class="carousel slide my-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Giảm giá đặc biệt lên đến 30%</h5>
+                            <p class="large-text">Đặt phòng trước 30 ngày để nhận ưu đãi lên đến 30%. Đây là cơ hội tuyệt vời để bạn lên kế hoạch cho kỳ nghỉ hoàn hảo với giá ưu đãi nhất.</p>
+                            <p class="details-text">Ưu đãi này áp dụng cho tất cả các loại phòng từ đơn giản đến cao cấp. Đừng bỏ lỡ cơ hội này để tiết kiệm chi phí cho chuyến đi của bạn!</p>
+                            <p class="call-to-action">Nhanh tay đặt phòng để nhận ngay ưu đãi!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-hang-1.jpg" class="d-block w-50 ms-auto" alt="Discount 1">
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Khuyến mãi cuối tuần – Voucher 500k</h5>
+                            <p class="large-text">Đặt phòng cuối tuần nhận voucher trị giá 500k. Đây là cơ hội lý tưởng để bạn tận hưởng những dịch vụ tốt nhất tại khách sạn của chúng tôi.</p>
+                            <p class="details-text">Voucher có thể được sử dụng cho các dịch vụ trong khách sạn như spa, nhà hàng, và các hoạt động giải trí. Đặc biệt, chương trình chỉ áp dụng cho các đặt phòng cuối tuần.</p>
+                            <p class="call-to-action">Nhanh tay đặt phòng cuối tuần để nhận ngay voucher!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-2.jpg" class="d-block w-51 ms-auto" alt="Discount 2">
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Mừng ngày lễ đặc biệt – Giảm giá 20%</h5>
+                            <p class="large-text">Nhân dịp các ngày lễ lớn trong năm, chúng tôi mang đến các ưu đãi giảm giá 20% cho tất cả các đặt phòng trong kỳ nghỉ lễ. Đây là dịp để bạn nghỉ ngơi thư giãn và trải nghiệm các dịch vụ chất lượng với giá ưu đãi.</p>
+                            <p class="details-text">Chương trình này áp dụng cho tất cả các loại phòng và dịch vụ. Chúng tôi cam kết mang đến cho bạn một kỳ nghỉ tuyệt vời.</p>
+                            <p class="call-to-action">Đặt phòng ngay hôm nay để không bỏ lỡ!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-hang-3.jpg" class="d-block w-51 ms-auto" alt="Discount 3">
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Ưu đãi cho hội viên – Phòng miễn phí cho đêm đầu tiên</h5>
+                            <p class="large-text">Trở thành hội viên của chúng tôi và nhận các ưu đãi đặc biệt như phòng miễn phí cho đêm đầu tiên, dịch vụ spa miễn phí và nhiều hơn nữa. Đây là một phần trong chương trình khách hàng thân thiết của chúng tôi.</p>
+                            <p class="details-text">Các ưu đãi này áp dụng cho những khách hàng đã đăng ký thành viên và tích lũy đủ số điểm trong hệ thống. Đây là cơ hội tuyệt vời để bạn trở thành thành viên và nhận những đặc quyền tuyệt vời.</p>
+                            <p class="call-to-action">Đăng ký hội viên ngay hôm nay để nhận ngay ưu đãi!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-4.jpg" class="d-block w-51 ms-auto" alt="Discount 4">
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Ưu đãi dành cho nhóm – Giảm giá 15% cho nhóm từ 5 người trở lên</h5>
+                            <p class="large-text">Khi bạn đặt phòng cho nhóm từ 5 người trở lên, bạn sẽ nhận được giảm giá 15% cho toàn bộ đơn đặt phòng. Đây là ưu đãi hoàn hảo cho những chuyến du lịch nhóm, dã ngoại hoặc hội thảo.</p>
+                            <p class="details-text">Ưu đãi áp dụng cho mọi loại phòng và dịch vụ trong khách sạn. Đừng bỏ lỡ cơ hội tiết kiệm chi phí khi đi du lịch cùng bạn bè và đồng nghiệp.</p>
+                            <p class="call-to-action">Đặt phòng cho nhóm ngay hôm nay để tiết kiệm thêm!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-5.jpg" class="d-block w-51 ms-auto" alt="Discount 5">
+                    </div>
+                </div>
+                <!-- Slide 6 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center">
+                        <div class="w-50 text-start pe-4">
+                            <h5 class="large-title">Khuyến mãi tháng sinh nhật – Tặng thêm đêm nghỉ miễn phí</h5>
+                            <p class="large-text">Nhân dịp sinh nhật của bạn, chúng tôi tặng bạn thêm một đêm nghỉ miễn phí khi bạn đặt phòng từ 2 đêm trở lên. Đây là món quà tuyệt vời dành cho bạn trong ngày đặc biệt này.</p>
+                            <p class="details-text">Ưu đãi này chỉ áp dụng cho các khách hàng sinh nhật trong tháng. Để nhận ưu đãi này, vui lòng cung cấp thông tin sinh nhật khi đặt phòng.</p>
+                            <p class="call-to-action">Chúc mừng sinh nhật! Đặt phòng để nhận ngay ưu đãi!</p>
+                        </div>
+                        <img src="~/Images/anh-sale-6.jpg" class="d-block w-51 ms-auto" alt="Discount 6">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Điều khiển carousel -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#discountCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#discountCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+    <!-- Phần KẾ HOẠCH -->
+    <section id="planSection" class="my-5 py-4">
+        <h3 class="section-title bold-title">Lên kế hoạch dễ dàng và nhanh chóng</h3> <!-- Tiêu đề in đậm -->
+        <p class="section-subtitle">Khám phá các điểm đến hàng đầu theo cách bạn thích ở Việt Nam</p>
+
+        <!-- Tabs -->
+        <div class="plan-tabs">
+            <button class="tab active" data-category="beach">Bãi biển</button>
+            <button class="tab" data-category="nature">Thiên nhiên</button>
+            <button class="tab" data-category="city">Thành phố</button>
+            <button class="tab" data-category="village">Làng mạc</button>
+            <button class="tab" data-category="relax">Thư giãn</button>
+        </div>
+
+        <!-- Cards Container -->
+        <div class="plan-cards">
+            <!-- Nội dung sẽ được thêm vào động ở đây -->
+        </div>
+    </section>
 </main>
+
+<script>
+    // Dữ liệu các danh mục
+    const plansData = {
+        beach: [
+            { title: "Vũng Tàu", distance: "Cách đây 104km", image: "path/to/vungtau.jpg" },
+            { title: "Long Hải", distance: "Cách đây 108km", image: "path/to/longhai.jpg" },
+            { title: "Hồ Tràm", distance: "Cách đây 113km", image: "path/to/hotram.jpg" },
+            { title: "La Gi", distance: "Cách đây 134km", image: "path/to/lagi.jpg" },
+            { title: "Kê Gà", distance: "Cách đây 153km", image: "path/to/kega.jpg" },
+            { title: "Phan Thiết", distance: "Cách đây 159km", image: "path/to/phanthiet.jpg" },
+        ],
+        nature: [
+            { title: "Mỹ Tho", distance: "Cách đây 99km", image: "path/to/mytho.jpg" },
+            { title: "Bến Tre", distance: "Cách đây 109km", image: "path/to/bentre.jpg" },
+            { title: "Vĩnh Long", distance: "Cách đây 129km", image: "path/to/vinhlong.jpg" },
+            { title: "Đà Lạt", distance: "Cách đây 211km", image: "path/to/dalat.jpg" },
+            { title: "Buôn Ma Thuột", distance: "Cách đây 224km", image: "path/to/buonmathuot.jpg" },
+            { title: "Pleiku", distance: "Cách đây 344km", image: "path/to/pleiku.jpg" },
+        ],
+        city: [
+            { title: "Mỹ Tho", distance: "Cách đây 99km", image: "path/to/mytho.jpg" },
+            { title: "Bến Tre", distance: "Cách đây 109km", image: "path/to/bentre.jpg" },
+            { title: "Vĩnh Long", distance: "Cách đây 129km", image: "path/to/vinhlong.jpg" },
+            { title: "Đà Lạt", distance: "Cách đây 211km", image: "path/to/dalat.jpg" },
+            { title: "Buôn Ma Thuột", distance: "Cách đây 224km", image: "path/to/buonmathuot.jpg" },
+            { title: "Pleiku", distance: "Cách đây 344km", image: "path/to/pleiku.jpg" },
+        ],
+        village: [
+            { title: "Mỹ Tho", distance: "Cách đây 99km", image: "path/to/mytho.jpg" },
+            { title: "Bến Tre", distance: "Cách đây 109km", image: "path/to/bentre.jpg" },
+            { title: "Vĩnh Long", distance: "Cách đây 129km", image: "path/to/vinhlong.jpg" },
+            { title: "Đà Lạt", distance: "Cách đây 211km", image: "path/to/dalat.jpg" },
+            { title: "Buôn Ma Thuột", distance: "Cách đây 224km", image: "path/to/buonmathuot.jpg" },
+            { title: "Pleiku", distance: "Cách đây 344km", image: "path/to/pleiku.jpg" },
+        ],
+        relax: [
+            { title: "Mỹ Tho", distance: "Cách đây 99km", image: "path/to/mytho.jpg" },
+            { title: "Bến Tre", distance: "Cách đây 109km", image: "path/to/bentre.jpg" },
+            { title: "Vĩnh Long", distance: "Cách đây 129km", image: "path/to/vinhlong.jpg" },
+            { title: "Đà Lạt", distance: "Cách đây 211km", image: "path/to/dalat.jpg" },
+            { title: "Buôn Ma Thuột", distance: "Cách đây 224km", image: "path/to/buonmathuot.jpg" },
+            { title: "Pleiku", distance: "Cách đây 344km", image: "path/to/pleiku.jpg" },
+        ],
+        // Thêm dữ liệu cho city, village, relax...
+    };
+
+    // Hàm hiển thị danh sách thẻ
+    function displayPlans(category) {
+        const cardsContainer = document.querySelector(".plan-cards");
+        cardsContainer.innerHTML = ""; // Xóa nội dung cũ
+
+        // Lấy dữ liệu danh mục
+        const plans = plansData[category];
+        plans.forEach(plan => {
+            const card = `
+<div class="card">
+    <img src="${plan.image}" alt="${plan.title}" class="card-image">
+    <h5 class="card-title">${plan.title}</h5>
+    <p class="card-distance">${plan.distance}</p>
+</div>
+        `;
+            cardsContainer.innerHTML += card;
+        });
+    }
+
+    // Sự kiện khi ấn vào tab
+    document.querySelectorAll(".tab").forEach(tab => {
+        tab.addEventListener("click", function () {
+            // Xóa trạng thái active khỏi tất cả các tab
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            this.classList.add("active"); // Thêm trạng thái active
+
+            // Hiển thị danh sách theo danh mục
+            const category = this.getAttribute("data-category");
+            displayPlans(category);
+        });
+    });
+
+    // Hiển thị mặc định (Bãi biển)
+    displayPlans("beach");
+</script>

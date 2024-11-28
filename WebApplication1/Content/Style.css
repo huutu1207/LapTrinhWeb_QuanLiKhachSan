@@ -313,3 +313,129 @@ footer {
 .carousel {
     margin-top: 0; /* Loại bỏ khoảng cách trên carousel */
 }
+/* Phần ưu đãi */
+.large-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.large-text {
+    font-size: 1.2rem;
+}
+
+.title-ud {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#discountCarousel {
+    height: 400px; /* Hoặc bất kỳ chiều cao cố định nào bạn muốn */
+    overflow: hidden;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-item img {
+    object-fit: cover; /* Đảm bảo ảnh không bị méo mà vẫn chiếm toàn bộ không gian */
+    height: 80%; /* Giảm chiều cao của ảnh xuống 80% */
+    width: 80%; /* Giảm chiều rộng của ảnh xuống 80% */
+    margin: auto; /* Đảm bảo ảnh nằm giữa */
+}
+
+#roomSection, #planSection {
+    margin-top: 30px; /* Đảm bảo khoảng cách giữa các phần */
+}
+
+#discountSection .intro-text {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+#discountCarousel .large-title {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #0066cc;
+}
+
+#discountCarousel .carousel-item img {
+    max-width: 50%; /* Giảm chiều rộng ảnh xuống còn 70% */
+    height: auto; /* Đảm bảo chiều cao ảnh tự động thay đổi theo tỷ lệ */
+    margin: auto; /* Đảm bảo ảnh căn giữa */
+}
+
+/* Tabs */
+.plan-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .tab.active, .tab:hover {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+/* Cards */
+.plan-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.card {
+    width: calc(100% / 6 - 10px);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+.card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.card-distance {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 10px 10px;
+}
+
+.bold-title {
+    font-weight: bold; /* Ensures the title is bold */
+}
