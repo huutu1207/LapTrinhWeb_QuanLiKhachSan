@@ -266,8 +266,6 @@
     <Content Include="Views\User\DangKy.cshtml" />
     <Content Include="Views\User\XacNhanEmail.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
-    <Content Include="Views\Shared\_DiscountPartial.cshtml" />
-    <Content Include="Views\Shared\_LoaiPhongPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
