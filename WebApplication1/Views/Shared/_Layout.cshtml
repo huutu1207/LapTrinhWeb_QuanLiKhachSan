@@ -12,15 +12,18 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
+        <div class="container ">
             <img src="~/Images/Logo.png" alt="LuckyHotel Logo" />
-            <h1>Welcome to LuckyHotel</h1>
-        </div>
-    </header>
 
+            @*<h1>Welcome to LuckyHotel</h1>*@
+        </div>
+
+
+    </header>
+    
     <!-- Navbar -->
-    @Html.Action("NavPartial", "TrangChu");  
-    @Html.Action("SliderPartial", "TrangChu");
+    @Html.Action("NavPartial", "TrangChu")
+    @Html.Action("SliderPartial", "TrangChu")
 
     <!-- Main Content -->
     <div class="container my-4">
