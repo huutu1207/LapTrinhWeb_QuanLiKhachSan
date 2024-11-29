@@ -1,0 +1,215 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietPhong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
+
+}
+@model WebApplication1.Models.PHONG
+<link rel="stylesheet" href="~/StyleCSS/ChiTietPhong.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Thêm jQuery UI (cho Datepicker) -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<section class="room-details-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="room-details-item">
+                    <img src="~/Images/phong-don-1.jpg" alt="">
+                    <div class="rd-text">
+                        <div class="rd-title">
+                            <h3>Premium King Room</h3>
+                            <div class="rdt-right">
+                                <div class="rating">
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star"></i>
+                                    <i class="icon_star-half_alt"></i>
+                                </div>
+                                <a href="#">Booking Now</a>
+                            </div>
+                        </div>
+                        <h2>159$<span>/Pernight</span></h2>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="r-o">Size:</td>
+                                    <td>30 ft</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Capacity:</td>
+                                    <td>Max persion 5</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Bed:</td>
+                                    <td>King Beds</td>
+                                </tr>
+                                <tr>
+                                    <td class="r-o">Services:</td>
+                                    <td>Wifi, Television, Bathroom,...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="f-para">
+                            Motorhome or Trailer that is the question for you. Here are some of the
+                            advantages and disadvantages of both, so you will be confident when purchasing an RV.
+                            When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
+                            wheeler? The advantages and disadvantages of both are studied so that you can make your
+                            choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
+                            achievement of a lifetime. It can be similar to sojourning with your residence as you
+                            search the various sites of our great land, America.
+                        </p>
+                        <p>
+                            The two commonly known recreational vehicle classes are the motorized and towable.
+                            Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
+                            wheel has the attraction of getting towed by a pickup or a car, thus giving the
+                            adaptability of possessing transportation for you when you are parked at your campsite.
+                        </p>
+                    </div>
+                </div>
+                <div class="rd-reviews">
+                    <h4>Reviews</h4>
+                    @foreach (var binhLuan in ViewBag.BinhLuans as List<WebApplication1.Models.CMMD>)
+                    {
+                        <div class="comment">
+                            <p><strong>Khách hàng @binhLuan.HoTenKhachHang:</strong></p> <!-- Hiển thị tên khách hàng -->
+                            <p>@binhLuan.NoiDung</p>
+                            <small>Đánh giá: @binhLuan.DanhGia sao | Thời gian: @binhLuan.ThoiGian</small>
+                            <hr />
+                        </div>
+                    }
+                </div>
+                <div class="review-add">
+
+                    <h4>Add Review</h4>
+
+                    @if (cus != null)
+                    {
+                        using (Html.BeginForm("ThemBinhLuan", "Phong", FormMethod.Post))
+                        {
+                            @Html.HiddenFor(model => model.MaPH)
+                            <div class="form-group">
+                                @Html.Label("Nội dung")
+                                @Html.TextArea("NoiDung", new { @class = "form-control", rows = 4 })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Đánh giá")
+                                <div class="rating" style="font-size: 30px; cursor: pointer;">
+                                    <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                                    <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                                </div>
+
+                                <!-- Hidden input để lưu giá trị đánh giá -->
+                                @Html.Hidden("DanhGia", "3")
+                            </div>
+                            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+                        }
+                    }
+                    else
+                    {
+                        <p>Bạn phải <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để bình luận.</p>
+                    }
+                    @*<form action="#" class="ra-form">
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div>
+                                    <h5>You Rating:</h5>
+                                    <div class="rating ">
+                                        <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                                        <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                                        <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                                        <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                                        <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+                                    </div>
+                                </div>
+                                <textarea placeholder="Your Review"></textarea>
+                                <button type="submit">Submit Now</button>
+                            </div>
+                        </div>
+                    </form>*@
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="room-booking">
+                    <h3>Your Reservation</h3>
+                    <form action="#">
+                        <div class="check-date">
+                            <label for="date-in">Check In:</label>
+                            <input type="text" class="date-input" id="date-in">
+                        </div>
+                        <div class="check-date">
+                            <label for="date-out">Check Out:</label>
+                            <input type="text" class="date-input" id="date-out">
+                        </div>
+                        @*<div class="select-option">
+                                <label for="guest">Guests:</label>
+                                <select id="guest">
+                                    <option value="">3 Adults</option>
+                                </select>
+                            </div>
+                            <div class="select-option">
+                                <label for="room">Room:</label>
+                                <select id="room">
+                                    <option value="">1 Room</option>
+                                </select>
+                            </div>*@
+                        <button type="submit" class="check">Check Availability</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function () {
+        // Kích hoạt Datepicker cho các trường ngày
+        $("#date-in, #date-out").datepicker({
+            dateFormat: 'dd-mm-yyyy',  // Định dạng ngày
+            minDate: 0,  // Ngày tối thiểu có thể chọn
+            autoclose: true  // Đóng calendar
+        });
+    });
+    $(document).ready(function () {
+        let selectedRating = 0;  // luu  rating
+
+        // Xử lý khi click vào sao
+        $('.star').click(function () {
+            selectedRating = $(this).data('value');  // Lưu giá trị rating của sao đã chọn
+            updateStars(selectedRating);
+            $('#rating-value').text(selectedRating);  // Hiển thị giá trị rating đã chọn
+        });
+
+        // Cập nhật màu sắc sao khi hover
+        $('.star').mouseover(function () {
+            let rating = $(this).data('value');
+            updateStars(rating);
+        });
+
+        // Quay lại trạng thái ban đầu khi mouseout
+        $('.star').mouseout(function () {
+            updateStars(selectedRating);
+        });
+
+        // Hàm cập nhật màu sắc sao
+        function updateStars(rating) {
+            $('.star').each(function () {
+                if ($(this).data('value') <= rating) {
+                    $(this).css('color', 'gold');  // Sao vàng nếu đã được chọn
+                } else {
+                    $(this).css('color', 'grey');  // Sao xám nếu chưa được chọn
+                }
+            });
+        }
+    });
+
+
+
+</script>

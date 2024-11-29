@@ -1,0 +1,226 @@
+﻿/* Chung cho toàn bộ trang */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Phần header và container */
+.room-details-section {
+    padding: 60px 0;
+    background-color: #ffffff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-lg-8 {
+    flex: 0 0 66.6667%;
+    max-width: 66.6667%;
+}
+
+/* Phần hình ảnh và text */
+.room-details-item {
+    margin-bottom: 40px;
+}
+
+    .room-details-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+/* Phần tiêu đề phòng */
+.rd-text {
+    padding: 20px 0;
+}
+
+.rd-title h3 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.rd-title .rdt-right {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+}
+
+.rd-title .rating {
+    color: #FFD700;
+    width: 100px;
+    height: 100px;
+}
+
+.rd-title a {
+    background-color: #f39c12;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+    .rd-title a:hover {
+        background-color: #e67e22;
+    }
+
+/* Phần giá phòng */
+h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #27ae60;
+    margin-top: 20px;
+}
+
+    h2 span {
+        font-size: 18px;
+        color: #999;
+    }
+
+/* Tạo kiểu cho bảng thông tin phòng */
+table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+    table th, table td {
+        padding: 12px;
+        text-align: left;
+        font-size: 16px;
+        color: #555;
+        border-bottom: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #f7f7f7;
+        font-weight: bold;
+    }
+
+.r-o {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Phần mô tả chi tiết phòng */
+.f-para {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-top: 20px;
+}
+/* Container chính cho phần đặt phòng */
+.room-booking {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+    /* Tiêu đề của phần đặt phòng */
+    .room-booking h3 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+/* Các trường nhập dữ liệu cho ngày */
+.check-date {
+    margin-bottom: 20px;
+}
+
+    .check-date label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .check-date input.date-input {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+    }
+
+    .check-date i.icon_calendar {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #888;
+        font-size: 20px;
+    }
+
+/* Các trường chọn lựa cho khách và phòng */
+.select-option {
+    margin-bottom: 20px;
+}
+
+    .select-option label {
+        font-size: 16px;
+        font-weight: 500;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .select-option select {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+    }
+
+/* Nút submit */
+button[type="submit"] {
+    background-color: transparent;
+    color: #f39c12;
+    font-size: 16px;
+    width: 100%;
+    height: 50px;
+    border: solid 2px #f39c12;
+    font-family: 'Leelawadee UI', Lora;
+}
+.check {
+    text-transform: uppercase;  
+}
+.check:hover {
+    background-color: #f39c12;
+    color: white;
+}
+.star {
+    font-size: 20px;
+    color: black; /* Màu trắng cho sao chưa chọn */
+    cursor: pointer;
+}
+
+    
+
+

@@ -148,6 +148,7 @@
     <Compile Include="Models\BINHLUAN.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CMMD.cs" />
     <Compile Include="Models\DATPHONG.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
@@ -261,6 +262,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="StyleCSS\ChiTietPhong.css" />
     <Content Include="StyleCSS\DanhSachPhong.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -284,6 +286,7 @@
     <Content Include="Views\User\XacNhanEmail.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Phong\DanhSachPhong.cshtml" />
+    <Content Include="Views\Phong\ChiTietPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
