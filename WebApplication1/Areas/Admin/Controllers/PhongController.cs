@@ -14,17 +14,50 @@ namespace WebApplication1.Areas.Admin.Controllers
         QL_KhachSanEntities db = new QL_KhachSanEntities();
         public ActionResult DanhSachPhong()
         {
-            var phongList = db.PHONGs.ToList();
-            return View(phongList);
+            // Lấy ngày hiện tại
+            DateTime currentDate = DateTime.Now.Date;
+            var datphongList = db.DATPHONGs.ToList();
+
+            foreach (var datphong in datphongList)
+            {
+                // Kiểm tra trạng thái và cập nhật cho DATPHONG
+                if (datphong.TinhTrang == "Occupied")
+                {
+                    if (datphong.NgayTra >= currentDate)
+                    {
+                        datphong.TinhTrang = "Available";
+                    }
+
+                }
+                else if (datphong.NgayNhan >= currentDate)
+                {
+                    datphong.TinhTrang = "Booked";
+                }
+                else if (datphong.NgayNhan < currentDate)
+                {
+                    datphong.TinhTrang = "Available";
+                }
+
+                // Cập nhật trạng thái cho PHONG dựa trên DATPHONG
+                var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == datphong.MaPH);
+                if (phong != null)
+                {
+                    phong.TrangThai = datphong.TinhTrang; // Đồng bộ trạng thái
+                }
+            }
+
+            // Lưu tất cả các thay đổi vào cơ sở dữ liệu
+            db.SaveChanges();
+            var danhSachPhong = db.PHONGs.ToList();
+            return View(danhSachPhong);
         }
         public ActionResult Chitietphong(string MaPH)
         {
-            // Tìm sách theo mã sách (id)
             var phong = db.PHONGs.FirstOrDefault(s => s.MaPH == MaPH);
 
             if (phong == null)
             {
-                return HttpNotFound(); // Nếu không tìm thấy sách, trả về lỗi 404
+                return HttpNotFound();
             }
 
             return View(phong);
