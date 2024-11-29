@@ -23,17 +23,17 @@ namespace WebApplication1.Areas.Admin.Controllers
                 // Kiểm tra trạng thái và cập nhật cho DATPHONG
                 if (datphong.TinhTrang == "Occupied")
                 {
-                    if (datphong.NgayTra >= currentDate)
+                    if (datphong.NgayTra <= currentDate)
                     {
                         datphong.TinhTrang = "Available";
                     }
 
                 }
-                else if (datphong.NgayNhan >= currentDate)
+                else if (datphong.NgayNhan >= currentDate && datphong.TinhTrang!="Occupied")
                 {
                     datphong.TinhTrang = "Booked";
                 }
-                else if (datphong.NgayNhan < currentDate)
+                else if (datphong.NgayNhan < currentDate && datphong.TinhTrang != "Occupied")
                 {
                     datphong.TinhTrang = "Available";
                 }
