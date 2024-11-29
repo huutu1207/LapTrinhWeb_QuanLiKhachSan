@@ -20,6 +20,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult DanhSachPhong(int ?page)
         {
+            
             var listPhong = LayPhong(20);
             int iSize = 9;
             int iPageNumber = (page ?? 1);
@@ -52,7 +53,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost]
-        public ActionResult ThemBinhLuan(string maPhong, string NoiDung, int DanhGia)
+        public ActionResult ThemBinhLuan(string MaPH, string NoiDung, int DanhGia)
         {
             // Kiểm tra xem người dùng đã đăng nhập chưa
             var khachHang = (KHACHHANG)Session["User"];
@@ -68,7 +69,7 @@ namespace WebApplication1.Controllers
             {
                 BINHLUAN binhLuanMoi = new BINHLUAN
                 {
-                    MaPH = maPhong,
+                    MaPH = MaPH,
                     MaKH = khachHang.MaKH,
                     NDBL = NoiDung,
                     DanhGia = DanhGia,
@@ -79,7 +80,7 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("ChiTietSach", new { id = maPhong});
+            return RedirectToAction("ChiTietPhong", new { id = MaPH});
         }
     }
 }

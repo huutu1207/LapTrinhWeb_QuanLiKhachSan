@@ -1,11 +1,11 @@
 ﻿@using WebApplication1.Models
-
+@if (ViewBag.DiaChi == null) { ViewBag.DiaChi = 0; }
 <ul class="custom-navbar d-flex justify-content-center">
     <li class="nav-item">
-        <a href="@Url.Action("Index", "TrangChu")" id="li-0" class="nav-link active" onclick="setActive(this)">Trang Chủ</a>
+        <a href="@Url.Action("Index", "TrangChu")" id="li-0" class="nav-link">Trang Chủ</a>
     </li>
     <li class="nav-item">
-        <a href="@Url.Action("DanhSachPhong", "Phong")" id="li-1" class="nav-link" onclick="setActive(this)">Phòng</a>
+        <a href="@Url.Action("DanhSachPhong", "Phong")" id="li-1" class="nav-link">Phòng</a>
     </li>
     <li class="nav-item">
         <a href="#" id="news" class="nav-link" onclick="setActive(this)">Tin Tức</a>
@@ -13,6 +13,7 @@
     <li class="nav-item">
         <a href="#" id="contact" class="nav-link" onclick="setActive(this)">Liên Hệ</a>
     </li>
+
     <li class="nav-item dropdown">
         @if (Session["User"] == null)
         {
@@ -39,14 +40,12 @@
             </ul>
         }
     </li>
+
+    
 </ul>
 
 <script>
     // Tự động thêm class "active" cho menu item khi có giá trị trong ViewBag.DiaChi
     var li = document.getElementById('li-@ViewBag.DiaChi');
-    if (li) {
-        li.classList.add('active');
-    }
+    li.classList.add('active');
 </script>
-
-    

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="MaBL" />
           </Key>
-          <Property Name="MaBL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaBL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaPH" Type="varchar" MaxLength="50" />
           <Property Name="MaKH" Type="varchar" MaxLength="50" />
           <Property Name="NDBL" Type="nvarchar(max)" />
@@ -217,7 +217,7 @@
           <Key>
             <PropertyRef Name="MaBL" />
           </Key>
-          <Property Name="MaBL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaBL" Type="Int32" Nullable="false" />
           <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NDBL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />

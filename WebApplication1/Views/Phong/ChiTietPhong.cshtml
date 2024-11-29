@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "ChiTietPhong";
+    ViewBag.Title = "Chi Tiết Phòng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
 
@@ -17,22 +17,14 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="room-details-item">
-                    <img src="~/Images/phong-don-1.jpg" alt="">
+                    <img src="~/Images/Sliders/@Model.Anh" alt="">
                     <div class="rd-text">
                         <div class="rd-title">
-                            <h3>Premium King Room</h3>
-                            <div class="rdt-right">
-                                <div class="rating">
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star"></i>
-                                    <i class="icon_star-half_alt"></i>
-                                </div>
-                                <a href="#">Booking Now</a>
-                            </div>
+                            <h3> Phòng @Model.SoPH </h3>
+                            
+                            <a href="#">Booking Now</a>
                         </div>
-                        <h2>159$<span>/Pernight</span></h2>
+                        <h2>@Model.Gia VND <span>/Pernight</span></h2>
                         <table>
                             <tbody>
                                 <tr>
@@ -54,19 +46,7 @@
                             </tbody>
                         </table>
                         <p class="f-para">
-                            Motorhome or Trailer that is the question for you. Here are some of the
-                            advantages and disadvantages of both, so you will be confident when purchasing an RV.
-                            When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth
-                            wheeler? The advantages and disadvantages of both are studied so that you can make your
-                            choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an
-                            achievement of a lifetime. It can be similar to sojourning with your residence as you
-                            search the various sites of our great land, America.
-                        </p>
-                        <p>
-                            The two commonly known recreational vehicle classes are the motorized and towable.
-                            Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth
-                            wheel has the attraction of getting towed by a pickup or a car, thus giving the
-                            adaptability of possessing transportation for you when you are parked at your campsite.
+                            @Model.Mota
                         </p>
                     </div>
                 </div>
@@ -75,7 +55,7 @@
                     @foreach (var binhLuan in ViewBag.BinhLuans as List<WebApplication1.Models.CMMD>)
                     {
                         <div class="comment">
-                            <p><strong>Khách hàng @binhLuan.HoTenKhachHang:</strong></p> <!-- Hiển thị tên khách hàng -->
+                            <p><strong> @binhLuan.HoTenKhachHang:</strong></p> 
                             <p>@binhLuan.NoiDung</p>
                             <small>Đánh giá: @binhLuan.DanhGia sao | Thời gian: @binhLuan.ThoiGian</small>
                             <hr />
@@ -90,7 +70,7 @@
                     {
                         using (Html.BeginForm("ThemBinhLuan", "Phong", FormMethod.Post))
                         {
-                            @Html.HiddenFor(model => model.MaPH)
+                            @Html.HiddenFor(model => model.MaPH) // Truyền MaPH từ model vào form
                             <div class="form-group">
                                 @Html.Label("Nội dung")
                                 @Html.TextArea("NoiDung", new { @class = "form-control", rows = 4 })
@@ -106,7 +86,7 @@
                                 </div>
 
                                 <!-- Hidden input để lưu giá trị đánh giá -->
-                                @Html.Hidden("DanhGia", "3")
+                                @Html.Hidden("DanhGia", "1")
                             </div>
                             <button type="submit" class="btn btn-primary">Gửi bình luận</button>
                         }
@@ -115,25 +95,26 @@
                     {
                         <p>Bạn phải <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để bình luận.</p>
                     }
-                    @*<form action="#" class="ra-form">
-                        <div class="row">
 
-                            <div class="col-lg-12">
-                                <div>
-                                    <h5>You Rating:</h5>
-                                    <div class="rating ">
-                                        <span class="star" data-value="1"><i class="fas fa-star"></i></span>
-                                        <span class="star" data-value="2"><i class="fas fa-star"></i></span>
-                                        <span class="star" data-value="3"><i class="fas fa-star"></i></span>
-                                        <span class="star" data-value="4"><i class="fas fa-star"></i></span>
-                                        <span class="star" data-value="5"><i class="fas fa-star"></i></span>
-                                    </div>
-                                </div>
-                                <textarea placeholder="Your Review"></textarea>
-                                <button type="submit">Submit Now</button>
-                            </div>
+                    @*<form action="#" class="ra-form">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div>
+                        <h5>You Rating:</h5>
+                        <div class="rating ">
+                            <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+                            <span class="star" data-value="5"><i class="fas fa-star"></i></span>
                         </div>
-                    </form>*@
+                    </div>
+                    <textarea placeholder="Your Review"></textarea>
+                    <button type="submit">Submit Now</button>
+                </div>
+            </div>
+        </form>*@
                 </div>
             </div>
             <div class="col-lg-4">
@@ -208,6 +189,24 @@
                 }
             });
         }
+    });
+
+    $(document).ready(function () {
+        $(".star").on("click", function () {
+            var ratingValue = $(this).data("value");
+
+            // Cập nhật giá trị trong input hidden
+            $("input[name='DanhGia']").val(ratingValue);
+
+            // Cập nhật giao diện sao (đổi màu sao đã chọn)
+            $(".star").each(function () {
+                if ($(this).data("value") <= ratingValue) {
+                    $(this).html('<i class="fas fa-star"></i>');  // Sao đã chọn
+                } else {
+                    $(this).html('<i class="far fa-star"></i>');  // Sao chưa chọn
+                }
+            });
+        });
     });
 
 
