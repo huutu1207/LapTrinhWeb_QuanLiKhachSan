@@ -90,6 +90,8 @@
           <Property Name="TrangThai" Type="nvarchar" MaxLength="50" />
           <Property Name="Gia" Type="float" />
           <Property Name="MaLoai" Type="varchar" MaxLength="50" />
+          <Property Name="CheckIn" Type="date" />
+          <Property Name="CheckOut" Type="date" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -308,6 +310,8 @@
           <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_PHONG" FromRole="PHONG" ToRole="BINHLUAN" />
           <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_PHONG" FromRole="PHONG" ToRole="DATPHONG" />
           <NavigationProperty Name="LOAIPHONG" Relationship="Self.FK_PHONG_LOAIPHONG" FromRole="PHONG" ToRole="LOAIPHONG" />
+          <Property Name="CheckIn" Type="DateTime" Precision="0" />
+          <Property Name="CheckOut" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -514,6 +518,8 @@
           <EntitySetMapping Name="PHONGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.PHONG">
               <MappingFragment StoreEntitySet="PHONG">
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
                 <ScalarProperty Name="MaPH" ColumnName="MaPH" />
                 <ScalarProperty Name="SoPH" ColumnName="SoPH" />
                 <ScalarProperty Name="Anh" ColumnName="Anh" />
