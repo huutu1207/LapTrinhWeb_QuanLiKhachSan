@@ -14,7 +14,7 @@ namespace WebApplication1.Models
     
     public partial class BINHLUAN
     {
-        public string MaBL { get; set; }
+        public int MaBL { get; set; }
         public string MaPH { get; set; }
         public string MaKH { get; set; }
         public string NDBL { get; set; }

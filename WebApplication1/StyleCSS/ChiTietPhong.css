@@ -49,10 +49,15 @@ body {
 .rd-title h3 {
     font-size: 28px;
     font-weight: bold;
+    
     color: #333;
-    margin-bottom: 10px;
+    display: inline-block;
+    align-items: center;
 }
-
+.rd-title {
+    display: flex; /* Sử dụng Flexbox */
+    align-items: center; /* Canh giữa theo chiều dọc */
+}
 .rd-title .rdt-right {
     display: flex;
     justify-content: space-between;
@@ -74,6 +79,8 @@ body {
     border-radius: 5px;
     font-size: 16px;
     transition: background-color 0.3s;
+    margin-left: auto;
+    margin-right: 20px;
 }
 
     .rd-title a:hover {
@@ -84,7 +91,7 @@ body {
 h2 {
     font-size: 32px;
     font-weight: bold;
-    color: #27ae60;
+    color: #f39c12;
     margin-top: 20px;
 }
 
@@ -221,6 +228,63 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+/* Container Reviews */
+.rd-reviews {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .rd-reviews h4 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .rd-reviews .comment {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+        .rd-reviews .comment:last-child {
+            border-bottom: none;
+        }
+
+        .rd-reviews .comment strong {
+            color: #007bff;
+        }
+
+        .rd-reviews .comment small {
+            display: block;
+            margin-top: 5px;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+/* Add Review Section */
+.review-add {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .review-add h4 {
+        margin-bottom: 15px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .review-add .form-group {
+        margin-bottom: 15px;
+    }
+
+        .review-add .form-group label {
+            font-weight: bold;
+            color: #333;
+        }
     
 
 
