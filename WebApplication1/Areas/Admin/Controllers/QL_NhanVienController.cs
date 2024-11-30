@@ -115,5 +115,28 @@ namespace WebApplication1.Areas.Admin.Controllers
                 return View(nv);
             }
         }
+        // Hiển thị modal xác nhận xóa
+        [HttpGet]
+        public ActionResult Delete(string maNV)
+        {
+            var nv = db.NHANVIENs.Find(maNV);
+            if (nv == null)
+            {
+                return HttpNotFound();
+            }
+            return View(nv);  // Hiển thị thông báo xác nhận xóa
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteConfirmed(string maNV)
+        {
+            var nv = db.NHANVIENs.Find(maNV);
+            if (nv != null)
+            {
+                db.NHANVIENs.Remove(nv);
+                db.SaveChanges();
+            }
+            return RedirectToAction("DanhSachNhanVien"); // Redirect về danh sách sau khi xóa
+        }
     }
 }

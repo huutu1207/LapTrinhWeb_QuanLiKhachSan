@@ -26,12 +26,26 @@
         <dd>
             @Html.DisplayFor(model => model.SoPH)
         </dd>
-
         <dt>
-            Ảnh:
+            Mã Khách Hàng
         </dt>
         <dd>
-            <img src="~/Images/@Model.Anh" alt=" @Model.SoPH">
+            @ViewBag.MaKH
+        </dd>
+
+        <dt>
+            Tên Khách Hàng
+        </dt>
+        <dd>
+            @ViewBag.TenKH
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Anh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Anh)
         </dd>
 
         <dt>
@@ -66,9 +80,43 @@
             @Html.DisplayFor(model => model.MaLoai)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckIn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CheckOut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienTich)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienTich)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiThat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NoiThat)
+        </dd>
+
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { MaPH = Model.MaPH }) |
-    @Html.ActionLink("Back to List", "DanhSachPhong")
+    @Html.ActionLink("Back to List", "DanhSachPhong")|
+    @Html.ActionLink("Trả phòng","TraPhong",new { MaPH = Model.MaPH })
+
 </p>

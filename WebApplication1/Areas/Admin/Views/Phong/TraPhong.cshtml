@@ -1,0 +1,54 @@
+﻿@model WebApplication1.Models.PHONG
+@{
+    ViewBag.Title = "TraPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Trả Phòng</h2>
+<form action="@Url.Action("TraPhong", "Phong")" method="post">
+    <input type="hidden" name="MaPH" value="@Model.MaPH" />
+
+    <div class="form-group">
+        <label>Mã Phòng:</label>
+        <input type="text" class="form-control" value="@Model.MaPH" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Số Phòng:</label>
+        <input type="text" class="form-control" name="SoPH" value="@Model.SoPH" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Họ Tên Khách Hàng:</label>
+        <input type="text" class="form-control" name="HoTen" required />
+    </div>
+
+    <div class="form-group">
+        <label>Số Điện Thoại:</label>
+        <input type="text" class="form-control" name="DienThoai" required />
+    </div>
+
+    <div class="form-group">
+        <label>CCCD:</label>
+        <input type="text" class="form-control" name="CCCD" required />
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" class="form-control" name="Email" />
+    </div>
+
+    <div class="form-group">
+        <label>Giá Phòng (VNĐ):</label>
+        <input type="number" class="form-control" name="Gia" value="@Model.Gia" readonly />
+    </div>
+
+    <div class="form-group">
+        <label>Ngày Nhận:</label>
+        <input type="date" class="form-control" name="NgayNhan" value="@Model.CheckIn" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-success">Trả Phòng</button>
+    <a href="@Url.Action("DanhSachPhong", "Phong")" class="btn btn-secondary">Hủy</a>
+</form>
+

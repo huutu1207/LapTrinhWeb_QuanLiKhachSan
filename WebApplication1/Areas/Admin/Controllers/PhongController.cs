@@ -53,15 +53,29 @@ namespace WebApplication1.Areas.Admin.Controllers
         }
         public ActionResult Chitietphong(string MaPH)
         {
-            var phong = db.PHONGs.FirstOrDefault(s => s.MaPH == MaPH);
-
+            var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == MaPH);
             if (phong == null)
             {
                 return HttpNotFound();
             }
 
+            // Lấy thông tin đặt phòng liên quan
+            var datphong = db.DATPHONGs.FirstOrDefault(dp => dp.MaPH == MaPH);
+            if (datphong != null)
+            {
+                // Lấy thông tin khách hàng liên quan
+                var khachHang = db.KHACHHANGs.FirstOrDefault(kh => kh.MaKH == datphong.MaKH);
+                if (khachHang != null)
+                {
+                    // Truyền thông tin khách hàng vào ViewBag
+                    ViewBag.MaKH = khachHang.MaKH;
+                    ViewBag.TenKH = khachHang.HoTen;
+                }
+            }
+
             return View(phong);
         }
+
         [HttpGet]
         public ActionResult Create()
         {
@@ -140,12 +154,12 @@ namespace WebApplication1.Areas.Admin.Controllers
             ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
             if (!ModelState.IsValid)
             {
-                ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
                 return View(phong);
             }
 
             try
             {
+                var datphongDB=db.DATPHONGs.SingleOrDefault(n=>n.MaPH==phong.MaPH);
                 var phongDb = db.PHONGs.SingleOrDefault(n => n.MaPH == phong.MaPH);
                 if (phongDb == null)
                 {
@@ -174,11 +188,15 @@ namespace WebApplication1.Areas.Admin.Controllers
                     return View(phong);
                 }
                 // Cập nhật các thuộc tính khác
+                datphongDB.NgayNhan = phong.CheckIn;
+                datphongDB.NgayTra = phong.CheckOut;
                 phongDb.SoPH = phong.SoPH;
                 phongDb.Mota = phong.Mota;
                 phongDb.TrangThai = phong.TrangThai;
                 phongDb.Gia = phong.Gia;
                 phongDb.MaLoai = phong.MaLoai;
+                phongDb.NoiThat=phong.NoiThat;
+                phongDb.DienTich=phong.DienTich;
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 db.SaveChanges();
@@ -188,8 +206,60 @@ namespace WebApplication1.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
-                ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai", phong.MaLoai);
                 return View(phong);
+            }
+        }
+        
+        [HttpGet]
+        public ActionResult TraPhong(string MaPH)
+        {
+            // Kiểm tra phòng tồn tại hay không
+            var phong = db.PHONGs.SingleOrDefault(p => p.MaPH == MaPH);
+            var datphong = db.DATPHONGs.SingleOrDefault(d => d.MaPH == MaPH);
+            var kh = db.KHACHHANGs.SingleOrDefault(k => k.MaKH == datphong.MaKH);
+            if (phong == null&&phong.TrangThai=="Occupied")
+            {
+                ModelState.AddModelError("", "Phòng không tồn tại.");
+                return RedirectToAction("DanhSachPhong");
+            }
+
+            try
+            {
+                // Lưu dữ liệu vào bảng LichSuTraPhong
+                var lichSuTraPhong = new LichSuTraPhong
+                {
+                    MaPH = MaPH,
+                    SoPH = phong.SoPH,
+                    MaKH = kh.MaKH, 
+                    HoTen = kh.HoTen,
+                    DienThoai = kh.DienThoai,
+                    CCCD = kh.CCCD,
+                    Email = kh.Email,
+                    Gia = phong.Gia,
+                    NgayNhan = phong.CheckIn,
+                    NgayTra = DateTime.Now
+                };
+
+                db.LichSuTraPhongs.Add(lichSuTraPhong);
+
+                // Cập nhật trạng thái phòng thành "Available"
+                phong.TrangThai = "Available";
+                var datPhong = db.DATPHONGs.SingleOrDefault(dp => dp.MaPH == MaPH);
+                if (datPhong != null)
+                {
+                    db.DATPHONGs.Remove(datPhong);
+                }
+
+                // Lưu thay đổi
+                db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Trả phòng thành công!";
+                return RedirectToAction("DanhSachPhong");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+                return RedirectToAction("DanhSachPhong");
             }
         }
 

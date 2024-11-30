@@ -33,5 +33,6 @@ namespace WebApplication1.Models
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<PHONG> PHONGs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<LichSuTraPhong> LichSuTraPhongs { get; set; }
     }
 }
