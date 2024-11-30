@@ -137,6 +137,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QL_LoaiPhongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QL_NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -255,6 +257,13 @@
     <Content Include="Areas\Admin\Views\Phong\DanhSachPhong.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_LoaiPhong\DanhSachLoaiPhong.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_LoaiPhong\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_LoaiPhong\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_NhanVien\DanhSachNhanVien.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_NhanVien\Chitietnhanvien.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_NhanVien\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_NhanVien\Edit.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

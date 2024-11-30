@@ -106,21 +106,42 @@
             <h3>LUCKY HOTEL</h3>
         </div>
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Quản lí phòng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Quản lí loại phòng</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Quản lí dịch vụ</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Quản lí menu</a>
-            </li>
 
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Le tan"|| Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("DanhSachPhong", "Phong", new { area = "Admin" })">Quản lý menu</a>
+                </li>
+            }
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("DanhSachLoaiPhong", "QL_LoaiPhong", new { area = "Admin" })">Quản lý loại phòng</a>
+                </li>
+            }
 
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("DanhSachNhanVien", "QL_NhanVien", new { area = "Admin" })">Quản lý nhân viên</a>
+                </li>
+            }
+
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("DanhSachDichVu", "QL_DichVu", new { area = "Admin" })">Quản lý dịch vụ</a>
+                </li>
+            }
+
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Le tan"|| Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("DanhSachMenu", "QL_Menu", new { area = "Admin" })">Quản lý menu</a>
+                </li>
+            }
         </ul>
+
     </div>
     <div id="navbar">
 

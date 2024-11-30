@@ -56,9 +56,11 @@
         font-weight: bold;
     }
 </style>
-<div class="Create">
-    <a href="@Url.Action("Create", "Phong")">Create</a>
-</div>
+<p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <a href="@Url.Action("Create", "Phong", new { area = "Admin" })" class="text-white">Create New</a>
+    </button>
+</p>
 
 <div class="phong-list">
     @foreach (var phong in Model)

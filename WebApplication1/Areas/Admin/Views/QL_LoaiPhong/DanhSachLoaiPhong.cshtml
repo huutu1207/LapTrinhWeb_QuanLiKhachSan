@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication1.Models.LOAIPHONG>
+
+@{
+    ViewBag.Title = "DanhSachLoaiPhong";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách loại phòng</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        Create New
+    </button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã loại</th>
+            <th>Tên loại</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaLoai)</td>
+                <td>@Html.DisplayFor(modelItem => item.TenLoai)</td>
+                <td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { maLoai = item.MaLoai }) |
+                    @Html.ActionLink("Delete", "Delete", new { maLoai = item.MaLoai }, new { @class = "text-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel">Tạo mới Loại Phòng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "QL_LoaiPhong", FormMethod.Post))
+                {
+                    <div class="mb-3">
+                        <label for="MaLoai" class="form-label">Mã Loại</label>
+                        @Html.TextBox("MaLoai", null, new { @class = "form-control", id = "MaLoai" })
+                    </div>
+                    <div class="mb-3">
+                        <label for="TenLoai" class="form-label">Tên Loại</label>
+                        @Html.TextBox("TenLoai", null, new { @class = "form-control", id = "TenLoai" })
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
