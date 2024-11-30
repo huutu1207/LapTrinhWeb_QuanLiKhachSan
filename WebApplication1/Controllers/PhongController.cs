@@ -88,32 +88,42 @@ namespace WebApplication1.Controllers
             return RedirectToAction("ChiTietPhong", new { id = MaPH});
         }
         [HttpPost]
-        public ActionResult CheckAvailability(string MaPH, DateTime CheckIn, DateTime CheckOut)
+        public ActionResult CheckAvailability(string MaPH, string CheckIn, string CheckOut)
         {
+            DateTime checkInDate, checkOutDate;
+
+            // Chuyển đổi các ngày từ chuỗi thành DateTime
+            if (!DateTime.TryParse(CheckIn, out checkInDate) || !DateTime.TryParse(CheckOut, out checkOutDate))
+            {
+                return Json(new { available = false, message = "Ngày không hợp lệ. Vui lòng chọn lại." });
+            }
+
+            if (checkInDate == null || checkOutDate == null)
+            {
+                return Json(new { available = false, message = "Vui lòng chọn ngày check-in và check-out." });
+            }
+
             var phong = db.PHONGs.FirstOrDefault(s => s.MaPH == MaPH);
             if (phong == null)
             {
-                return HttpNotFound(); // Nếu không tìm thấy phòng, trả về lỗi 404
+                return Json(new { available = false, message = "Phòng không tồn tại." });
             }
 
-            // Kiểm tra ngày check-in và check-out
-            var overlappingBookings = db.BINHLUANs
-                .Where(b => b.MaPH == MaPH &&
-                            (b.ThoiGian >= CheckIn && b.ThoiGian < CheckOut)) // Kiểm tra chồng lấp ngày
+            // Kiểm tra các đơn đặt phòng có chồng lấp với thời gian check-in và check-out
+            var overlappingBookings = db.DATPHONGs
+                .Where(d => d.MaPH == MaPH &&
+                            ((d.NgayNhan >= checkInDate && d.NgayTra < checkOutDate) ||
+                             (d.NgayNhan > checkInDate && d.NgayTra <= checkOutDate)))
                 .ToList();
 
             if (overlappingBookings.Any())
             {
-                ViewBag.Message = "The room is not available for the selected dates.";
-                return View("ChiTietPhong", phong); // Trả về trang ChiTietPhong với thông báo lỗi
+                return Json(new { available = false, message = "Phòng đã được đặt trong khoảng thời gian này." });
             }
 
-            // Nếu không có sự trùng lặp, cho phép đặt phòng
-            ViewBag.Message = "The room is available for the selected dates!";
-            return View("ChiTietPhong", phong);
+            // Nếu không có sự trùng lặp, phòng còn trống
+            return Json(new { available = true, message = "Phòng có sẵn trong khoảng thời gian này." });
         }
-
-
 
     }
 }

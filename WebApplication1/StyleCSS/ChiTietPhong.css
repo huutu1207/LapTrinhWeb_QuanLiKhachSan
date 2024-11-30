@@ -285,12 +285,18 @@ button[type="submit"] {
             font-weight: bold;
             color: #333;
         }
-    
 
-        /*Dichvu*/
+/* Container dịch vụ phòng */
+/* Cột bên phải (container chứa phần đặt phòng và dịch vụ) */
+.col-lg-4 {
+    position: relative; /* Để có thể căn chỉnh phần dịch vụ ở góc trên bên phải */
+}
+
 /* Container dịch vụ phòng */
 .room-services {
-    margin-top: 20px;
+    position: absolute; /* Đặt phần dịch vụ tại vị trí tuyệt đối */
+    width: 300px; /* Giới hạn chiều rộng của phần dịch vụ */
+    margin-top: 50px; /* Loại bỏ margin trên */
     padding: 20px;
     background-color: #f9f9f9;
     border: 1px solid #ddd;
@@ -298,6 +304,7 @@ button[type="submit"] {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+    /* Tiêu đề của phần dịch vụ */
     .room-services h4 {
         font-size: 20px;
         font-weight: bold;
