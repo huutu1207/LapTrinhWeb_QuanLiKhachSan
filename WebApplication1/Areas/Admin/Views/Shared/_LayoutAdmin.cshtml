@@ -110,7 +110,7 @@
             @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Le tan"|| Session["UserChucVu"].ToString() == "Quan ly"))
             {
                 <li class="nav-item">
-                    <a class="nav-link active" href="@Url.Action("DanhSachPhong", "Phong", new { area = "Admin" })">Quản lý menu</a>
+                    <a class="nav-link active" href="@Url.Action("DanhSachPhong", "Phong", new { area = "Admin" })">Quản lý phòng</a>
                 </li>
             }
             @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Quan ly"))

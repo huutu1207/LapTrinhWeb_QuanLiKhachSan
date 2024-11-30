@@ -60,6 +60,22 @@
           <Property Name="IsEmailVerified" Type="bit" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="LichSuTraPhong">
+          <Key>
+            <PropertyRef Name="MaLS" />
+          </Key>
+          <Property Name="MaLS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaPH" Type="varchar" MaxLength="50" />
+          <Property Name="SoPH" Type="varchar" MaxLength="50" />
+          <Property Name="MaKH" Type="varchar" MaxLength="50" />
+          <Property Name="HoTen" Type="nvarchar" MaxLength="50" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="50" />
+          <Property Name="CCCD" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gia" Type="float" />
+          <Property Name="NgayNhan" Type="date" />
+          <Property Name="NgayTra" Type="date" />
+        </EntityType>
         <EntityType Name="LOAIPHONG">
           <Key>
             <PropertyRef Name="MaLoai" />
@@ -184,6 +200,7 @@
           <EntitySet Name="DATPHONG" EntityType="Self.DATPHONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DICHVU" EntityType="Self.DICHVU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuTraPhong" EntityType="Self.LichSuTraPhong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIPHONG" EntityType="Self.LOAIPHONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHONG" EntityType="Self.PHONG" Schema="dbo" store:Type="Tables" />
@@ -436,7 +453,24 @@
             <End Role="LOAIPHONG" EntitySet="LOAIPHONGs" />
             <End Role="PHONG" EntitySet="PHONGs" />
           </AssociationSet>
+          <EntitySet Name="LichSuTraPhongs" EntityType="QL_KhachSanModel.LichSuTraPhong" />
         </EntityContainer>
+        <EntityType Name="LichSuTraPhong">
+          <Key>
+            <PropertyRef Name="MaLS" />
+          </Key>
+          <Property Name="MaLS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCCD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Double" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
+          <Property Name="NgayTra" Type="DateTime" Precision="0" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -550,6 +584,23 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuTraPhongs">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuTraPhong">
+              <MappingFragment StoreEntitySet="LichSuTraPhong">
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="SoPH" ColumnName="SoPH" />
+                <ScalarProperty Name="MaPH" ColumnName="MaPH" />
+                <ScalarProperty Name="MaLS" ColumnName="MaLS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
