@@ -24,7 +24,7 @@ namespace WebApplication1.Controllers
         {
             ViewBag.DiaChi = 1;
             var listPhong = LayPhong(20);
-            int iSize = 9;
+            int iSize = 6;
             int iPageNumber = (page ?? 1);
             return View(listPhong.ToPagedList(iPageNumber, iSize));
         }

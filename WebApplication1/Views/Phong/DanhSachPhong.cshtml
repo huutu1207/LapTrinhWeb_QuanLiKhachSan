@@ -28,19 +28,19 @@
                             <h3>@room.Gia VND<span>/Per Night</span></h3>
                             <table>
                                 <tbody>
+
+                                    <tr>
+                                        <td class="r-o">Diện tích:</td>
+                                        <td>@room.DienTich m<sup>2</sup> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="r-o">Nội thất:</td>
+                                        <td>@room.NoiThat</td>
+                                    </tr>
                                     <tr>
                                         <td class="r-o">Mô tả:</td>
                                         <td>@room.Mota</td>
                                     </tr>
-                                    <tr>
-                                        <td class="r-o">Trạng thái:</td>
-                                        <td>@room.TrangThai</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Giá:</td>
-                                        <td>@room.Gia</td>
-                                    </tr>
-
                                 </tbody>
                             </table>
                             <a href="@Url.Action("ChiTietPhong","Phong", new { id = room.MaPH})" class="primary-btn">More Details</a>

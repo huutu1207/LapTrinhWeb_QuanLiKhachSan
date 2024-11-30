@@ -304,6 +304,7 @@
     <Content Include="Views\DichVu\DSDichVu.cshtml" />
     <Content Include="Views\DichVu\ChiTietDichVu.cshtml" />
     <Content Include="Views\User\ThongTinCaNhan.cshtml" />
+    <Content Include="Views\User\SuaProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
