@@ -1,5 +1,4 @@
-﻿@using WebApplication1.Models
-@if (ViewBag.DiaChi == null) { ViewBag.DiaChi = 0; }
+﻿@if (ViewBag.DiaChi == null) { ViewBag.DiaChi = 0; }
 <ul class="custom-navbar d-flex justify-content-center">
     <li class="nav-item">
         <a href="@Url.Action("Index", "TrangChu")" id="li-0" class="nav-link">Trang Chủ</a>
@@ -32,16 +31,15 @@
         else
         {
             <a href="#" id="user" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" onclick="setActive(this)">
-                @(((KHACHHANG)Session["User"]).HoTen)
+                @(((WebApplication1.Models.KHACHHANG)Session["User"]).HoTen)
             </a>
             <ul class="dropdown-menu" aria-labelledby="user">
-                <li><a class="dropdown-item" href="#">Thông tin cá nhân</a></li>
+                <li><a class="dropdown-item" href="@Url.Action("ThongTinCaNhan", "User")">Thông tin cá nhân</a></li>
                 <li><a class="dropdown-item" href="@Url.Action("DangXuat", "User")">Đăng xuất</a></li>
             </ul>
         }
     </li>
 
-    
 </ul>
 
 <script>

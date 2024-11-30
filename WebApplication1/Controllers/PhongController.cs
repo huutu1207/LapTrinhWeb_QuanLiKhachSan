@@ -1,6 +1,8 @@
-﻿using PagedList;
+﻿using Newtonsoft.Json;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -20,7 +22,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult DanhSachPhong(int ?page)
         {
-            
+            ViewBag.DiaChi = 1;
             var listPhong = LayPhong(20);
             int iSize = 9;
             int iPageNumber = (page ?? 1);
@@ -82,5 +84,33 @@ namespace WebApplication1.Controllers
 
             return RedirectToAction("ChiTietPhong", new { id = MaPH});
         }
+        [HttpPost]
+        public ActionResult CheckAvailability(string MaPH, DateTime CheckIn, DateTime CheckOut)
+        {
+            var phong = db.PHONGs.FirstOrDefault(s => s.MaPH == MaPH);
+            if (phong == null)
+            {
+                return HttpNotFound(); // Nếu không tìm thấy phòng, trả về lỗi 404
+            }
+
+            // Kiểm tra ngày check-in và check-out
+            var overlappingBookings = db.BINHLUANs
+                .Where(b => b.MaPH == MaPH &&
+                            (b.ThoiGian >= CheckIn && b.ThoiGian < CheckOut)) // Kiểm tra chồng lấp ngày
+                .ToList();
+
+            if (overlappingBookings.Any())
+            {
+                ViewBag.Message = "The room is not available for the selected dates.";
+                return View("ChiTietPhong", phong); // Trả về trang ChiTietPhong với thông báo lỗi
+            }
+
+            // Nếu không có sự trùng lặp, cho phép đặt phòng
+            ViewBag.Message = "The room is available for the selected dates!";
+            return View("ChiTietPhong", phong);
+        }
+
+
+
     }
 }

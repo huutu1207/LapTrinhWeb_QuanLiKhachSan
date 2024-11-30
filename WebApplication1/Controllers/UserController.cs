@@ -283,6 +283,19 @@ namespace WebApplication1.Controllers
             return RedirectToAction("Index", "TrangChu");
         }
 
+        public ActionResult ThongTinCaNhan()
+        {
+            // Lấy thông tin người dùng từ Session (giả sử người dùng đã đăng nhập)
+            var user = (KHACHHANG)Session["User"];
+
+            if (user == null)
+            {
+                return RedirectToAction("DangNhap", "User"); // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
+            }
+            return View(user); // Trả về View và gửi dữ liệu người dùng tới View
+        }
+
+
     }
 
 }
