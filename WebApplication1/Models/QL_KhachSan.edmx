@@ -39,6 +39,7 @@
           <Property Name="TenDV" Type="nvarchar" MaxLength="50" />
           <Property Name="Mota" Type="nvarchar(max)" />
           <Property Name="Gia" Type="float" />
+          <Property Name="AnhDichVu" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -57,6 +58,7 @@
           <Property Name="Password" Type="nvarchar(max)" />
           <Property Name="EmailVerificationCode" Type="varchar" MaxLength="10" />
           <Property Name="IsEmailVerified" Type="bit" />
+          <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="LOAIPHONG">
           <Key>
@@ -92,6 +94,8 @@
           <Property Name="MaLoai" Type="varchar" MaxLength="50" />
           <Property Name="CheckIn" Type="date" />
           <Property Name="CheckOut" Type="date" />
+          <Property Name="DienTich" Type="float" />
+          <Property Name="NoiThat" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -253,6 +257,7 @@
           <Property Name="Mota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Double" />
           <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_DICHVU" FromRole="DICHVU" ToRole="DATPHONG" />
+          <Property Name="AnhDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -273,6 +278,7 @@
           <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_KHACHHANG" FromRole="KHACHHANG" ToRole="DATPHONG" />
           <Property Name="EmailVerificationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsEmailVerified" Type="Boolean" />
+          <Property Name="Avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="LOAIPHONG">
           <Key>
@@ -312,6 +318,8 @@
           <NavigationProperty Name="LOAIPHONG" Relationship="Self.FK_PHONG_LOAIPHONG" FromRole="PHONG" ToRole="LOAIPHONG" />
           <Property Name="CheckIn" Type="DateTime" Precision="0" />
           <Property Name="CheckOut" Type="DateTime" Precision="0" />
+          <Property Name="DienTich" Type="Double" />
+          <Property Name="NoiThat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -466,6 +474,7 @@
           <EntitySetMapping Name="DICHVUs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.DICHVU">
               <MappingFragment StoreEntitySet="DICHVU">
+                <ScalarProperty Name="AnhDichVu" ColumnName="AnhDichVu" />
                 <ScalarProperty Name="MaDV" ColumnName="MaDV" />
                 <ScalarProperty Name="TenDV" ColumnName="TenDV" />
                 <ScalarProperty Name="Mota" ColumnName="Mota" />
@@ -476,6 +485,7 @@
           <EntitySetMapping Name="KHACHHANGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.KHACHHANG">
               <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
                 <ScalarProperty Name="EmailVerificationCode" ColumnName="EmailVerificationCode" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
@@ -518,6 +528,8 @@
           <EntitySetMapping Name="PHONGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.PHONG">
               <MappingFragment StoreEntitySet="PHONG">
+                <ScalarProperty Name="NoiThat" ColumnName="NoiThat" />
+                <ScalarProperty Name="DienTich" ColumnName="DienTich" />
                 <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
                 <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
                 <ScalarProperty Name="MaPH" ColumnName="MaPH" />

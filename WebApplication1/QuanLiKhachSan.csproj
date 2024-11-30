@@ -186,6 +186,7 @@
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProfileViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -221,6 +222,7 @@
     <Content Include="Images\Sliders\2.jpg" />
     <Content Include="Images\Sliders\3.jpg" />
     <Content Include="Images\Sliders\4.jpg" />
+    <Content Include="Images\User\DefaultAvatar.jpg" />
     <Content Include="Models\QL_KhachSan.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>QL_KhachSan.Context.cs</LastGenOutput>
@@ -292,6 +294,7 @@
     <Content Include="Views\Phong\ChiTietPhong.cshtml" />
     <Content Include="Views\DichVu\DSDichVu.cshtml" />
     <Content Include="Views\DichVu\ChiTietDichVu.cshtml" />
+    <Content Include="Views\User\ThongTinCaNhan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
