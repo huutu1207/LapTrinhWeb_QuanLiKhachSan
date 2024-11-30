@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using WebApplication1.Models;
 using System.Net.Mail;
 using System.Net;
+using System.Data.Entity;
+using System.IO;
+using System.Web.UI.WebControls;
 
 namespace WebApplication1.Controllers
 {
@@ -287,13 +290,69 @@ namespace WebApplication1.Controllers
         {
             // Lấy thông tin người dùng từ Session (giả sử người dùng đã đăng nhập)
             var user = (KHACHHANG)Session["User"];
-
             if (user == null)
             {
                 return RedirectToAction("DangNhap", "User"); // Nếu người dùng chưa đăng nhập, chuyển hướng đến trang đăng nhập
             }
-            return View(user); // Trả về View và gửi dữ liệu người dùng tới View
+            var kh = db.KHACHHANGs.FirstOrDefault(s => s.MaKH == user.MaKH);
+            return View(kh); // Trả về View và gửi dữ liệu người dùng tới View
         }
+
+        public ActionResult SuaProfile(string id)
+        {
+            var cus = db.KHACHHANGs.FirstOrDefault(s => s.MaKH == id);
+            if (cus == null)
+            {
+                TempData["ErrorMessage"] = "Khách hàng không tồn tại.";
+                return RedirectToAction("ThongTinCaNhan");
+            }
+
+            return View(cus); // Trả về View với dữ liệu khách hàng
+        }
+
+        [HttpPost]
+        public ActionResult SuaProfile(FormCollection f, HttpPostedFileBase fileUpload)
+        {
+            string id = f["Id"];
+            var user = db.KHACHHANGs.FirstOrDefault(s => s.MaKH == id);
+
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "Khách hàng không tồn tại.";
+                return RedirectToAction("ThongTinCaNhan");
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.HoTen = f["Name"];
+                user.Email = f["Email"];
+                user.DienThoai = f["Phone"];
+                user.DiaChi = f["Address"];
+
+                // Kiểm tra nếu người dùng tải ảnh mới
+                if (fileUpload != null && fileUpload.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(fileUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Images"), fileName);
+
+                    // Nếu ảnh đã tồn tại, xoá đi và lưu ảnh mới
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    fileUpload.SaveAs(path); // Lưu ảnh vào thư mục Images
+                    user.Avatar = fileName; // Cập nhật tên ảnh trong cơ sở dữ liệu
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("ThongTinCaNhan");
+            }
+
+            // Trả về view nếu có lỗi
+            return View(user);
+        }
+
 
 
     }
