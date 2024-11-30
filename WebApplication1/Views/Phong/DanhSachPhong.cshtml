@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.DiaChi = 1;
     ViewBag.Title = "Danh sách phòng";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,43 +16,50 @@
 <section class="rooms-section spad">
     <div class="container">
         <div class="row">
-            @foreach (var room in Model)
-            {
-                i++;
-                <div class="col-lg-4 col-md-6">
-                    <div class="room-item">
-                        <img src="~/Images/Sliders/@room.Anh" class=" w-100" alt="@room.SoPH">
-                        <div class="ri-text">
-                            <h4>Phòng @room.SoPH</h4>
-                            <h3>@room.Gia VND<span>/Per Night</span></h3>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="r-o">Mô tả:</td>
-                                        <td>@room.Mota</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Trạng thái:</td>
-                                        <td>@room.TrangThai</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="r-o">Giá:</td>
-                                        <td>@room.Gia</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                            <a href="@Url.Action("ChiTietPhong","Phong", new { id = room.MaPH})" class="primary-btn">More Details</a>
-                        </div>
+            <!-- Filter Section (Bộ lọc theo loại phòng) -->
+            <div class="col-lg-3">
+                <form method="get" action="@Url.Action("DanhSachPhong")">
+                    <div class="filter-box">
+                        <h4>Filter by Room Type</h4>
+                        <select name="selectedLoaiPhong" class="form-control">
+                            <option value="">All Room Types</option>
+                            @foreach (var item in ViewBag.LoaiPhongList as SelectList)
+                            {
+                                <option value="@item.Value" @(item.Value == Request["selectedLoaiPhong"] ? "selected" : "")>@item.Text</option>
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-primary">Filter</button>
                     </div>
+                </form>
+            </div>
+
+            <!-- Danh sách phòng -->
+            <div class="col-lg-9">
+                <div class="row">
+                    @foreach (var room in Model)
+                    {
+                        i++;
+                        <div class="col-lg-4">
+                            <div class="room-item">
+                                <img src="~/Images/Rooms/@room.Anh" alt="Room Image">
+                                <div class="room-info">
+                                    <h3>@room.SoPH</h3>
+                                    <p><strong>Type:</strong> @room.MaLoai</p>
+                                    <p><strong>Price:</strong> @String.Format("{0:0,0} VND", room.Gia)</p>  <!-- Hiển thị giá phòng với định dạng tiền tệ -->
+                                    <a href="@Url.Action("ChiTietPhong", "Phong", new { id = room.MaPH })" class="btn btn-primary">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
+
+                <!-- Phân trang -->
+                <div class="MenuTrang">
+                    @Html.PagedListPager(Model, page => Url.Action("DanhSachPhong", new { page }))
+                </div>
+
+
+            </div>
         </div>
     </div>
 </section>
-<div class="MenuTrang">
-    @Html.PagedListPager(Model, page => Url.Action("DanhSachPhong", new { page = page }))
-</div>
-
-
-

@@ -8,24 +8,41 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using WebApplication1.Models;
+using PagedList.Mvc;
+using static System.Net.WebRequestMethods;
 
 namespace WebApplication1.Controllers
 {
     public class PhongController : Controller
     {
         // GET: Phong
-        QL_KhachSanEntities db = new QL_KhachSanEntities();
+       private QL_KhachSanEntities db = new QL_KhachSanEntities();
 
         private List<PHONG> LayPhong(int count)
         {
             return db.PHONGs.OrderBy(a => a.SoPH).Take(count).ToList();
         }
-        public ActionResult DanhSachPhong(int ?page)
+        public ActionResult DanhSachPhong(int? page, string selectedLoaiPhong)
         {
-            ViewBag.DiaChi = 1;
-            var listPhong = LayPhong(20);
+            // Lấy danh sách loại phòng từ bảng LOAIPHONG để gửi vào ViewBag cho filter
+            var loaiPhongList = db.LOAIPHONGs.ToList();
+            ViewBag.LoaiPhongList = new SelectList(loaiPhongList, "MaLoai", "TenLoai"); // Hiển thị tên loại phòng
+
+            // Lấy danh sách phòng và lọc theo loại phòng nếu có
+            var listPhongQuery = db.PHONGs.AsQueryable();
+
+            // Nếu có chọn loại phòng thì lọc theo loại phòng
+            if (!string.IsNullOrEmpty(selectedLoaiPhong))
+            {
+                listPhongQuery = listPhongQuery.Where(p => p.MaLoai == selectedLoaiPhong);
+            }
+
+            // Lấy các phòng với phân trang
             int iSize = 9;
             int iPageNumber = (page ?? 1);
+            var listPhong = listPhongQuery.ToList();
+
+            // Truyền danh sách phòng đã lọc và phân trang vào View
             return View(listPhong.ToPagedList(iPageNumber, iSize));
         }
 
