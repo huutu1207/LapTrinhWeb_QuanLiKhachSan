@@ -1,0 +1,70 @@
+﻿/* General layout adjustments */
+.services-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.service-item {
+    text-align: center;
+    padding: 20px;
+}
+
+    .service-item .icon {
+        background-color: #FF6F61;
+        color: white;
+        border-radius: 50%;
+        padding: 20px;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 36px;
+    }
+
+    .service-item h3 {
+        font-size: 20px;
+        margin: 10px 0;
+        color: #333;
+    }
+
+    .service-item p {
+        color: #777;
+        font-size: 14px;
+        margin: 0;
+    }
+
+/* Style for the row to ensure spacing between items */
+.row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+/* Make the service items responsive */
+@media (max-width: 768px) {
+    .services-2 {
+        margin-bottom: 30px;
+    }
+
+    .service-item {
+        padding: 15px;
+    }
+
+        .service-item .icon {
+            width: 80px;
+            height: 80px;
+            font-size: 30px;
+        }
+
+        .service-item h3 {
+            font-size: 18px;
+        }
+
+        .service-item p {
+            font-size: 13px;
+        }
+}
