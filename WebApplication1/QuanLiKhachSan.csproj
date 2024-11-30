@@ -138,6 +138,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
+    <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
@@ -264,6 +265,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="StyleCSS\ChiTietPhong.css" />
+    <Content Include="StyleCSS\DichVu.css" />
     <Content Include="StyleCSS\DanhSachPhong.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -288,6 +290,8 @@
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Phong\DanhSachPhong.cshtml" />
     <Content Include="Views\Phong\ChiTietPhong.cshtml" />
+    <Content Include="Views\DichVu\DSDichVu.cshtml" />
+    <Content Include="Views\DichVu\ChiTietDichVu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

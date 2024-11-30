@@ -48,6 +48,9 @@ namespace WebApplication1.Controllers
                              }).ToList();
 
             ViewBag.BinhLuans = binhLuans;
+            var dichVuList = db.DICHVUs.ToList();
+            ViewBag.DichVuList = dichVuList;
+
             return View(phong);
 
         }

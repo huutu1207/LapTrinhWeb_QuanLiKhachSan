@@ -3,6 +3,7 @@
     ViewBag.Title = "Chi Tiết Phòng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
+    var dichVuList = ViewBag.DichVuList as List<WebApplication1.Models.DICHVU>;
 
 }
 @model WebApplication1.Models.PHONG
@@ -21,7 +22,6 @@
                     <div class="rd-text">
                         <div class="rd-title">
                             <h3> Phòng @Model.SoPH </h3>
-                            
                             <a href="#">Booking Now</a>
                         </div>
                         <h2>@Model.Gia VND <span>/Pernight</span></h2>
@@ -50,12 +50,13 @@
                         </p>
                     </div>
                 </div>
+                <!-- Phần đánh giá -->
                 <div class="rd-reviews">
                     <h4>Reviews</h4>
                     @foreach (var binhLuan in ViewBag.BinhLuans as List<WebApplication1.Models.CMMD>)
                     {
                         <div class="comment">
-                            <p><strong> @binhLuan.HoTenKhachHang:</strong></p> 
+                            <p><strong> @binhLuan.HoTenKhachHang:</strong></p>
                             <p>@binhLuan.NoiDung</p>
                             <small>Đánh giá: @binhLuan.DanhGia sao | Thời gian: @binhLuan.ThoiGian</small>
                             <hr />
@@ -63,14 +64,12 @@
                     }
                 </div>
                 <div class="review-add">
-
                     <h4>Add Review</h4>
-
                     @if (cus != null)
                     {
                         using (Html.BeginForm("ThemBinhLuan", "Phong", FormMethod.Post))
                         {
-                            @Html.HiddenFor(model => model.MaPH) // Truyền MaPH từ model vào form
+                            @Html.HiddenFor(model => model.MaPH)
                             <div class="form-group">
                                 @Html.Label("Nội dung")
                                 @Html.TextArea("NoiDung", new { @class = "form-control", rows = 4 })
@@ -84,8 +83,6 @@
                                     <span class="star" data-value="4"><i class="fas fa-star"></i></span>
                                     <span class="star" data-value="5"><i class="fas fa-star"></i></span>
                                 </div>
-
-                                <!-- Hidden input để lưu giá trị đánh giá -->
                                 @Html.Hidden("DanhGia", "1")
                             </div>
                             <button type="submit" class="btn btn-primary">Gửi bình luận</button>
@@ -95,29 +92,11 @@
                     {
                         <p>Bạn phải <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để bình luận.</p>
                     }
-
-                    @*<form action="#" class="ra-form">
-            <div class="row">
-
-                <div class="col-lg-12">
-                    <div>
-                        <h5>You Rating:</h5>
-                        <div class="rating ">
-                            <span class="star" data-value="1"><i class="fas fa-star"></i></span>
-                            <span class="star" data-value="2"><i class="fas fa-star"></i></span>
-                            <span class="star" data-value="3"><i class="fas fa-star"></i></span>
-                            <span class="star" data-value="4"><i class="fas fa-star"></i></span>
-                            <span class="star" data-value="5"><i class="fas fa-star"></i></span>
-                        </div>
-                    </div>
-                    <textarea placeholder="Your Review"></textarea>
-                    <button type="submit">Submit Now</button>
                 </div>
             </div>
-        </form>*@
-                </div>
-            </div>
+            <!-- Cột bên phải -->
             <div class="col-lg-4">
+                <!-- Phần đặt phòng -->
                 <div class="room-booking">
                     <h3>Your Reservation</h3>
                     <form action="#">
@@ -129,20 +108,38 @@
                             <label for="date-out">Check Out:</label>
                             <input type="text" class="date-input" id="date-out">
                         </div>
-                        @*<div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">3 Adults</option>
-                                </select>
-                            </div>
-                            <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                </select>
-                            </div>*@
                         <button type="submit" class="check">Check Availability</button>
                     </form>
+                </div>
+                <!-- Phần danh sách dịch vụ -->
+                <div class="room-services">
+                    <h4>Danh Sách Dịch Vụ</h4>
+                    @if (dichVuList != null && dichVuList.Any())
+                    {
+                        foreach (var dichVu in dichVuList)
+                        {
+                            <div class="service-item">
+                                <h5 class="service-title">@dichVu.TenDV</h5>
+                                <p class="service-desc">
+                                    @if (string.IsNullOrEmpty(dichVu.Mota))
+                                    {
+                                        <text>Không có mô tả</text>
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(dichVu.Mota.Length > 50 ? dichVu.Mota.Substring(0, 50) + "..." : dichVu.Mota)
+                                    }
+                                </p>
+                                <p class="service-price">Giá: @String.Format("{0:0,0} VND", dichVu.Gia)</p>
+                                <a href="@Url.Action("ChiTietDichVu", "DichVu", new { id = dichVu.MaDV })" class="btn btn-primary">Tìm hiểu</a>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>Không có dịch vụ nào để hiển thị.</p>
+                    }
+
                 </div>
             </div>
         </div>
