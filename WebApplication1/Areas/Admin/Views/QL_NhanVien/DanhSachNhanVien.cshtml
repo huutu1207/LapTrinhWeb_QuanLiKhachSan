@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication1.Models.NHANVIEN>
+@{
+    ViewBag.Title = "DanhSachNhanVien";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Danh sách nhân viên</h2>
+
+<p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+        <a href="@Url.Action("Create", "QL_NhanVien", new { area = "Admin" })" class="text-white">Create New</a>
+    </button>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã nhân viên</th>
+            <th>Tên nhân viên</th>
+            <th>Chức vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.MaNV)</td>
+                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
+                <td>@Html.DisplayFor(modelItem => item.ChucVu)</td>
+                <td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { maNV = item.MaNV }) |
+                    @Html.ActionLink("Detail", "Chitietnhanvien", new {maNV = item.MaNV}) |
+                    @Html.ActionLink("Delete", "Delete", new { maNV = item.MaNV }, new { @class = "text-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

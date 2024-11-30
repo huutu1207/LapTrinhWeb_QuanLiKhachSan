@@ -31,7 +31,7 @@ namespace WebApplication1.Areas.Admin.Controllers
             NHANVIEN ad = db.NHANVIENs.SingleOrDefault(n => n.Username == sTenDN && n.Password == sMatKhau);
             if (ad != null)
             {
-                Session["Admin"] = ad;
+                Session["UserChucVu"] = ad.ChucVu;
                 return RedirectToAction("Index", "Admin");
             }
             else
