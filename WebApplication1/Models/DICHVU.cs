@@ -24,6 +24,7 @@ namespace WebApplication1.Models
         public string TenDV { get; set; }
         public string Mota { get; set; }
         public Nullable<double> Gia { get; set; }
+        public string AnhDichVu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATPHONG> DATPHONGs { get; set; }
