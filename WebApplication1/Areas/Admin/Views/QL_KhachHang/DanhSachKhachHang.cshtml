@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebApplication1.Models.KHACHHANG>
+
+@{
+    ViewBag.Title = "DanhSachKhachHang";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>DanhSachKhachHang</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaKH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoTen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiTinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Avatar)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { MaKH = item.MaKH }) |
+                @Html.ActionLink("Details", "Chitietkhachhang", new { MaKH = item.MaKH }) |
+                @Html.ActionLink("Delete", "Delete", new { MaKH = item.MaKH })
+
+                @if (Session["UserChucVu"] != null && Session["UserChucVu"].ToString() == "Quan ly")
+                {
+                    <span> | </span>
+                    <a href="@Url.Action("LichSuThayDoi", "QL_KhachHang", new { MaKH = item.MaKH })" class="btn btn-info">Xem lịch sử thay đổi</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

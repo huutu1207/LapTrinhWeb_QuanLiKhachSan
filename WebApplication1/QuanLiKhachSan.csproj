@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QL_KhachHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_LoaiPhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
@@ -159,6 +160,9 @@
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\KHACHHANG.cs">
+      <DependentUpon>QL_KhachSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LichSuThayDoi.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LichSuTraPhong.cs">
@@ -269,6 +273,11 @@
     <Content Include="Areas\Admin\Views\QL_NhanVien\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\Chitietphong.cshtml" />
     <Content Include="Areas\Admin\Views\Phong\TraPhong.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_KhachHang\DanhSachKhachHang.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_KhachHang\Chitietkhachhang.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_KhachHang\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_KhachHang\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_KhachHang\LichSuThayDoi.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
