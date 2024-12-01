@@ -2,174 +2,7 @@
     ViewBag.Title = "DangNhap";
     Layout = null;
 }
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: #f9f9f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .login-page {
-        width: 100%;
-        max-width: 900px;
-        display: flex;
-        background: #ffffff;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .login-container {
-        display: flex;
-        flex: 1;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .form-container {
-        flex: 1;
-        padding: 40px;
-    }
-
-    .image-container {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-        background: #f4f5f7;
-    }
-
-        .image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-    h2 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 10px;
-    }
-
-    p {
-        color: #666;
-        font-size: 14px;
-        margin-bottom: 30px;
-    }
-
-    form {
-        width: 100%;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #333;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-    .form-options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-        font-size: 12px;
-    }
-
-    .remember-me {
-        display: flex;
-        align-items: center;
-    }
-
-        .remember-me input {
-            margin-right: 5px;
-        }
-
-    .forgot-password {
-        color: #2575fc;
-        text-decoration: none;
-    }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
-    .btn-login {
-        width: 100%;
-        padding: 10px;
-        background: #000;
-        color: #fff;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 10px;
-    }
-
-        .btn-login:hover {
-            background: #333;
-        }
-
-    .btn-google {
-        width: 100%;
-        padding: 10px;
-        background: #f4f5f7;
-        color: #000;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-        .btn-google img {
-            width: 18px;
-            height: 18px;
-        }
-
-        .btn-google:hover {
-            background: #e9ecef;
-        }
-
-    .register-link {
-        margin-top: 20px;
-        font-size: 14px;
-        color: #666;
-    }
-
-        .register-link a {
-            color: #2575fc;
-            text-decoration: none;
-        }
-
-            .register-link a:hover {
-                text-decoration: underline;
-            }
-
-</style>
+<link rel="stylesheet" href="~/StyleCSS/DangNhap.css" />
 <div class="login-page">
     <div class="login-container">
         <div class="form-container">
@@ -193,8 +26,9 @@
                 </div>
                 <button type="submit" class="btn-login">Log in</button>
                 <button type="button" class="btn-google">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" alt="Google" />
-                    Log in with Google
+                    <a href="@ViewBag.response" class="aaa">
+                        <img src="~/Images/Google.png" alt="Icon" class="btn-icon"> Đăng nhập với Google
+                    </a>
                 </button>
             </form>
             <div class="register-link">
@@ -202,7 +36,7 @@
             </div>
         </div>
         <div class="image-container">
-            <img src="https://via.placeholder.com/400x400?text=Your+Image" alt="Illustration" />
+            <img src="~/Images/DangNhap.png" alt="Illustration" />
         </div>
     </div>
 </div>

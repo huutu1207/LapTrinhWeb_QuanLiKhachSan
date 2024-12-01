@@ -130,7 +130,7 @@
             @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Quan ly"))
             {
                 <li class="nav-item">
-                    <a class="nav-link active" href="@Url.Action("DanhSachDichVu", "QL_DichVu", new { area = "Admin" })">Quản lý dịch vụ</a>
+                    <a class="nav-link active" href="@Url.Action("DSDichVu", "QL_DichVu", new { area = "Admin" })">Quản lý dịch vụ</a>
                 </li>
             }
 

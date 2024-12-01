@@ -94,6 +94,7 @@ body {
         .room-item a.primary-btn:hover {
             background-color: #e55a4e;
         }
+
     .room-item img {
         width: 100%; /* Giữ ảnh có chiều rộng bằng 100% của phần tử cha */
         height: 200px; /* Cố định chiều cao */
@@ -104,10 +105,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px; /* Thêm khoảng cách phía trên */
+    margin-top: 30px;
 }
 
-    /* Kiểu cho các nút phân trang */
     .MenuTrang .pagination {
         display: flex;
         list-style: none;
@@ -115,44 +115,34 @@ body {
         margin: 0;
     }
 
-        /* Kiểu cho mỗi trang */
         .MenuTrang .pagination li {
             margin: 0 5px;
         }
 
-        /* Kiểu cho các nút phân trang */
         .MenuTrang .pagination a,
         .MenuTrang .pagination span {
             padding: 10px 20px;
-            background-color: #f8f9fa; /* Màu nền */
-            color: #007bff; /* Màu chữ xanh */
-            border: 1px solid #ccc; /* Đường viền */
+            background-color: #f8f9fa;
+            color: #007bff;
+            border: 1px solid #ccc;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s, color 0.3s;
         }
 
-            /* Hiệu ứng hover khi di chuột */
             .MenuTrang .pagination a:hover,
             .MenuTrang .pagination span:hover {
-                background-color: #007bff; /* Nền khi hover */
-                color: #fff; /* Chữ khi hover */
+                background-color: #007bff;
+                color: #fff;
             }
 
-        /* Kiểu cho nút phân trang hiện tại (active) */
         .MenuTrang .pagination .active a {
-            background-color: #007bff; /* Nền xanh khi active */
-            color: #fff; /* Chữ trắng khi active */
+            background-color: #007bff;
+            color: #fff;
         }
 
-        /* Kiểu cho nút phân trang bị vô hiệu hóa */
         .MenuTrang .pagination .disabled {
-            color: #ddd; /* Màu chữ nhạt cho nút vô hiệu hóa */
+            color: #ddd;
             cursor: not-allowed;
         }
-h2 {
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-}
-
