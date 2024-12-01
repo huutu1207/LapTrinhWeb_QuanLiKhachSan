@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="~/StyleCSS/ChiTietPhong.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Thêm jQuery UI (cho Datepicker) -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<!-- Thư viện jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
 
 <section class="room-details-section spad">
     <div class="container">
@@ -151,57 +151,57 @@
 
 <script>
     $(document).ready(function () {
-        // Kích hoạt Datepicker cho các trường ngày
-        $("#date-in, #date-out").datepicker({
-            dateFormat: 'yy-mm-dd',  // Định dạng ngày
-            minDate: 0,  // Ngày tối thiểu có thể chọn
-            autoclose: true,  // Đóng calendar tự động khi chọn ngày
-            onClose: function (selectedDate) {
-                // Đồng bộ check-out sau khi chọn check-ina
-                if (this.id == "date-in" && selectedDate !== "") {
-                    var checkOutDate = $("#date-out").val();
-                    if (checkOutDate && selectedDate > checkOutDate) {
-                        $("#date-out").val(selectedDate);
-                    }
+    // Kích hoạt Datepicker cho các trường ngày
+    $("#date-in, #date-out").datepicker({
+        dateFormat: 'yy-mm-dd',  // Định dạng ngày
+        minDate: 0,  // Ngày tối thiểu có thể chọn
+        autoclose: true,  // Đóng calendar tự động khi chọn ngày
+        onClose: function (selectedDate) {
+            // Đồng bộ check-out sau khi chọn check-ina
+            if (this.id == "date-in" && selectedDate !== "") {
+                var checkOutDate = $("#date-out").val();
+                if (checkOutDate && selectedDate > checkOutDate) {
+                    $("#date-out").val(selectedDate);
                 }
             }
-        });
+        }
+    });
 
-        // Kiểm tra tính khả dụng của phòng khi form được submit
-        $("#reservation-form").submit(function (event) {
-            event.preventDefault(); // Ngừng hành động mặc định của form (không tải lại trang)
+    // Kiểm tra tính khả dụng của phòng khi form được submit
+    $("#reservation-form").submit(function (event) {
+        event.preventDefault(); // Ngừng hành động mặc định của form (không tải lại trang)
 
-            // Lấy dữ liệu từ form
-            var checkIn = $("#date-in").val();
-            var checkOut = $("#date-out").val();
-            var maPH = "@Model.MaPH";  // Giả sử bạn truyền mã phòng từ View
+        // Lấy dữ liệu từ form
+        var checkIn = $("#date-in").val();
+        var checkOut = $("#date-out").val();
+        var maPH = "@Model.MaPH";  // Giả sử bạn truyền mã phòng từ View
 
-            // Kiểm tra nếu ngày chưa được chọn
-            if (!checkIn || !checkOut) {
-                $("#availability-result").html("<p class='error'>Vui lòng chọn ngày check-in và check-out.</p>");
-                return;
-            }
+        // Kiểm tra nếu ngày chưa được chọn
+        if (!checkIn || !checkOut) {
+            $("#availability-result").html("<p class='error'>Vui lòng chọn ngày check-in và check-out.</p>");
+            return;
+        }
 
-            // Gửi yêu cầu Ajax
-            $.ajax({
-                url: "@Url.Action("CheckAvailability", "Phong")",  // URL action trong Controller
-                type: "POST",
-                data: {
-                    MaPH: maPH,
-                    CheckIn: checkIn,
-                    CheckOut: checkOut
-                },
-                success: function (response) {
-                    if (response.available) {
-                        $("#availability-result").html("<p class='success'>Phòng còn trống. Bạn có thể đặt phòng ngay.</p>");
-                    } else {
-                        $("#availability-result").html("<p class='error'>" + response.message + "</p>");
-                    }
-                },
-                error: function (xhr, status, error) {
-                    $("#availability-result").html("<p class='error'>Có lỗi xảy ra. Vui lòng thử lại sau.</p>");
+        // Gửi yêu cầu Ajax
+        $.ajax({
+            url: "@Url.Action("CheckAvailability", "Phong")",  // URL action trong Controller
+            type: "POST",
+            data: {
+                MaPH: maPH,
+                CheckIn: checkIn,
+                CheckOut: checkOut
+            },
+            success: function (response) {
+                if (response.available) {
+                    $("#availability-result").html("<p class='success'>Phòng còn trống. Bạn có thể đặt phòng ngay.</p>");
+                } else {
+                    $("#availability-result").html("<p class='error'>" + response.message + "</p>");
                 }
-            });
+            },
+            error: function (xhr, status, error) {
+                $("#availability-result").html("<p class='error'>Có lỗi xảy ra. Vui lòng thử lại sau.</p>");
+            }
         });
     });
+});
 </script>

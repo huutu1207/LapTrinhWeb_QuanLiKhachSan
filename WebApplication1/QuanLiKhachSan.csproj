@@ -165,6 +165,7 @@
     <Compile Include="Models\LichSuTraPhong.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LichSuView.cs" />
     <Compile Include="Models\LOAIPHONG.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
@@ -313,6 +314,7 @@
     <Content Include="Views\User\SuaProfile.cshtml" />
     <Content Include="Views\DatPhong\DatPhong.cshtml" />
     <Content Include="Views\DatPhong\DatPhongConfirmation.cshtml" />
+    <Content Include="Views\User\LichSuDatPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
