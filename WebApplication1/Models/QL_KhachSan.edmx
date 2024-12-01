@@ -60,6 +60,18 @@
           <Property Name="IsEmailVerified" Type="bit" />
           <Property Name="Avatar" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="LichSuThayDoi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaKH" Type="nvarchar" MaxLength="50" />
+          <Property Name="TruongThayDoi" Type="nvarchar" MaxLength="100" />
+          <Property Name="GiaTriCu" Type="nvarchar(max)" />
+          <Property Name="GiaTriMoi" Type="nvarchar(max)" />
+          <Property Name="NgayThayDoi" Type="datetime" />
+          <Property Name="NguoiThayDoi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="LichSuTraPhong">
           <Key>
             <PropertyRef Name="MaLS" />
@@ -200,6 +212,7 @@
           <EntitySet Name="DATPHONG" EntityType="Self.DATPHONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DICHVU" EntityType="Self.DICHVU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LichSuThayDoi" EntityType="Self.LichSuThayDoi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LichSuTraPhong" EntityType="Self.LichSuTraPhong" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LOAIPHONG" EntityType="Self.LOAIPHONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
@@ -454,6 +467,7 @@
             <End Role="PHONG" EntitySet="PHONGs" />
           </AssociationSet>
           <EntitySet Name="LichSuTraPhongs" EntityType="QL_KhachSanModel.LichSuTraPhong" />
+          <EntitySet Name="LichSuThayDois" EntityType="QL_KhachSanModel.LichSuThayDoi" />
         </EntityContainer>
         <EntityType Name="LichSuTraPhong">
           <Key>
@@ -470,6 +484,18 @@
           <Property Name="Gia" Type="Double" />
           <Property Name="NgayNhan" Type="DateTime" Precision="0" />
           <Property Name="NgayTra" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="LichSuThayDoi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TruongThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTriCu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTriMoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThayDoi" Type="DateTime" Precision="3" />
+          <Property Name="NguoiThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -601,6 +627,19 @@
                 <ScalarProperty Name="SoPH" ColumnName="SoPH" />
                 <ScalarProperty Name="MaPH" ColumnName="MaPH" />
                 <ScalarProperty Name="MaLS" ColumnName="MaLS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuThayDois">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuThayDoi">
+              <MappingFragment StoreEntitySet="LichSuThayDoi">
+                <ScalarProperty Name="NguoiThayDoi" ColumnName="NguoiThayDoi" />
+                <ScalarProperty Name="NgayThayDoi" ColumnName="NgayThayDoi" />
+                <ScalarProperty Name="GiaTriMoi" ColumnName="GiaTriMoi" />
+                <ScalarProperty Name="GiaTriCu" ColumnName="GiaTriCu" />
+                <ScalarProperty Name="TruongThayDoi" ColumnName="TruongThayDoi" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

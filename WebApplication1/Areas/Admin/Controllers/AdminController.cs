@@ -32,6 +32,7 @@ namespace WebApplication1.Areas.Admin.Controllers
             if (ad != null)
             {
                 Session["UserChucVu"] = ad.ChucVu;
+                Session["NhanVien"] = ad.HoTen;
                 return RedirectToAction("Index", "Admin");
             }
             else

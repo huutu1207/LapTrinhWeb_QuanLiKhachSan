@@ -152,6 +152,7 @@ namespace WebApplication1.Areas.Admin.Controllers
         public ActionResult Edit(PHONG phong, HttpPostedFileBase AnhUpload)
         {
             ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
+
             if (!ModelState.IsValid)
             {
                 return View(phong);
@@ -159,44 +160,57 @@ namespace WebApplication1.Areas.Admin.Controllers
 
             try
             {
-                var datphongDB=db.DATPHONGs.SingleOrDefault(n=>n.MaPH==phong.MaPH);
+                // Lấy phòng hiện tại từ CSDL
                 var phongDb = db.PHONGs.SingleOrDefault(n => n.MaPH == phong.MaPH);
                 if (phongDb == null)
                 {
-                    return HttpNotFound(); // Không tìm thấy phòng
+                    return HttpNotFound(); // Nếu không tìm thấy phòng, trả về lỗi
                 }
 
-                // Xử lý upload ảnh mới (nếu có)
+                // Kiểm tra ảnh upload nếu có
                 if (AnhUpload != null && AnhUpload.ContentLength > 0)
                 {
                     var fileName = Path.GetFileName(AnhUpload.FileName);
                     var path = Path.Combine(Server.MapPath("~/Images"), fileName);
 
-                    // Lưu ảnh nếu chưa tồn tại
+                    // Nếu ảnh chưa tồn tại, lưu ảnh mới
                     if (!System.IO.File.Exists(path))
                     {
-                        AnhUpload.SaveAs(path);
+                        AnhUpload.SaveAs(path); // Lưu ảnh lên server
                     }
-
-                    // Gán tên ảnh mới
-                    phongDb.Anh = fileName;
+                    phong.Anh = fileName; // Cập nhật tên ảnh vào thuộc tính phong.Anh
                 }
-                var existingPhong = db.PHONGs.FirstOrDefault(p => p.SoPH == phong.SoPH && p.MaPH!=phong.MaPH);
+                else if (string.IsNullOrEmpty(phong.Anh))
+                {
+                    // Nếu không có ảnh upload mới và ảnh hiện tại null, giữ ảnh cũ
+                    phong.Anh = phongDb.Anh;
+                }
+
+                // Kiểm tra trùng số phòng
+                var existingPhong = db.PHONGs.FirstOrDefault(p => p.SoPH == phong.SoPH && p.MaPH != phong.MaPH);
                 if (existingPhong != null)
                 {
                     ModelState.AddModelError("", "Số phòng đã tồn tại. Vui lòng chọn mã khác.");
                     return View(phong);
                 }
-                // Cập nhật các thuộc tính khác
-                datphongDB.NgayNhan = phong.CheckIn;
-                datphongDB.NgayTra = phong.CheckOut;
+
+                // Cập nhật thông tin phòng
                 phongDb.SoPH = phong.SoPH;
                 phongDb.Mota = phong.Mota;
                 phongDb.TrangThai = phong.TrangThai;
                 phongDb.Gia = phong.Gia;
                 phongDb.MaLoai = phong.MaLoai;
-                phongDb.NoiThat=phong.NoiThat;
-                phongDb.DienTich=phong.DienTich;
+                phongDb.NoiThat = phong.NoiThat;
+                phongDb.DienTich = phong.DienTich;
+                phongDb.Anh = phong.Anh;
+
+                // Cập nhật lại thông tin đặt phòng
+                var datphongDB = db.DATPHONGs.SingleOrDefault(n => n.MaPH == phong.MaPH);
+                if (datphongDB != null)
+                {
+                    datphongDB.NgayNhan = phong.CheckIn;
+                    datphongDB.NgayTra = phong.CheckOut;
+                }
 
                 // Lưu thay đổi vào cơ sở dữ liệu
                 db.SaveChanges();
@@ -206,10 +220,13 @@ namespace WebApplication1.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
-                return View(phong);
             }
+
+            return View(phong);
         }
-        
+
+
+
         [HttpGet]
         public ActionResult TraPhong(string MaPH)
         {
