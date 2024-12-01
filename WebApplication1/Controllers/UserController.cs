@@ -9,6 +9,7 @@ using System.Net;
 using System.Data.Entity;
 using System.IO;
 using System.Web.UI.WebControls;
+using System.Collections.Specialized;
 
 namespace WebApplication1.Controllers
 {
@@ -353,8 +354,60 @@ namespace WebApplication1.Controllers
             return View(user);
         }
 
+        public ActionResult LichSuDatPhong()
+        {
+            var user = (KHACHHANG)Session["User"];
+            if (user == null)
+            {
+                return Redirect("DangNhap");
+            }
+            var lst = db.DATPHONGs.Where(dp => dp.MaKH == user.MaKH)
+                .Join(db.PHONGs, dp => dp.MaPH, p => p.MaPH, (dp, p) => new { dp, p })
+                .Join(db.LOAIPHONGs, dp_p => dp_p.p.MaLoai, lp => lp.MaLoai, (dp_p, lp) => new
+                {
+                    MaDatPhong = dp_p.dp.MaDP,
+                    TenPhong = dp_p.p.SoPH,
+                    LoaiPhong = lp.TenLoai,
+                    NgayDat = dp_p.dp.NgayDat,
+                    NgayNhan = dp_p.dp.NgayNhan,
+                    NgayTra = dp_p.dp.NgayTra,
+                    DichVu = dp_p.dp.MaDV,
+                    ThanhTien = dp_p.dp.DonGia
+                }).AsEnumerable().Select(m => 
+                    new LichSuView()
+                    {
+                        MaDatPhong = m.MaDatPhong,
+                        TenPhong = m.TenPhong,
+                        LoaiPhong = m.LoaiPhong,
+                        NgayDat = m.NgayDat.Value.ToString("dd/MM/yyyy"),
+                        NgayNhan = m.NgayNhan.Value.ToString("dd/MM/yyyy"),
+                        NgayTra = m.NgayTra.Value.ToString("dd/MM/yyyy"),
+                        DichVu = m.DichVu,
+                        ThanhTien = m.ThanhTien,
+                        CoTheHuy = m.NgayNhan > DateTime.Now ? true : false
+                    }
+                ).ToList();
+            return View(lst);
+        }
 
+        [HttpPost]
+        public ActionResult HuyDatPhong(string maDP)
+        {
+            var room = db.DATPHONGs.FirstOrDefault(s => s.MaDP == maDP);
+            if (room == null)
+            {
+                return HttpNotFound(); // hoặc trả về thông báo lỗi tùy ý
+            }
 
+            else
+            {
+                db.DATPHONGs.Remove(room);
+                db.SaveChanges();
+            }
+            return View();
+        }
+
+        
     }
 
 }
