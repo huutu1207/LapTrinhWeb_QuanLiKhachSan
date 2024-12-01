@@ -20,9 +20,10 @@
                     <img src="~/Images/Sliders/@Model.Anh" alt="">
                     <div class="rd-text">
                         <div class="rd-title">
-                            <h3> Phòng @Model.SoPH </h3>
-                            <a href="#">Booking Now</a>
+                            <h3>Phòng @Model.SoPH</h3>
+                            <a href="@Url.Action("DatPhong", "DatPhong", new { MaPH = Model.MaPH })" class="booking-now-btn">Booking Now</a>
                         </div>
+
                         <h2>@Model.Gia VND <span>/Pernight</span></h2>
                         <table>
                             <tbody>
