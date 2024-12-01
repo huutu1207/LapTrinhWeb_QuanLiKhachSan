@@ -1,0 +1,167 @@
+﻿@{
+    ViewBag.Title = "Đặt Phòng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
+    var phong = ViewBag.Phong as WebApplication1.Models.PHONG;
+    var dichVuList = ViewBag.DichVuList as List<WebApplication1.Models.DICHVU>;
+    var errorMessage = ViewBag.ErrorMessage as string;
+}
+
+<section class="room-details-section spad">
+    <div class="container">
+        <h2>Đặt phòng @(phong?.SoPH)</h2>
+
+        <!-- Hiển thị thông báo lỗi -->
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger">
+                @errorMessage
+            </div>
+        }
+
+        <!-- Nếu người dùng chưa đăng nhập -->
+        @if (cus == null)
+        {
+            <p>Bạn phải <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để tiếp tục đặt phòng.</p>
+        }
+        else if (phong == null)
+        {
+            <p>Không tìm thấy thông tin phòng. Vui lòng quay lại và thử lại.</p>
+        }
+        else
+        {
+            using (Html.BeginForm("DatPhong", "DatPhong", FormMethod.Post))
+            {
+                @Html.Hidden("MaPH", phong.MaPH)
+
+                <div class="form-group">
+                    @Html.Label("Ngày Nhận")
+                    @Html.TextBox("NgayNhan", "", new { @class = "form-control", type = "date" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Ngày Trả")
+                    @Html.TextBox("NgayTra", "", new { @class = "form-control", type = "date" })
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Dịch Vụ")
+                    @if (dichVuList != null && dichVuList.Any())
+                    {
+                        @Html.DropDownList("MaDV", new SelectList(dichVuList, "MaDV", "TenDV"), "Chọn dịch vụ", new { @class = "form-control" })
+                    }
+                    else
+                    {
+                        <p>Không có dịch vụ nào để chọn.</p>
+                    }
+                </div>
+
+                <button type="submit" class="btn btn-primary">Đặt phòng</button>
+            }
+        }
+    </div>
+</section>
+
+<style>
+    /* Thiết lập nền cho section */
+    .room-details-section {
+        padding: 60px 0;
+        background-color: #f9f9f9;
+    }
+
+    /* Thiết lập container */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    /* Tiêu đề */
+    .room-details-section h2 {
+        font-size: 2rem;
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Định dạng form-group */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+        /* Label cho các input */
+        .form-group label {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Textbox */
+        .form-group input.form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Dropdown list */
+        .form-group select.form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+        }
+
+    /* Nút bấm */
+    button.btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        width: 100%;
+    }
+
+        /* Hover effect cho nút bấm */
+        button.btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    /* Thông báo lỗi */
+    .alert-danger {
+        color: #fff;
+        background-color: #e74c3c;
+        border: none;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    /* Thông báo không đăng nhập */
+    p {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #e74c3c;
+    }
+
+    /* Thông báo không có dịch vụ */
+    .form-group p {
+        text-align: center;
+        font-size: 1rem;
+        color: #e74c3c;
+        font-style: italic;
+    }
+</style>

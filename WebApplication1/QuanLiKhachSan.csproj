@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\QL_LoaiPhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
+    <Compile Include="Controllers\DatPhongController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
@@ -311,6 +312,8 @@
     <Content Include="Views\DichVu\ChiTietDichVu.cshtml" />
     <Content Include="Views\User\ThongTinCaNhan.cshtml" />
     <Content Include="Views\User\SuaProfile.cshtml" />
+    <Content Include="Views\DatPhong\DatPhong.cshtml" />
+    <Content Include="Views\DatPhong\DatPhongConfirmation.cshtml" />
     <Content Include="Views\User\LichSuDatPhong.cshtml" />
   </ItemGroup>
   <ItemGroup>
