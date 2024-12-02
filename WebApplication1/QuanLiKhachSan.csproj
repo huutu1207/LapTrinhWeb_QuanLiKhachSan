@@ -140,12 +140,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_KhachHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_LoaiPhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_NhanVienController.cs" />
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TrangTinController.cs" />
+    <Compile Include="Areas\Admin\String.cs" />
     <Compile Include="Controllers\DatPhongController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +181,9 @@
     <Compile Include="Models\LOAIPHONG.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MENU.cs">
+      <DependentUpon>QL_KhachSan.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NHANVIEN.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
@@ -200,6 +206,9 @@
       <DependentUpon>QL_KhachSan.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>QL_KhachSan.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TRANGTIN.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserProfileViewModel.cs" />
@@ -287,6 +296,9 @@
     <Content Include="Areas\Admin\Views\QL_KhachHang\LichSuThayDoi.cshtml" />
     <Content Include="Areas\Admin\Views\QL_DichVu\DSDichVu.cshtml" />
     <Content Include="Areas\Admin\Views\QL_DichVu\ThemDichVu.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TrangTin\Edit.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -336,6 +348,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
