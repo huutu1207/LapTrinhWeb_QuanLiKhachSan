@@ -203,5 +203,46 @@
             }
         });
     });
-});
+    });
+    $(document).ready(function () {
+        let selectedRating = 0;  // luu  rating
+        // Xử lý khi click vào sao
+        $('.star').click(function () {
+            selectedRating = $(this).data('value');  // Lưu giá trị rating của sao đã chọn
+            updateStars(selectedRating);
+            $('#rating-value').text(selectedRating);  // Hiển thị giá trị rating đã chọn
+        });
+        // Cập nhật màu sắc sao khi hover
+        $('.star').mouseover(function () {
+            let rating = $(this).data('value');
+            updateStars(rating);
+        });
+        // Quay lại trạng thái ban đầu khi mouseout
+        $('.star').mouseout(function () {
+            updateStars(selectedRating);
+        });
+        function updateStars(rating) {
+            $('.star').each(function () {
+                if ($(this).data('value') <= rating) {
+                    $(this).css('color', 'gold');  // Sao vàng nếu đã được chọn
+                } else {
+                    $(this).css('color', 'grey');  // Sao xám nếu chưa được chọn
+                }
+            });
+        }
+    });
+    $(document).ready(function () {
+        $(".star").on("click", function () {
+            var ratingValue = $(this).data("value");
+            // Cập nhật giá trị trong input hidden
+            $("input[name='DanhGia']").val(ratingValue);
+            $(".star").each(function () {
+                if ($(this).data("value") <= ratingValue) {
+                    $(this).html('<i class="fas fa-star"></i>');  // Sao đã chọn
+                } else {
+                    $(this).html('<i class="far fa-star"></i>');  // Sao chưa chọn
+                }
+            });
+        });
+    });
 </script>

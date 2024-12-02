@@ -69,8 +69,8 @@ body {
     font-family: Arial, sans-serif;
 }
 footer {
-    background-color: #f0f4ff; /* Màu nền */
-    color: #333;
+    background-color: #222736; /* Màu nền */
+    color: #a1a1ab;
     padding: 30px 0;
     border-top: 3px solid #ccc;
     width: 100%;
@@ -94,7 +94,7 @@ footer {
     .footer-column h3 {
         font-size: 18px;
         font-weight: bold;
-        color: #333;
+        color: #d9a572;
         margin-bottom: 15px;
         text-transform: uppercase;
         border-bottom: 2px solid #007bff;
@@ -117,7 +117,7 @@ footer {
 
             .footer-column ul li a {
                 text-decoration: none;
-                color: #007bff;
+                color: #a1a1ab;
                 transition: color 0.3s;
             }
 
@@ -132,7 +132,7 @@ footer {
     .footer-column p {
         font-size: 14px;
         margin: 8px 0;
-        color: #555;
+        color: #a1a1ab;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -144,18 +144,29 @@ footer {
 
 .social-icons {
     margin-top: 10px;
+    display: flex;
 }
 
     .social-icons a {
         text-decoration: none;
         margin-right: 15px;
         font-size: 18px;
-        color: #007bff;
-        transition: color 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px; /* Đường kính hình tròn */
+        height: 50px;
+        border: 1px solid #514745;
+        border-radius: 50%;
+        color: #ffffff;
+        transition: background-color 0.3s, transform 0.3s;
     }
 
         .social-icons a:hover {
-            color: #0056b3;
+            color: #ffffff;
+            background-color: #d9a572;
+            text-decoration: none;
+            transform: scale(1.1);
         }
 
 /* Phần dưới cùng */

@@ -231,6 +231,8 @@
     <Content Include="Images\anh-sale-3.png" />
     <Content Include="Images\anh-sale-hang-1.jpg" />
     <Content Include="Images\AnhPhong\Phong101.jpg" />
+    <Content Include="Images\google-icon.png" />
+    <Content Include="Images\Login.gif" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\phong-don-1.jpg" />
     <Content Include="Images\sale.png" />
