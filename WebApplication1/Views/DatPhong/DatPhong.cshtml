@@ -50,22 +50,28 @@
                 </div>
 
                 <div class="form-group">
-                    @Html.Label("Dịch Vụ")
+                    @Html.Label("Dịch Vụ (Không bắt buộc)")
                     @if (dichVuList != null && dichVuList.Any())
                     {
-                        @Html.DropDownList("MaDV", new SelectList(dichVuList, "MaDV", "TenDV"), "Chọn dịch vụ", new { @class = "form-control" })
+                        @Html.DropDownList("MaDV",
+                            new SelectList(dichVuList, "MaDV", "TenDV"),
+                            "Không chọn dịch vụ", // Tùy chọn mặc định
+                            new { @class = "form-control" })
                     }
                     else
                     {
-                        <p>Không có dịch vụ nào để chọn.</p>
+                        <p class="text-warning">Hiện không có dịch vụ nào để chọn. Bạn có thể tiếp tục đặt phòng mà không cần chọn dịch vụ.</p>
                     }
                 </div>
 
+
+               
                 <button type="submit" class="btn btn-primary">Đặt phòng</button>
             }
         }
     </div>
 </section>
+
 
 <style>
  /* Section layout */

@@ -27,6 +27,7 @@ namespace WebApplication1.Controllers
                 ViewBag.ErrorMessage = "Không có dịch vụ nào trong hệ thống.";
             }
 
+
             ViewBag.Phong = phong;
             ViewBag.DichVuList = dichVuList;
 
@@ -38,14 +39,12 @@ namespace WebApplication1.Controllers
         public ActionResult DatPhong(string MaPH, DateTime? NgayNhan, DateTime? NgayTra, string MaDV = null)
         {
 
-            // Kiểm tra xem người dùng đã đăng nhập chưa
             var khachHang = (KHACHHANG)Session["User"];
             if (khachHang == null)
             {
                 return RedirectToAction("DangNhap", "User");
             }
 
-            // Kiểm tra dữ liệu đầu vào
             if (!NgayNhan.HasValue || !NgayTra.HasValue)
             {
                 ModelState.AddModelError("", "Vui lòng nhập ngày nhận và ngày trả.");
@@ -58,7 +57,6 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
-            // Kiểm tra trùng thời gian đặt phòng
             var isOverlapping = db.DATPHONGs.Any(dp =>
                 dp.MaPH == MaPH &&
                 ((NgayNhan < dp.NgayTra && NgayTra > dp.NgayNhan)));
@@ -69,7 +67,6 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
-            // Các bước tiếp theo như lấy thông tin phòng, tính giá, và lưu thông tin đặt phòng
             string MaKH = khachHang.MaKH;
             string MaDP = "DP" + new Random().Next(1000, 9999);
             var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == MaPH);
@@ -78,32 +75,42 @@ namespace WebApplication1.Controllers
                 return HttpNotFound("Không tìm thấy phòng.");
             }
 
+            // Tính giá dịch vụ nếu có
             float giaDichVu = 0f;
+            string maDVToSave = null;
             if (!string.IsNullOrEmpty(MaDV))
             {
                 var dichVu = db.DICHVUs.FirstOrDefault(dv => dv.MaDV == MaDV);
                 if (dichVu != null)
                 {
-                    giaDichVu = (float)dichVu.Gia;
+                    giaDichVu = (float)dichVu.Gia; // Giá dịch vụ
+                    maDVToSave = MaDV; // Lưu mã dịch vụ
+                }
+                else
+                {
+                    giaDichVu = 0;
+                    maDVToSave = null;
                 }
             }
 
+            // Tính tổng giá trị
             int soNgayO = (NgayTra.Value - NgayNhan.Value).Days;
-            float donGia = (float)(((phong.Gia ?? 0) * soNgayO) + giaDichVu - 200000);
-            phong.TrangThai = "Booked";
+
+            // Tính giá phòng
+            float donGiaPhong = (float)(phong.Gia ?? 0) * soNgayO + giaDichVu - 200000;
 
             var datPhong = new DATPHONG
             {
                 MaDP = MaDP,
                 MaKH = MaKH,
                 MaPH = MaPH,
-                MaDV = MaDV,
+                MaDV = maDVToSave, // Có thể null
                 NgayDat = DateTime.Now,
                 NgayNhan = NgayNhan.Value,
                 NgayTra = NgayTra.Value,
                 TinhTrang = "Booked",
                 DatCoc = 200000,
-                DonGia = donGia
+                DonGia = donGiaPhong
             };
 
             db.DATPHONGs.Add(datPhong);
@@ -112,7 +119,7 @@ namespace WebApplication1.Controllers
             return RedirectToAction("DatPhongConfirmation", new { MaDP = MaDP });
         }
 
-        public ActionResult DatPhongConfirmation(string MaDP)
+            public ActionResult DatPhongConfirmation(string MaDP)
         {
             var datPhong = db.DATPHONGs.FirstOrDefault(dp => dp.MaDP == MaDP);
             if (datPhong == null)
