@@ -1,25 +1,29 @@
 ﻿@{
     ViewBag.Title = "Đặt Phòng";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Lấy thông tin từ ViewBag
     var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
     var phong = ViewBag.Phong as WebApplication1.Models.PHONG;
     var dichVuList = ViewBag.DichVuList as List<WebApplication1.Models.DICHVU>;
-    var errorMessage = ViewBag.ErrorMessage as string;
 }
 
 <section class="room-details-section spad">
     <div class="container">
-        <h2>Đặt phòng @(phong?.SoPH)</h2>
+        <h2>Đặt Phòng @(phong?.SoPH)</h2>
 
-        <!-- Hiển thị thông báo lỗi -->
-        @if (!string.IsNullOrEmpty(errorMessage))
+        <!-- Hiển thị thông báo lỗi nếu có -->
+        @if (!ViewData.ModelState.IsValid)
         {
             <div class="alert alert-danger">
-                @errorMessage
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <p>@error.ErrorMessage</p>
+                }
             </div>
         }
 
-        <!-- Nếu người dùng chưa đăng nhập -->
+        <!-- Kiểm tra người dùng -->
         @if (cus == null)
         {
             <p>Bạn phải <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để tiếp tục đặt phòng.</p>
@@ -30,18 +34,19 @@
         }
         else
         {
+            <!-- Form đặt phòng -->
             using (Html.BeginForm("DatPhong", "DatPhong", FormMethod.Post))
             {
                 @Html.Hidden("MaPH", phong.MaPH)
 
                 <div class="form-group">
                     @Html.Label("Ngày Nhận")
-                    @Html.TextBox("NgayNhan", "", new { @class = "form-control", type = "date" })
+                    @Html.TextBox("NgayNhan", "", new { @class = "form-control", type = "date", required = "required" })
                 </div>
 
                 <div class="form-group">
                     @Html.Label("Ngày Trả")
-                    @Html.TextBox("NgayTra", "", new { @class = "form-control", type = "date" })
+                    @Html.TextBox("NgayTra", "", new { @class = "form-control", type = "date", required = "required" })
                 </div>
 
                 <div class="form-group">
@@ -63,105 +68,108 @@
 </section>
 
 <style>
-    /* Thiết lập nền cho section */
-    .room-details-section {
-        padding: 60px 0;
-        background-color: #f9f9f9;
-    }
+ /* Section layout */
+.room-details-section {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* Gradient background for section */
+}
 
-    /* Thiết lập container */
-    .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #ffffff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effect */
+}
+
+.container:hover {
+    transform: translateY(-10px); /* Floating effect on hover */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+/* Title */
+.room-details-section h2 {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase; /* Adds emphasis */
+    letter-spacing: 1px;
+}
+
+/* Form elements */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Button styles */
+    button.btn-primary {
+        background-color: #ff6f61;
+        color: white;
+        padding: 12px 20px;
+        border: none;
         border-radius: 8px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin-left: 220px;
+        width: 250px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-    /* Tiêu đề */
+    button.btn-primary:hover {
+        background-color: #e55a4e;
+        transform: translateY(-3px); /* Slight lift effect on hover */
+    }
+
+/* Button focus effect */
+button.btn-primary:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.6); /* Blue focus ring */
+}
+
+/* Error messages */
+.alert-danger {
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for alert box */
+}
+
+/* Responsive Design */
+@@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
     .room-details-section h2 {
         font-size: 2rem;
-        color: #333;
-        text-align: center;
-        margin-bottom: 20px;
     }
 
-    /* Định dạng form-group */
-    .form-group {
-        margin-bottom: 20px;
+    .form-group label {
+        font-size: 1rem;
     }
 
-        /* Label cho các input */
-        .form-group label {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #555;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        /* Textbox */
-        .form-group input.form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        /* Dropdown list */
-        .form-group select.form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            background-color: #fff;
-        }
-
-    /* Nút bấm */
     button.btn-primary {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        width: 100%;
-    }
-
-        /* Hover effect cho nút bấm */
-        button.btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-    /* Thông báo lỗi */
-    .alert-danger {
-        color: #fff;
-        background-color: #e74c3c;
-        border: none;
-        padding: 15px;
-        text-align: center;
-        margin-bottom: 20px;
-        border-radius: 5px;
         font-size: 1rem;
     }
+}
 
-    /* Thông báo không đăng nhập */
-    p {
-        text-align: center;
-        font-size: 1.1rem;
-        color: #e74c3c;
-    }
-
-    /* Thông báo không có dịch vụ */
-    .form-group p {
-        text-align: center;
-        font-size: 1rem;
-        color: #e74c3c;
-        font-style: italic;
-    }
 </style>
