@@ -127,8 +127,10 @@ namespace WebApplication1.Controllers
             // Kiểm tra các đơn đặt phòng có chồng lấp với thời gian check-in và check-out
             var overlappingBookings = db.DATPHONGs
                 .Where(d => d.MaPH == MaPH &&
-                            ((d.NgayNhan >= checkInDate && d.NgayTra < checkOutDate) ||
-                             (d.NgayNhan > checkInDate && d.NgayTra <= checkOutDate)))
+                            // Kiểm tra nếu một trong các điều kiện này thỏa mãn thì có sự trùng lặp
+                            (
+                                (d.NgayNhan < checkOutDate && d.NgayTra > checkInDate)  // Đặt phòng trùng với khoảng thời gian mới
+                            ))
                 .ToList();
 
             if (overlappingBookings.Any())

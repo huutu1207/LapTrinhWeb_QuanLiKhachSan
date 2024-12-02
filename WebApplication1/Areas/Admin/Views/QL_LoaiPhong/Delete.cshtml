@@ -12,8 +12,8 @@
 @using (Html.BeginForm("Delete", "QL_LoaiPhong", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.MaLoai)
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-        <button type="submit" class="btn btn-danger">Xóa</button>
-    </div>
+<div class="modal-footer">
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a href="@Url.Action("DanhSachLoaiPhong", "QL_LoaiPhong")" class="btn btn-secondary">Đóng</a>
+</div>
 }

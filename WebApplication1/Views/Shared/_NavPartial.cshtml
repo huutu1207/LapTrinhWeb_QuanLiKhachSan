@@ -1,4 +1,5 @@
-﻿@if (ViewBag.DiaChi == null) { ViewBag.DiaChi = 0; }
+﻿
+@if (ViewBag.DiaChi == null) { ViewBag.DiaChi = 0; }
 <ul class="custom-navbar d-flex justify-content-center">
     <li class="nav-item">
         <a href="@Url.Action("Index", "TrangChu")" id="li-0" class="nav-link">Trang Chủ</a>
@@ -15,6 +16,19 @@
     <li class="nav-item">
         <a href="#" id="contact" class="nav-link" onclick="setActive(this)">Liên Hệ</a>
     </li>
+
+    @if (ViewBag.TrangTinList != null)
+    {
+        var trangTinList = ViewBag.TrangTinList as IEnumerable<WebApplication1.Models.TRANGTIN>;
+        <ul class="nav navbar-nav">
+            @foreach (var item in trangTinList)
+            {
+                <li><a href="~/Admin/TrangTin/Index/@item.MetaTitle">@item.TenTrang</a></li>
+            }
+        </ul>
+    }
+
+
 
     <li class="nav-item dropdown">
         @if (Session["User"] == null)

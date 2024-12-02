@@ -115,8 +115,8 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { MaPH = Model.MaPH }) |
-    @Html.ActionLink("Back to List", "DanhSachPhong")|
-    @Html.ActionLink("Trả phòng","TraPhong",new { MaPH = Model.MaPH })
-
+    <a href="@Url.Action("Edit", "Phong", new { MaPH = Model.MaPH })" class="btn btn-primary">Edit</a>
+    <a href="@Url.Action("DanhSachPhong", "Phong")" class="btn btn-secondary">Back to List</a>
+    <a href="@Url.Action("TraPhong", "Phong", new { MaPH = Model.MaPH })" class="btn btn-danger">Trả phòng</a>
 </p>
+
