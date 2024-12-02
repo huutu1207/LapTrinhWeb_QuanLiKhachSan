@@ -49,11 +49,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Mota)
+            Mô tả:
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Mota)
+            @Html.Raw(@Model.Mota.ToString().Replace("\n",
+           "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
         </dd>
 
         <dt>

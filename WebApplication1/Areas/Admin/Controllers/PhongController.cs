@@ -85,7 +85,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(PHONG phong, HttpPostedFileBase AnhUpload)
+        public ActionResult Create(PHONG phong, FormCollection f, HttpPostedFileBase AnhUpload)
         {
             ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
 
@@ -115,7 +115,7 @@ namespace WebApplication1.Areas.Admin.Controllers
                     }
 
                     phong.Anh = fileName; // Gán tên file vào thuộc tính Anh
-
+                    phong.Mota= f["MoTa"];
                     // Thêm vào cơ sở dữ liệu
                     db.PHONGs.Add(phong);
                     db.SaveChanges();
@@ -141,7 +141,7 @@ namespace WebApplication1.Areas.Admin.Controllers
             }
 
             ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
-
+            ViewBag.MoTa = phong.Mota;
 
             return View(phong);
         }
@@ -149,7 +149,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(PHONG phong, HttpPostedFileBase AnhUpload)
+        public ActionResult Edit(PHONG phong, FormCollection f, HttpPostedFileBase AnhUpload)
         {
             ViewBag.MaLoai = new SelectList(db.LOAIPHONGs.OrderBy(n => n.TenLoai), "MaLoai", "TenLoai");
 
@@ -193,10 +193,9 @@ namespace WebApplication1.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Số phòng đã tồn tại. Vui lòng chọn mã khác.");
                     return View(phong);
                 }
-
                 // Cập nhật thông tin phòng
                 phongDb.SoPH = phong.SoPH;
-                phongDb.Mota = phong.Mota;
+                phongDb.Mota = f["MoTa"]; 
                 phongDb.TrangThai = phong.TrangThai;
                 phongDb.Gia = phong.Gia;
                 phongDb.MaLoai = phong.MaLoai;
