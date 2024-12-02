@@ -4,11 +4,13 @@
 }
 
 @model List<WebApplication1.Models.LichSuView>
+
+
 <h2 style="text-align: center;">Lịch sử đặt phòng</h2>
 <div class="wrap-lich-su">
-    @if (@Model.Count > 0)
+    @if (Model.Count > 0)
     {
-        foreach (WebApplication1.Models.LichSuView lsv in @Model)
+        foreach (var lsv in Model)
         {
             <div class="khung-lich-su">
                 <table class="bang-dang-ky-thanh-cong bang-dat-phong-thanh-cong">
@@ -26,9 +28,12 @@
                     </tbody>
                 </table>
                 <div style="text-align: center;" class="btnHuy">
-                    @if (@lsv.CoTheHuy)
+                    @if (lsv.CoTheHuy)
                     {
-                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#myModal" onclick="myFunction('@lsv.MaDatPhong')">Hủy Đặt</button>
+                        <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#confirmCancelModal"
+                                onclick="setMaDatPhong('@lsv.MaDatPhong')">
+                            Hủy Đặt
+                        </button>
                     }
                     else
                     {
@@ -48,17 +53,17 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="confirmCancelModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Xác nhận hủy đặt phòng</h5>
+                <h5 class="modal-title" id="modalLabel">Xác nhận hủy đặt phòng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Bạn có chắc chắn muốn hủy đặt phòng này không?
+                Bạn có chắc chắn muốn hủy đặt phòng với mã <strong id="maDatPhongModal"></strong> không?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -68,17 +73,22 @@
     </div>
 </div>
 
-<script>
-    let maDatPhongToCancel = '';
 
-    function myFunction(maDatPhong) {
-        maDatPhongToCancel = maDatPhong;
+
+<script>
+    let maDatPhong = '';
+
+    function setMaDatPhong(ma) {
+        maDatPhong = ma;
+        document.getElementById('maDatPhongModal').innerText = ma;
     }
 
     function submitCancellation() {
-        window.location.href = `/User/HuyDatPhong/${maDatPhongToCancel}`;
+        // Điều hướng đến Controller để xử lý
+        window.location.href = `/User/HuyDatPhong?maDP=${maDatPhong}`;
     }
 </script>
+
 
 
 
