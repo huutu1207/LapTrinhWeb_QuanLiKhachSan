@@ -44,12 +44,12 @@
         </div>
 
         <div class="form-group">
-            <textarea name="MoTa" id="mota">@ViewBag.MoTa</textarea>
+            <textarea name="MoTa" id="mota"></textarea>
             <script>
-        CKEDITOR.replace("mota", {
-            customConfig: '/ckeditor/config.js',
-            extraAllowedContent: 'span'
-        });
+                CKEDITOR.replace("mota", {
+                    customConfig: '/ckeditor/config.js',
+                    extraAllowedContent: 'span'
+                });
             </script>
 
         </div>
@@ -89,5 +89,6 @@
 }
 
 <div>
-    @Html.ActionLink("Quay lại danh sách", "DanhSachPhong")
+    <a href="@Url.Action("DanhSachPhong", "QL_LoaiPhong")" class="btn btn-secondary">Quay lại danh sách</a>
 </div>
+

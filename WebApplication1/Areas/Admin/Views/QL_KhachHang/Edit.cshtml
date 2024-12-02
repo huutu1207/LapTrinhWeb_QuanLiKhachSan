@@ -106,12 +106,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary text-white" />
+                <input type="submit" value="Save" class="btn btn-primary text-white" /> | 
+                <a href="@Url.Action("DanhSachKhachHang", "QL_KhachHang")" class="btn btn-secondary">Back to List</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "DanhSachKhachHang")
-</div>
+

@@ -102,6 +102,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new {MaKH=Model.MaKH }) |
-    @Html.ActionLink("Back to List", "DanhSachKhachHang")
+    <a href="@Url.Action("Edit", "QL_KhachHang", new { MaKH = Model.MaKH })" class="btn btn-primary">Edit</a> |
+    <a href="@Url.Action("DanhSachKhachHang", "QL_KhachHang")" class="btn btn-secondary">Back to List</a>
 </p>
