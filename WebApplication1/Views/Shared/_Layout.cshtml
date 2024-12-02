@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="~/Content/Style.css" />
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Optional: jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -24,7 +29,7 @@
     @*@Html.Action("NavPartial", "TrangChu");*@
     @Html.Partial("_NavPartial");
 
-    @Html.Action("SliderPartial", "TrangChu");
+    @Html.Action("SliderPartial", "TrangChu")
 
     <!-- Main Content -->
     <div class="container my-4">
@@ -32,7 +37,7 @@
     </div>
 
     <!-- Footer -->
-    @Html.Action("FooterPartial", "TrangChu");
+    @Html.Action("FooterPartial", "TrangChu")
 
     <!-- Scripts -->
 
