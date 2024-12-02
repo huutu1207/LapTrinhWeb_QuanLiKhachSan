@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<script src="~/ckeditor/ckeditor.js"></script>
 <h2>Edit Room</h2>
 
 @using (Html.BeginForm("Edit", "Phong", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -66,11 +66,14 @@
 
     <!-- Mô tả -->
     <div class="form-group">
-        @Html.LabelFor(model => model.Mota, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Mota, new { @class = "form-control", rows = 4 })
-            @Html.ValidationMessageFor(model => model.Mota, "", new { @class = "text-danger" })
-        </div>
+        <textarea name="MoTa" id="mota">@ViewBag.MoTa</textarea>
+        <script>
+                CKEDITOR.replace("mota", {
+                    customConfig: '/ckeditor/config.js',
+                    extraAllowedContent: 'span'
+                });
+        </script>
+
     </div>
 
     <!-- Trạng thái -->
