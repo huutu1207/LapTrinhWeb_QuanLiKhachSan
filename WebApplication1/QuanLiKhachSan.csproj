@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
+    <Compile Include="Areas\Admin\Controllers\QL_DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_KhachHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_LoaiPhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_NhanVienController.cs" />
@@ -280,6 +281,8 @@
     <Content Include="Areas\Admin\Views\QL_KhachHang\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\QL_KhachHang\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\QL_KhachHang\LichSuThayDoi.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_DichVu\DSDichVu.cshtml" />
+    <Content Include="Areas\Admin\Views\QL_DichVu\ThemDichVu.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -292,6 +295,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="StyleCSS\ChiTietPhong.css" />
+    <Content Include="StyleCSS\QLDichVu.css" />
     <Content Include="StyleCSS\DichVu.css" />
     <Content Include="StyleCSS\DanhSachPhong.css" />
     <Content Include="Web.config" />

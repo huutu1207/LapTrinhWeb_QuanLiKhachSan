@@ -10,6 +10,9 @@ using System.Data.Entity;
 using System.IO;
 using System.Web.UI.WebControls;
 using System.Collections.Specialized;
+using System.Data.Entity.Validation;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace WebApplication1.Controllers
 {
@@ -25,8 +28,161 @@ namespace WebApplication1.Controllers
                 ViewBag.Username = Request.Cookies["Username"].Value;
                 ViewBag.Password = Request.Cookies["Password"].Value;
             }
+
+            var clientId = "236329445042-ao0n55mptkk6fftaeu8mactg13feu683.apps.googleusercontent.com";
+            var url = "https://localhost:44354/User/LoginGoogle";  // Đảm bảo URL này là chính xác.
+            string response = GenerateGoogleOAuthUrl(clientId, url);
+            ViewBag.response = response;
+
             return View();
         }
+
+        private string GenerateGoogleOAuthUrl(string clientId, string redirectUri)
+        {
+            string googleOAuthUrl = "https://accounts.google.com/o/oauth2/v2/auth";
+
+            var queryParams = new List<KeyValuePair<string, string>>
+          {
+              new KeyValuePair<string, string>("response_type", "code"),
+              new KeyValuePair<string, string>("client_id", clientId),
+              new KeyValuePair<string, string>("redirect_uri", redirectUri),
+              new KeyValuePair<string, string>("scope", "openid email profile"),
+              new KeyValuePair<string, string>("access_type", "online")
+          };
+
+            // Create URL by concatenating parameters
+            string queryString = string.Join("&", queryParams.Select(q => $"{q.Key}={Uri.EscapeDataString(q.Value)}"));
+            return $"{googleOAuthUrl}?{queryString}";
+        }
+
+        private async Task<string> ExchangeCodeForTokenAsync(string code, string clientId, string redirectUri, string clientSecret)
+        {
+            string tokenEndpoint = "https://oauth2.googleapis.com/token";
+
+            using (var client = new HttpClient())
+            {
+                var content = new FormUrlEncodedContent(new[]
+                {
+            new KeyValuePair<string, string>("code", code),
+            new KeyValuePair<string, string>("client_id", clientId),
+            new KeyValuePair<string, string>("client_secret", clientSecret),
+            new KeyValuePair<string, string>("redirect_uri", redirectUri),
+            new KeyValuePair<string, string>("grant_type", "authorization_code")
+        });
+
+                try
+                {
+                    // Gửi yêu cầu POST đến token endpoint
+                    var response = await client.PostAsync(tokenEndpoint, content);
+                    var responseString = await response.Content.ReadAsStringAsync();
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        // Nếu yêu cầu không thành công, throw ra lỗi với phản hồi chi tiết
+                        throw new Exception($"Error exchanging code: {responseString}");
+                    }
+
+                    // Parse phản hồi JSON
+                    dynamic jsonResponse = Newtonsoft.Json.JsonConvert.DeserializeObject(responseString);
+
+                    // Kiểm tra lỗi trong phản hồi từ Google
+                    if (jsonResponse.error != null)
+                    {
+                        throw new Exception($"Error exchanging code: {jsonResponse.error_description}");
+                    }
+
+                    // Trả về access token
+                    return jsonResponse.access_token;
+                }
+                catch (Exception ex)
+                {
+                    // Log lỗi chi tiết để dễ dàng debug
+                    Console.WriteLine($"Exception: {ex.Message}");
+                    throw;
+                }
+            }
+        }
+
+        private async Task<dynamic> GetGoogleUserInfoAsync(string accessToken)
+        {
+            string userInfoEndpoint = "https://www.googleapis.com/oauth2/v2/userinfo";
+            using (var client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+                var response = await client.GetAsync(userInfoEndpoint);
+                var responseString = await response.Content.ReadAsStringAsync();
+
+                dynamic userInfo = Newtonsoft.Json.JsonConvert.DeserializeObject(responseString.ToString());
+
+                if (userInfo.error != null)
+                {
+                    throw new Exception($"Error fetchung user info: {userInfo.error.message}");
+                }
+                return userInfo;
+            }
+        }
+        public async Task<ActionResult> LoginGoogle(string code, string scope, string authuser, string prompt)
+        {
+            string redirectUri = "https://localhost:44354/User/LoginGoogle";
+            var clientID = "236329445042-ao0n55mptkk6fftaeu8mactg13feu683.apps.googleusercontent.com";
+            var clientSecret = "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";
+
+            if (string.IsNullOrEmpty(code))
+            {
+                return RedirectToAction("DangNhap", "User");
+            }
+            try
+            {
+                var accessToken = await ExchangeCodeForTokenAsync(code, clientID, redirectUri, clientSecret);
+                var userInfo = await GetGoogleUserInfoAsync(accessToken);
+
+                string name = userInfo.name?.ToString();
+                string email = userInfo.email?.ToString();
+
+                if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email))
+                {
+                    ViewBag.Error = "Incomplete user information returned by google";
+                    return RedirectToAction("DangNhap");
+
+                }
+                
+
+                KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(u => u.Email == email);
+                if (kh == null)
+                {
+                    string pass = Guid.NewGuid().ToString("N").Substring(0, 10);
+                    KHACHHANG khNew = new KHACHHANG
+                    {
+                        MaKH = "KH" + (db.KHACHHANGs.Max(k => k.MaKH.Substring(2)) + 1).ToString(),  // Tạo mã khách hàng theo định dạng KH + số tự tăng
+                        HoTen = name,
+                        Email = email,
+                        Username = email.Length > 13 ? email.Substring(0, 13) : email,  // Đảm bảo username hợp lệ
+                        Password = pass,
+                        DienThoai = "0000",
+                        NgaySinh = DateTime.Now,
+                    };
+                    db.KHACHHANGs.Add(khNew);
+                    db.SaveChanges();
+                    Session["User"] = khNew;
+                    ViewBag.ThongBao = "Chúc mừng bạn đăng nhập thành công";
+                }
+                else
+                {
+                    Session["User"] = kh;
+                }
+                return RedirectToAction("Index", "TrangChu");
+
+            }
+            catch (DbEntityValidationException dbEx)
+            {
+                var errorMessages = dbEx.EntityValidationErrors.SelectMany(validationResult => validationResult.ValidationErrors)
+                    .Select(error => $"Property: {error.PropertyName}, Error: {error.ErrorMessage}");
+                var fullErrorMessage = string.Join(", ", errorMessages);
+
+                return Content($"Validation Errors: {fullErrorMessage}");
+            }
+        }
+
 
         [HttpPost]
         public ActionResult DangNhap(FormCollection collection)
@@ -84,7 +240,7 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            return View();
+            return View("Index","TrangChu");
         }
 
 
