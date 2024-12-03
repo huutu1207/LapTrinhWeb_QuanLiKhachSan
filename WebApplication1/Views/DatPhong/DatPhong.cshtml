@@ -1,7 +1,7 @@
 ﻿@{
     ViewBag.Title = "Đặt Phòng";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    ViewBag.DiaChi = 1;
     // Lấy thông tin từ ViewBag
     var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
     var phong = ViewBag.Phong as WebApplication1.Models.PHONG;
@@ -60,8 +60,11 @@
                         <p>Không có dịch vụ nào để chọn.</p>
                     }
                 </div>
+                <div class="center-button">
+                    <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                </div>
 
-                <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                @*<button type="submit" class="btn btn-primary">Đặt phòng</button>*@
             }
         }
     </div>
@@ -74,20 +77,11 @@
     background: linear-gradient(to bottom, #ff7e5f, #feb47b); /* Gradient background for section */
 }
 
-/* Container */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 30px;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Enhanced shadow */
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effect */
-}
 
-.container:hover {
-    transform: translateY(-10px); /* Floating effect on hover */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
-}
+    .center-button {
+        display: flex;
+        justify-content: center;
+    }
 
 /* Title */
 .room-details-section h2 {
@@ -123,7 +117,7 @@
         border-radius: 8px;
         font-size: 1.2rem;
         cursor: pointer;
-        margin-left: 220px;
+        align-items: center;
         width: 250px;
         transition: background-color 0.3s ease, transform 0.3s ease;
     }

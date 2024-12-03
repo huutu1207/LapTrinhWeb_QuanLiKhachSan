@@ -231,7 +231,7 @@ namespace WebApplication1.Controllers
                     }
 
                     // Chuyển hướng sau khi đăng nhập thành công
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "TrangChu");
                 }
                 else
                 {

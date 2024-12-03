@@ -3,6 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var cus = (WebApplication1.Models.KHACHHANG)Session["User"];
     var dichVuList = ViewBag.DichVuList as List<WebApplication1.Models.DICHVU>;
+    ViewBag.DiaChi = 1;
 }
 @model WebApplication1.Models.PHONG
 <link rel="stylesheet" href="~/StyleCSS/ChiTietPhong.css" />
