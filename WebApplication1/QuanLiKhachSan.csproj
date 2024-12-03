@@ -141,6 +141,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_DichVuController.cs" />
     <Compile Include="Areas\Admin\Controllers\QL_KhachHangController.cs" />
@@ -346,11 +347,13 @@
     <Content Include="Views\DatPhong\DatPhong.cshtml" />
     <Content Include="Views\DatPhong\DatPhongConfirmation.cshtml" />
     <Content Include="Views\User\LichSuDatPhong.cshtml" />
+    <Content Include="Views\TrangChu\TrangTin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Areas\Admin\Views\Menu\" />
     <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
