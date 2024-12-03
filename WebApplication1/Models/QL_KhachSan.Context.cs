@@ -37,5 +37,6 @@ namespace WebApplication1.Models
         public virtual DbSet<LichSuThayDoi> LichSuThayDois { get; set; }
         public virtual DbSet<TRANGTIN> TRANGTINs { get; set; }
         public virtual DbSet<MENU> MENUs { get; set; }
+        public virtual DbSet<DATDICHVU> DATDICHVUs { get; set; }
     }
 }

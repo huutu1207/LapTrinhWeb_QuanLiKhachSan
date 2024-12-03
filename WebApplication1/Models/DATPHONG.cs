@@ -14,6 +14,12 @@ namespace WebApplication1.Models
     
     public partial class DATPHONG
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DATPHONG()
+        {
+            this.DATDICHVUs = new HashSet<DATDICHVU>();
+        }
+    
         public string MaDP { get; set; }
         public string MaKH { get; set; }
         public string MaPH { get; set; }
@@ -28,5 +34,7 @@ namespace WebApplication1.Models
         public virtual DICHVU DICHVU { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }
         public virtual PHONG PHONG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DATDICHVU> DATDICHVUs { get; set; }
     }
 }
