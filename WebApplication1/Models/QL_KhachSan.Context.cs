@@ -13,10 +13,10 @@ namespace WebApplication1.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class QL_KhachSanEntities : DbContext
+    public partial class QL_KhachSanEntities1 : DbContext
     {
-        public QL_KhachSanEntities()
-            : base("name=QL_KhachSanEntities")
+        public QL_KhachSanEntities1()
+            : base("name=QL_KhachSanEntities1")
         {
         }
     
@@ -26,17 +26,17 @@ namespace WebApplication1.Models
         }
     
         public virtual DbSet<BINHLUAN> BINHLUANs { get; set; }
+        public virtual DbSet<DATDICHVU> DATDICHVUs { get; set; }
         public virtual DbSet<DATPHONG> DATPHONGs { get; set; }
         public virtual DbSet<DICHVU> DICHVUs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
+        public virtual DbSet<LichSuThayDoi> LichSuThayDois { get; set; }
+        public virtual DbSet<LichSuTraPhong> LichSuTraPhongs { get; set; }
         public virtual DbSet<LOAIPHONG> LOAIPHONGs { get; set; }
+        public virtual DbSet<MENU> MENUs { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<PHONG> PHONGs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<LichSuTraPhong> LichSuTraPhongs { get; set; }
-        public virtual DbSet<LichSuThayDoi> LichSuThayDois { get; set; }
         public virtual DbSet<TRANGTIN> TRANGTINs { get; set; }
-        public virtual DbSet<MENU> MENUs { get; set; }
-        public virtual DbSet<DATDICHVU> DATDICHVUs { get; set; }
     }
 }

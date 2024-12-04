@@ -14,7 +14,7 @@ namespace WebApplication1.Controllers
     public class PhongController : Controller
     {
         // GET: Phong
-        QL_KhachSanEntities db = new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
 
         private List<PHONG> LayPhong(int count)
         {

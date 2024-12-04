@@ -19,7 +19,7 @@ namespace WebApplication1.Controllers
 {
     public class UserController : Controller
     {
-        QL_KhachSanEntities db = new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
 
         public ActionResult DangNhap()
         {
@@ -540,7 +540,6 @@ namespace WebApplication1.Controllers
                     NgayDat = dp.NgayDat,
                     NgayNhan = dp.NgayNhan,
                     NgayTra = dp.NgayTra,
-                    DichVu = dp.MaDV,
                     ThanhTien = dp.DonGia
                 }).AsEnumerable().Select(m => 
                     new LichSuView()
@@ -550,7 +549,6 @@ namespace WebApplication1.Controllers
                         NgayDat = m.NgayDat.Value.ToString("dd/MM/yyyy"),
                         NgayNhan = m.NgayNhan.Value.ToString("dd/MM/yyyy"),
                         NgayTra = m.NgayTra.Value.ToString("dd/MM/yyyy"),
-                        DichVu = m.DichVu,
                         ThanhTien = m.ThanhTien,
                         CoTheHuy = m.NgayNhan > dateHomNay ? true : false
                     }
@@ -566,14 +564,24 @@ namespace WebApplication1.Controllers
                 return HttpNotFound();
             }
 
+            // Tìm đặt phòng theo mã MaDP
             var room = db.DATPHONGs.FirstOrDefault(s => s.MaDP == maDP);
             if (room == null)
             {
                 return HttpNotFound();
             }
 
-            // Xóa bản ghi đặt phòng
+            // Xóa các bản ghi trong bảng DATDICHVU liên quan đến MaDP
+            var dichVuLienQuan = db.DATDICHVUs.Where(dv => dv.MaDP == maDP).ToList();
+            if (dichVuLienQuan.Any())
+            {
+                db.DATDICHVUs.RemoveRange(dichVuLienQuan);
+            }
+
+            // Xóa bản ghi trong bảng DATPHONG
             db.DATPHONGs.Remove(room);
+
+            // Lưu thay đổi vào cơ sở dữ liệu
             db.SaveChanges();
 
             // Điều hướng lại trang lịch sử

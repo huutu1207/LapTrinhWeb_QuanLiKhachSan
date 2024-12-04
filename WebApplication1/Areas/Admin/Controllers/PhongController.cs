@@ -11,7 +11,7 @@ namespace WebApplication1.Areas.Admin.Controllers
     public class PhongController : Controller
     {
         // GET: Admin/Phong
-        QL_KhachSanEntities db = new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
         public ActionResult DanhSachPhong()
         {
             // Lấy ngày hiện tại

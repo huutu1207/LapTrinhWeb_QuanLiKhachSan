@@ -9,7 +9,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 {
     public class QL_DichVuController : Controller
     {
-        private QL_KhachSanEntities db = new QL_KhachSanEntities();  
+        private QL_KhachSanEntities1 db = new QL_KhachSanEntities1();  
         // GET: Admin/QL_DichVu
         public ActionResult DSDichVu()
         {

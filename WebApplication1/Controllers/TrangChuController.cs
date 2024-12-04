@@ -11,7 +11,7 @@ namespace WebApplication1.Controllers
     public class TrangChuController : Controller
     {
         // GET: TrangChu
-        QL_KhachSanEntities db=new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db =new QL_KhachSanEntities1();
         public ActionResult Index()
         {
             return View();

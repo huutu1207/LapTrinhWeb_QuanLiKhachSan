@@ -119,15 +119,67 @@
                 @Html.ValidationMessageFor(model => model.DienTich, "", new { @class = "text-danger" })
             </div>
         </div>
-        <!-- Nút lưu -->
+        <!-- Nút Lưu và Quay lại -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-primary text-white" /> | 
-                    <a href="@Url.Action("DanhSachPhong", "Phong")" class="btn btn-secondary">Back to List</a>
+                <input type="submit" value="Save" class="btn btn-primary text-white" />
+                <button type="button" onclick="window.location.href='@Url.Action("DanhSachPhong", "Phong")'" class="btn btn-secondary">Back to List</button>
             </div>
         </div>
+
     </div>
 }
+<style>
+    /* Nút chung */
+    .btn {
+        padding: 12px 24px; /* Tăng kích thước nút */
+        font-size: 16px; /* Kích thước chữ lớn hơn */
+        font-weight: 600; /* Đậm hơn */
+        border-radius: 8px; /* Bo góc lớn hơn */
+        border: none;
+        text-transform: uppercase; /* Viết hoa toàn bộ */
+        cursor: pointer;
+        transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi mượt */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng đổ bóng */
+    }
+
+    /* Nút Primary */
+    .btn-primary {
+        background-color: #007bff; /* Màu xanh chuẩn */
+        color: white; /* Màu chữ */
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Màu khi hover */
+            transform: translateY(-2px); /* Nâng nút lên khi hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Tăng độ sâu bóng */
+        }
+
+    /* Nút Secondary */
+    .btn-secondary {
+        background-color: #6c757d; /* Màu xám chuẩn */
+        color: white; /* Màu chữ */
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268; /* Màu khi hover */
+            transform: translateY(-2px); /* Nâng nút lên khi hover */
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Tăng độ sâu bóng */
+        }
+
+    /* Hiệu ứng focus */
+    .btn:focus {
+        outline: none; /* Loại bỏ đường viền mặc định */
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Hiệu ứng focus */
+    }
+
+    /* Animation nhấn xuống */
+    .btn:active {
+        transform: translateY(0); /* Trả về vị trí ban đầu khi nhấn */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Giảm bóng */
+    }
+</style>
+
 
 
 

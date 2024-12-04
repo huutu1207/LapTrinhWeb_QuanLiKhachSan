@@ -23,7 +23,6 @@ namespace WebApplication1.Models
         public string MaDP { get; set; }
         public string MaKH { get; set; }
         public string MaPH { get; set; }
-        public string MaDV { get; set; }
         public Nullable<System.DateTime> NgayDat { get; set; }
         public Nullable<System.DateTime> NgayNhan { get; set; }
         public Nullable<System.DateTime> NgayTra { get; set; }
@@ -31,10 +30,9 @@ namespace WebApplication1.Models
         public Nullable<double> DonGia { get; set; }
         public Nullable<double> DatCoc { get; set; }
     
-        public virtual DICHVU DICHVU { get; set; }
-        public virtual KHACHHANG KHACHHANG { get; set; }
-        public virtual PHONG PHONG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATDICHVU> DATDICHVUs { get; set; }
+        public virtual KHACHHANG KHACHHANG { get; set; }
+        public virtual PHONG PHONG { get; set; }
     }
 }
