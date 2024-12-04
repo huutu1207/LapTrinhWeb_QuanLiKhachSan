@@ -5,10 +5,9 @@
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Chitietkhachhang</h2>
+<h2>Thông tin của khách hàng</h2>
 
 <div>
-    <h4>KHACHHANG</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -26,7 +25,7 @@
         <dd>
             @Html.DisplayFor(model => model.HoTen)
         </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.DiaChi)
         </dt>
@@ -105,3 +104,90 @@
     <a href="@Url.Action("Edit", "QL_KhachHang", new { MaKH = Model.MaKH })" class="btn btn-primary">Edit</a> |
     <a href="@Url.Action("DanhSachKhachHang", "QL_KhachHang")" class="btn btn-secondary">Back to List</a>
 </p>
+
+<style>
+    /* Table Styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-family: 'Arial', sans-serif;
+    }
+
+        .table th, .table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+            cursor: pointer;
+        }
+
+        /* Image Styling */
+        .table img {
+            width: 100px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+    /* Button Styling */
+    .btn {
+        padding: 8px 15px;
+        font-size: 14px;
+        text-decoration: none;
+        border-radius: 4px;
+        margin: 5px 0;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .btn-info {
+        background-color: #17a2b8;
+        color: white;
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    /* Add space between table and actions */
+    p {
+        margin: 0;
+    }
+
+    /* Action button hover effects */
+    a.btn:hover {
+        text-decoration: none;
+    }
+
+</style>

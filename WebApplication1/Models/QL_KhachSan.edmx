@@ -16,6 +16,17 @@
           <Property Name="DanhGia" Type="int" />
           <Property Name="ThoiGian" Type="date" />
         </EntityType>
+        <EntityType Name="DATDICHVU">
+          <Key>
+            <PropertyRef Name="MaDV" />
+            <PropertyRef Name="MaDP" />
+          </Key>
+          <Property Name="MaDV" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaDP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NgayDat" Type="date" />
+          <Property Name="NgayNhan" Type="date" />
+          <Property Name="NgayTra" Type="date" />
+        </EntityType>
         <EntityType Name="DATPHONG">
           <Key>
             <PropertyRef Name="MaDP" />
@@ -179,6 +190,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DATDICHVU_DATPHONG">
+          <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="1" />
+          <End Role="DATDICHVU" Type="Self.DATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATPHONG">
+              <PropertyRef Name="MaDP" />
+            </Principal>
+            <Dependent Role="DATDICHVU">
+              <PropertyRef Name="MaDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATDICHVU_DICHVU">
+          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="1" />
+          <End Role="DATDICHVU" Type="Self.DATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DICHVU">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="DATDICHVU">
+              <PropertyRef Name="MaDV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DATPHONG_DICHVU">
           <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="0..1" />
           <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="*" />
@@ -229,6 +264,7 @@
         </Association>
         <EntityContainer Name="QL_KhachSanModelStoreContainer">
           <EntitySet Name="BINHLUAN" EntityType="Self.BINHLUAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DATDICHVU" EntityType="Self.DATDICHVU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DATPHONG" EntityType="Self.DATPHONG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DICHVU" EntityType="Self.DICHVU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
@@ -247,6 +283,14 @@
           <AssociationSet Name="FK_BINHLUAN_PHONG" Association="Self.FK_BINHLUAN_PHONG">
             <End Role="PHONG" EntitySet="PHONG" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATDICHVU_DATPHONG" Association="Self.FK_DATDICHVU_DATPHONG">
+            <End Role="DATPHONG" EntitySet="DATPHONG" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVU" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATDICHVU_DICHVU" Association="Self.FK_DATDICHVU_DICHVU">
+            <End Role="DICHVU" EntitySet="DICHVU" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVU" />
           </AssociationSet>
           <AssociationSet Name="FK_DATPHONG_DICHVU" Association="Self.FK_DATPHONG_DICHVU">
             <End Role="DICHVU" EntitySet="DICHVU" />
@@ -299,6 +343,7 @@
           <NavigationProperty Name="DICHVU" Relationship="Self.FK_DATPHONG_DICHVU" FromRole="DATPHONG" ToRole="DICHVU" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_DATPHONG_KHACHHANG" FromRole="DATPHONG" ToRole="KHACHHANG" />
           <NavigationProperty Name="PHONG" Relationship="Self.FK_DATPHONG_PHONG" FromRole="DATPHONG" ToRole="PHONG" />
+          <NavigationProperty Name="DATDICHVUs" Relationship="QL_KhachSanModel.FK_DATDICHVU_DATPHONG" FromRole="DATPHONG" ToRole="DATDICHVU" />
         </EntityType>
         <EntityType Name="DICHVU">
           <Key>
@@ -310,6 +355,7 @@
           <Property Name="Gia" Type="Double" />
           <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_DICHVU" FromRole="DICHVU" ToRole="DATPHONG" />
           <Property Name="AnhDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DATDICHVUs" Relationship="QL_KhachSanModel.FK_DATDICHVU_DICHVU" FromRole="DICHVU" ToRole="DATDICHVU" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -492,6 +538,15 @@
           <EntitySet Name="LichSuThayDois" EntityType="QL_KhachSanModel.LichSuThayDoi" />
           <EntitySet Name="TRANGTINs" EntityType="QL_KhachSanModel.TRANGTIN" />
           <EntitySet Name="MENUs" EntityType="QL_KhachSanModel.MENU" />
+          <EntitySet Name="DATDICHVUs" EntityType="QL_KhachSanModel.DATDICHVU" />
+          <AssociationSet Name="FK_DATDICHVU_DATPHONG" Association="QL_KhachSanModel.FK_DATDICHVU_DATPHONG">
+            <End Role="DATPHONG" EntitySet="DATPHONGs" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATDICHVU_DICHVU" Association="QL_KhachSanModel.FK_DATDICHVU_DICHVU">
+            <End Role="DICHVU" EntitySet="DICHVUs" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="LichSuTraPhong">
           <Key>
@@ -541,6 +596,43 @@
           <Property Name="ParentId" Type="Int32" />
           <Property Name="OrderNumber" Type="Int32" />
         </EntityType>
+        <EntityType Name="DATDICHVU">
+          <Key>
+            <PropertyRef Name="MaDV" />
+            <PropertyRef Name="MaDP" />
+          </Key>
+          <Property Name="MaDV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaDP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NgayDat" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DATPHONG" Relationship="QL_KhachSanModel.FK_DATDICHVU_DATPHONG" FromRole="DATDICHVU" ToRole="DATPHONG" />
+          <NavigationProperty Name="DICHVU" Relationship="QL_KhachSanModel.FK_DATDICHVU_DICHVU" FromRole="DATDICHVU" ToRole="DICHVU" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
+          <Property Name="NgayTra" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_DATDICHVU_DATPHONG">
+          <End Type="QL_KhachSanModel.DATPHONG" Role="DATPHONG" Multiplicity="1" />
+          <End Type="QL_KhachSanModel.DATDICHVU" Role="DATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATPHONG">
+              <PropertyRef Name="MaDP" />
+            </Principal>
+            <Dependent Role="DATDICHVU">
+              <PropertyRef Name="MaDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATDICHVU_DICHVU">
+          <End Type="QL_KhachSanModel.DICHVU" Role="DICHVU" Multiplicity="1" />
+          <End Type="QL_KhachSanModel.DATDICHVU" Role="DATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DICHVU">
+              <PropertyRef Name="MaDV" />
+            </Principal>
+            <Dependent Role="DATDICHVU">
+              <PropertyRef Name="MaDV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,6 +798,17 @@
                 <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
                 <ScalarProperty Name="MenuName" ColumnName="MenuName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DATDICHVUs">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.DATDICHVU">
+              <MappingFragment StoreEntitySet="DATDICHVU">
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="MaDP" ColumnName="MaDP" />
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

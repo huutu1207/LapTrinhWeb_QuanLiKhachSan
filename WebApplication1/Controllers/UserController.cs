@@ -188,59 +188,72 @@ namespace WebApplication1.Controllers
         public ActionResult DangNhap(FormCollection collection)
         {
             // Lấy dữ liệu từ form
-            var sUsername = collection["Username"]; // Lấy tên đăng nhập
-            var sPassword = collection["Password"]; // Lấy mật khẩu
+            string sUsername = collection["username"];
+            string sPassword = collection["password"];
+            string remember = collection["remember"]; // Giá trị checkbox remember
 
             // Kiểm tra thông tin đầu vào
             if (string.IsNullOrEmpty(sUsername))
             {
                 ViewData["Err1"] = "Bạn chưa nhập tên đăng nhập.";
+                return View();
             }
-            else if (string.IsNullOrEmpty(sPassword))
+
+            if (string.IsNullOrEmpty(sPassword))
             {
                 ViewData["Err2"] = "Bạn chưa nhập mật khẩu.";
+                return View();
             }
-            else
+
+            // Mã hóa mật khẩu trước khi kiểm tra
+            var hashedPassword = HashPassword(sPassword);
+
+            // Kiểm tra thông tin đăng nhập
+            var khachhang = db.KHACHHANGs
+                .FirstOrDefault(kh => kh.Username == sUsername && kh.Password == hashedPassword);
+
+            if (khachhang != null)
             {
-                // Mã hóa mật khẩu trước khi kiểm tra
-                var hashedPassword = HashPassword(sPassword);
+                // Đăng nhập thành công
+                Session["User"] = khachhang; // Lưu user vào Session
 
-                // Tìm user trong bảng KHACHHANG
-                var khachhang = db.KHACHHANGs
-                    .FirstOrDefault(kh => kh.Username == sUsername && kh.Password == hashedPassword);
-
-                if (khachhang != null)
+                if (!string.IsNullOrEmpty(remember) && remember == "on")
                 {
-                    // Đăng nhập thành công
-                    ViewBag.ThongBao = "Đăng Nhập Thành Công!";
-                    Session["User"] = khachhang; // Lưu user vào Session
-
-                    // Ghi nhớ đăng nhập qua Cookies
-                    if (!string.IsNullOrEmpty(collection["remember"]) && collection["remember"] == "true")
+                    // Tạo cookie lưu thông tin đăng nhập trong 30 ngày
+                    HttpCookie usernameCookie = new HttpCookie("Username", sUsername)
                     {
-                        Response.Cookies["Username"].Value = sUsername;
-                        Response.Cookies["Password"].Value = sPassword;
-                        Response.Cookies["Username"].Expires = DateTime.Now.AddDays(1);
-                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(1);
-                    }
-                    else
-                    {
-                        // Xóa cookies nếu không ghi nhớ
-                        Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
-                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
-                    }
+                        Expires = DateTime.Now.AddDays(30) // Thời hạn 30 ngày
+                    };
 
-                    // Chuyển hướng sau khi đăng nhập thành công
-                    return RedirectToAction("Index", "Home");
+                    HttpCookie passwordCookie = new HttpCookie("Password", sPassword)
+                    {
+                        Expires = DateTime.Now.AddDays(30) // Thời hạn 30 ngày
+                    };
+
+                    Response.Cookies.Add(usernameCookie);
+                    Response.Cookies.Add(passwordCookie);
                 }
                 else
                 {
-                    // Thông báo nếu thông tin đăng nhập không hợp lệ
-                    ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
-                }
-            }
+                    // Xóa cookies nếu người dùng không chọn "Remember"
+                    if (Request.Cookies["Username"] != null)
+                    {
+                        Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
+                    }
 
-            return View("Index","TrangChu");
+                    if (Request.Cookies["Password"] != null)
+                    {
+                        Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
+                    }
+                }
+
+                return RedirectToAction("Index", "TrangChu"); // Chuyển hướng về trang chính
+            }
+            else
+            {
+                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng!";
+                return View();
+            }
         }
 
 
@@ -566,7 +579,122 @@ namespace WebApplication1.Controllers
             return RedirectToAction("LichSuDatPhong");
         }
 
+        [HttpGet]
+        public ActionResult QuenMatKhau()
+        {
+            return View(); // Trả về view QuenMatKhau.cshtml
+        }
 
+        [HttpPost]
+        public ActionResult QuenMatKhau(FormCollection collection)
+        {
+            string email = collection["email"];
+
+            // Kiểm tra email có hợp lệ hay không
+            if (string.IsNullOrEmpty(email))
+            {
+                ViewData["ErrEmail"] = "Email không được để trống!";
+                return View();
+            }
+
+            // Kiểm tra email có tồn tại trong hệ thống không
+            var khachhang = db.KHACHHANGs.FirstOrDefault(k => k.Email == email);
+
+            if (khachhang == null)
+            {
+                ViewData["ErrEmail"] = "Email này không tồn tại trong hệ thống!";
+                return View();
+            }
+
+            // Mật khẩu mặc định sau khi reset
+            string newPassword = "123456";
+
+            // Mã hóa mật khẩu mới trước khi lưu vào CSDL
+            khachhang.Password = HashPassword(newPassword);
+
+            // Lưu mật khẩu mới vào CSDL
+            db.SaveChanges();
+
+            // Gửi email thông báo về việc reset mật khẩu
+            string verificationCode = GenerateVerificationCode();
+            GuiEmaiResertMatKhau(email, verificationCode);
+
+            ViewBag.ThongBao = "Mật khẩu của bạn đã được reset. Vui lòng kiểm tra email của bạn.";
+
+            return View();
+        }
+
+        // Phương thức xử lý liên kết đặt lại mật khẩu
+        public ActionResult DatLaiMatKhau(string email)
+        {
+            // Xử lý đặt lại mật khẩu
+            return View(); // Trả về view để người dùng nhập mật khẩu mới
+        }
+
+        private void SendResetPasswordEmail(string email, string resetLink)
+        {
+            var mailMessage = new MailMessage();
+            mailMessage.To.Add(email);
+            mailMessage.Subject = "Reset Your Password";
+            mailMessage.Body = $"Click the following link to reset your password: <a href='{resetLink}'>Reset Password</a>";
+            mailMessage.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient("smtp.yourserver.com");
+            smtpClient.Send(mailMessage);
+        }
+
+
+        private void GuiEmaiResertMatKhau(string emailNguoiDung, string verificationCode)
+        {
+            try
+            {
+                // Địa chỉ email gửi
+                var fromAddress = new MailAddress("2224802010314@student.tdmu.edu.vn", "Lucky Hotel");
+
+                // Địa chỉ email nhận
+                var toAddress = new MailAddress(emailNguoiDung);
+
+                const string fromPassword = "hbpk bhtz zvic aysp";
+                const string subject = "Mật khẩu của bạn đã được reset";
+
+                string body = $"<h3>Chào bạn!</h3>" +
+                              $"<p>Mật khẩu của bạn đã được reset về: <strong>123456</strong></p>" +
+                              $"<p>Vui lòng đăng nhập lại với mật khẩu này.</p>" +
+                              $"<p>Trân trọng,</p>" +
+                              $"<p><em>Lucky Hotel</em></p>";
+
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+                };
+
+                using (var message = new MailMessage(fromAddress, toAddress)
+                {
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = true
+                })
+                {
+                    smtp.Send(message);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Có lỗi khi gửi email: " + ex.Message, ex);
+            }
+        }
+
+        private string GenerateVerificationCode()
+        {
+            var random = new Random();
+            var verificationCode = random.Next(100000, 999999).ToString(); // Mã xác nhận 6 chữ số
+            return verificationCode;
+        }
 
     }
 

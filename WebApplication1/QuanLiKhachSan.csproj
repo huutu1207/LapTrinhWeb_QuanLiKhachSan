@@ -163,6 +163,9 @@
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CMMD.cs" />
+    <Compile Include="Models\DATDICHVU.cs">
+      <DependentUpon>QL_KhachSan.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DATPHONG.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
@@ -213,6 +216,9 @@
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserProfileViewModel.cs" />
+    <Compile Include="PayCompare.cs" />
+    <Compile Include="PayLib.cs" />
+    <Compile Include="PayUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -314,7 +320,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="StyleCSS\ChiTietPhong.css" />
-    <Content Include="StyleCSS\QLDichVu.css" />
     <Content Include="StyleCSS\DichVu.css" />
     <Content Include="StyleCSS\DanhSachPhong.css" />
     <Content Include="Web.config" />
@@ -348,6 +353,8 @@
     <Content Include="Views\DatPhong\DatPhongConfirmation.cshtml" />
     <Content Include="Views\User\LichSuDatPhong.cshtml" />
     <Content Include="Views\TrangChu\TrangTin.cshtml" />
+    <Content Include="Views\DatPhong\PaymentConfirm.cshtml" />
+    <Content Include="Views\User\QuenMatKhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
