@@ -34,7 +34,7 @@ namespace WebApplication1.Controllers
         }
         public ActionResult TrangTin(string metatitle)
         {
-            var tt = (from t in db.TRANGTINs where t.MetaTitle == metatitle select t).Single();
+            var tt = (from t in db.TRANGTINs where t.MetaTitle == metatitle select t).SingleOrDefault();
             return View(tt);
         }
     }
