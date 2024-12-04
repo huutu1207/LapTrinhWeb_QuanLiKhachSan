@@ -9,7 +9,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 {
     public class BaseController : Controller
     {
-        protected QL_KhachSanEntities db = new QL_KhachSanEntities();
+        protected QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
 
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {

@@ -264,8 +264,8 @@
     <Content Include="Images\User\DefaultAvatar.jpg" />
     <Content Include="Models\QL_KhachSan.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>QL_KhachSan.Context.cs</LastGenOutput>
       <DependentUpon>QL_KhachSan.edmx</DependentUpon>
+      <LastGenOutput>QL_KhachSan.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\QL_KhachSan.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -278,13 +278,6 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\QL_KhachSan.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>QL_KhachSan.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\QL_KhachSan.edmx.diagram">
-      <DependentUpon>QL_KhachSan.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\QuanLiPhong\Index.cshtml" />
@@ -313,6 +306,13 @@
     <Content Include="Areas\Admin\Views\TrangTin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TrangTin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\TrangTin\Edit.cshtml" />
+    <EntityDeploy Include="Models\QL_KhachSan.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QL_KhachSan.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\QL_KhachSan.edmx.diagram">
+      <DependentUpon>QL_KhachSan.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

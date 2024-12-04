@@ -9,7 +9,7 @@ namespace WebApplication1.Controllers
 {
     public class DichVuController : Controller
     {
-        private QL_KhachSanEntities db = new QL_KhachSanEntities();
+        private QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
         // GET: DichVu
         public ActionResult DSDichVu()
         {

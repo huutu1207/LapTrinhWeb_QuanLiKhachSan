@@ -9,7 +9,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 {
     public class MenuController : Controller
     {
-        QL_KhachSanEntities db=new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db =new QL_KhachSanEntities1();
         public ActionResult Index()
         {
             // Lấy danh sách các menu cấp cha và sắp xếp theo thứ tự

@@ -10,7 +10,7 @@ namespace WebApplication1.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         // GET: Admin/Admin
-        QL_KhachSanEntities db=new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db =new QL_KhachSanEntities1();
         public ActionResult Index()
         {
 

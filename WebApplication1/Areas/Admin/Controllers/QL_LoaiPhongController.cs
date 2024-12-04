@@ -8,7 +8,7 @@ namespace WebApplication1.Areas.Admin.Controllers
 {
     public class QL_LoaiPhongController : Controller
     {
-        QL_KhachSanEntities db = new QL_KhachSanEntities();
+        QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
 
         // GET: Admin/QL_LoaiPhong
         public ActionResult Index()

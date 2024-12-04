@@ -14,7 +14,7 @@
           <Property Name="MaKH" Type="varchar" MaxLength="50" />
           <Property Name="NDBL" Type="nvarchar(max)" />
           <Property Name="DanhGia" Type="int" />
-          <Property Name="ThoiGian" Type="date" />
+          <Property Name="ThoiGian" Type="datetime" />
         </EntityType>
         <EntityType Name="DATDICHVU">
           <Key>
@@ -34,7 +34,6 @@
           <Property Name="MaDP" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="MaKH" Type="varchar" MaxLength="50" />
           <Property Name="MaPH" Type="varchar" MaxLength="50" />
-          <Property Name="MaDV" Type="varchar" MaxLength="50" />
           <Property Name="NgayDat" Type="date" />
           <Property Name="NgayNhan" Type="date" />
           <Property Name="NgayTra" Type="date" />
@@ -190,7 +189,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DATDICHVU_DATPHONG">
+        <Association Name="FK_DATDICHVU_DATPHONG1">
           <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="1" />
           <End Role="DATDICHVU" Type="Self.DATDICHVU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -210,18 +209,6 @@
               <PropertyRef Name="MaDV" />
             </Principal>
             <Dependent Role="DATDICHVU">
-              <PropertyRef Name="MaDV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DATPHONG_DICHVU">
-          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="0..1" />
-          <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DICHVU">
-              <PropertyRef Name="MaDV" />
-            </Principal>
-            <Dependent Role="DATPHONG">
               <PropertyRef Name="MaDV" />
             </Dependent>
           </ReferentialConstraint>
@@ -284,17 +271,13 @@
             <End Role="PHONG" EntitySet="PHONG" />
             <End Role="BINHLUAN" EntitySet="BINHLUAN" />
           </AssociationSet>
-          <AssociationSet Name="FK_DATDICHVU_DATPHONG" Association="Self.FK_DATDICHVU_DATPHONG">
+          <AssociationSet Name="FK_DATDICHVU_DATPHONG1" Association="Self.FK_DATDICHVU_DATPHONG1">
             <End Role="DATPHONG" EntitySet="DATPHONG" />
             <End Role="DATDICHVU" EntitySet="DATDICHVU" />
           </AssociationSet>
           <AssociationSet Name="FK_DATDICHVU_DICHVU" Association="Self.FK_DATDICHVU_DICHVU">
             <End Role="DICHVU" EntitySet="DICHVU" />
             <End Role="DATDICHVU" EntitySet="DATDICHVU" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DATPHONG_DICHVU" Association="Self.FK_DATPHONG_DICHVU">
-            <End Role="DICHVU" EntitySet="DICHVU" />
-            <End Role="DATPHONG" EntitySet="DATPHONG" />
           </AssociationSet>
           <AssociationSet Name="FK_DATPHONG_KHACHHANG" Association="Self.FK_DATPHONG_KHACHHANG">
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
@@ -317,14 +300,27 @@
           <Key>
             <PropertyRef Name="MaBL" />
           </Key>
-          <Property Name="MaBL" Type="Int32" Nullable="false" />
+          <Property Name="MaBL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NDBL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DanhGia" Type="Int32" />
-          <Property Name="ThoiGian" Type="DateTime" Precision="0" />
+          <Property Name="ThoiGian" Type="DateTime" Precision="3" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_BINHLUAN_KHACHHANG" FromRole="BINHLUAN" ToRole="KHACHHANG" />
           <NavigationProperty Name="PHONG" Relationship="Self.FK_BINHLUAN_PHONG" FromRole="BINHLUAN" ToRole="PHONG" />
+        </EntityType>
+        <EntityType Name="DATDICHVU">
+          <Key>
+            <PropertyRef Name="MaDV" />
+            <PropertyRef Name="MaDP" />
+          </Key>
+          <Property Name="MaDV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaDP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NgayDat" Type="DateTime" Precision="0" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
+          <Property Name="NgayTra" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DATPHONG" Relationship="Self.FK_DATDICHVU_DATPHONG1" FromRole="DATDICHVU" ToRole="DATPHONG" />
+          <NavigationProperty Name="DICHVU" Relationship="Self.FK_DATDICHVU_DICHVU" FromRole="DATDICHVU" ToRole="DICHVU" />
         </EntityType>
         <EntityType Name="DATPHONG">
           <Key>
@@ -333,17 +329,15 @@
           <Property Name="MaDP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MaDV" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NgayDat" Type="DateTime" Precision="0" />
           <Property Name="NgayNhan" Type="DateTime" Precision="0" />
           <Property Name="NgayTra" Type="DateTime" Precision="0" />
           <Property Name="TinhTrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DonGia" Type="Double" />
           <Property Name="DatCoc" Type="Double" />
-          <NavigationProperty Name="DICHVU" Relationship="Self.FK_DATPHONG_DICHVU" FromRole="DATPHONG" ToRole="DICHVU" />
+          <NavigationProperty Name="DATDICHVUs" Relationship="Self.FK_DATDICHVU_DATPHONG1" FromRole="DATPHONG" ToRole="DATDICHVU" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_DATPHONG_KHACHHANG" FromRole="DATPHONG" ToRole="KHACHHANG" />
           <NavigationProperty Name="PHONG" Relationship="Self.FK_DATPHONG_PHONG" FromRole="DATPHONG" ToRole="PHONG" />
-          <NavigationProperty Name="DATDICHVUs" Relationship="QL_KhachSanModel.FK_DATDICHVU_DATPHONG" FromRole="DATPHONG" ToRole="DATDICHVU" />
         </EntityType>
         <EntityType Name="DICHVU">
           <Key>
@@ -353,9 +347,8 @@
           <Property Name="TenDV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Mota" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Double" />
-          <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_DICHVU" FromRole="DICHVU" ToRole="DATPHONG" />
           <Property Name="AnhDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DATDICHVUs" Relationship="QL_KhachSanModel.FK_DATDICHVU_DICHVU" FromRole="DICHVU" ToRole="DATDICHVU" />
+          <NavigationProperty Name="DATDICHVUs" Relationship="Self.FK_DATDICHVU_DICHVU" FromRole="DICHVU" ToRole="DATDICHVU" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -372,11 +365,39 @@
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_KHACHHANG" FromRole="KHACHHANG" ToRole="BINHLUAN" />
-          <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_KHACHHANG" FromRole="KHACHHANG" ToRole="DATPHONG" />
           <Property Name="EmailVerificationCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IsEmailVerified" Type="Boolean" />
           <Property Name="Avatar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_KHACHHANG" FromRole="KHACHHANG" ToRole="BINHLUAN" />
+          <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_KHACHHANG" FromRole="KHACHHANG" ToRole="DATPHONG" />
+        </EntityType>
+        <EntityType Name="LichSuThayDoi">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TruongThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTriCu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaTriMoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThayDoi" Type="DateTime" Precision="3" />
+          <Property Name="NguoiThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LichSuTraPhong">
+          <Key>
+            <PropertyRef Name="MaLS" />
+          </Key>
+          <Property Name="MaLS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SoPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCCD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gia" Type="Double" />
+          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
+          <Property Name="NgayTra" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="LOAIPHONG">
           <Key>
@@ -385,6 +406,16 @@
           <Property Name="MaLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TenLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PHONGs" Relationship="Self.FK_PHONG_LOAIPHONG" FromRole="LOAIPHONG" ToRole="PHONG" />
+        </EntityType>
+        <EntityType Name="MENU">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MenuLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="OrderNumber" Type="Int32" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -411,13 +442,13 @@
           <Property Name="TrangThai" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gia" Type="Double" />
           <Property Name="MaLoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_PHONG" FromRole="PHONG" ToRole="BINHLUAN" />
-          <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_PHONG" FromRole="PHONG" ToRole="DATPHONG" />
-          <NavigationProperty Name="LOAIPHONG" Relationship="Self.FK_PHONG_LOAIPHONG" FromRole="PHONG" ToRole="LOAIPHONG" />
           <Property Name="CheckIn" Type="DateTime" Precision="0" />
           <Property Name="CheckOut" Type="DateTime" Precision="0" />
           <Property Name="DienTich" Type="Double" />
           <Property Name="NoiThat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BINHLUANs" Relationship="Self.FK_BINHLUAN_PHONG" FromRole="PHONG" ToRole="BINHLUAN" />
+          <NavigationProperty Name="DATPHONGs" Relationship="Self.FK_DATPHONG_PHONG" FromRole="PHONG" ToRole="DATPHONG" />
+          <NavigationProperty Name="LOAIPHONG" Relationship="Self.FK_PHONG_LOAIPHONG" FromRole="PHONG" ToRole="LOAIPHONG" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -428,6 +459,16 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TRANGTIN">
+          <Key>
+            <PropertyRef Name="MaTT" />
+          </Key>
+          <Property Name="MaTT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenTrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NgayTao" Type="DateTime" Precision="0" />
+          <Property Name="MetaTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BINHLUAN_KHACHHANG">
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
@@ -453,14 +494,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DATPHONG_DICHVU">
-          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="0..1" />
-          <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="*" />
+        <Association Name="FK_DATDICHVU_DATPHONG1">
+          <End Role="DATPHONG" Type="Self.DATPHONG" Multiplicity="1" />
+          <End Role="DATDICHVU" Type="Self.DATDICHVU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DATPHONG">
+              <PropertyRef Name="MaDP" />
+            </Principal>
+            <Dependent Role="DATDICHVU">
+              <PropertyRef Name="MaDP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DATDICHVU_DICHVU">
+          <End Role="DICHVU" Type="Self.DICHVU" Multiplicity="1" />
+          <End Role="DATDICHVU" Type="Self.DATDICHVU" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DICHVU">
               <PropertyRef Name="MaDV" />
             </Principal>
-            <Dependent Role="DATPHONG">
+            <Dependent Role="DATDICHVU">
               <PropertyRef Name="MaDV" />
             </Dependent>
           </ReferentialConstraint>
@@ -501,15 +554,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="QL_KhachSanEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="QL_KhachSanEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BINHLUANs" EntityType="Self.BINHLUAN" />
+          <EntitySet Name="DATDICHVUs" EntityType="Self.DATDICHVU" />
           <EntitySet Name="DATPHONGs" EntityType="Self.DATPHONG" />
           <EntitySet Name="DICHVUs" EntityType="Self.DICHVU" />
           <EntitySet Name="KHACHHANGs" EntityType="Self.KHACHHANG" />
+          <EntitySet Name="LichSuThayDois" EntityType="Self.LichSuThayDoi" />
+          <EntitySet Name="LichSuTraPhongs" EntityType="Self.LichSuTraPhong" />
           <EntitySet Name="LOAIPHONGs" EntityType="Self.LOAIPHONG" />
+          <EntitySet Name="MENUs" EntityType="Self.MENU" />
           <EntitySet Name="NHANVIENs" EntityType="Self.NHANVIEN" />
           <EntitySet Name="PHONGs" EntityType="Self.PHONG" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TRANGTINs" EntityType="Self.TRANGTIN" />
           <AssociationSet Name="FK_BINHLUAN_KHACHHANG" Association="Self.FK_BINHLUAN_KHACHHANG">
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
             <End Role="BINHLUAN" EntitySet="BINHLUANs" />
@@ -518,9 +576,13 @@
             <End Role="PHONG" EntitySet="PHONGs" />
             <End Role="BINHLUAN" EntitySet="BINHLUANs" />
           </AssociationSet>
-          <AssociationSet Name="FK_DATPHONG_DICHVU" Association="Self.FK_DATPHONG_DICHVU">
-            <End Role="DICHVU" EntitySet="DICHVUs" />
+          <AssociationSet Name="FK_DATDICHVU_DATPHONG1" Association="Self.FK_DATDICHVU_DATPHONG1">
             <End Role="DATPHONG" EntitySet="DATPHONGs" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DATDICHVU_DICHVU" Association="Self.FK_DATDICHVU_DICHVU">
+            <End Role="DICHVU" EntitySet="DICHVUs" />
+            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
           </AssociationSet>
           <AssociationSet Name="FK_DATPHONG_KHACHHANG" Association="Self.FK_DATPHONG_KHACHHANG">
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
@@ -534,111 +596,13 @@
             <End Role="LOAIPHONG" EntitySet="LOAIPHONGs" />
             <End Role="PHONG" EntitySet="PHONGs" />
           </AssociationSet>
-          <EntitySet Name="LichSuTraPhongs" EntityType="QL_KhachSanModel.LichSuTraPhong" />
-          <EntitySet Name="LichSuThayDois" EntityType="QL_KhachSanModel.LichSuThayDoi" />
-          <EntitySet Name="TRANGTINs" EntityType="QL_KhachSanModel.TRANGTIN" />
-          <EntitySet Name="MENUs" EntityType="QL_KhachSanModel.MENU" />
-          <EntitySet Name="DATDICHVUs" EntityType="QL_KhachSanModel.DATDICHVU" />
-          <AssociationSet Name="FK_DATDICHVU_DATPHONG" Association="QL_KhachSanModel.FK_DATDICHVU_DATPHONG">
-            <End Role="DATPHONG" EntitySet="DATPHONGs" />
-            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DATDICHVU_DICHVU" Association="QL_KhachSanModel.FK_DATDICHVU_DICHVU">
-            <End Role="DICHVU" EntitySet="DICHVUs" />
-            <End Role="DATDICHVU" EntitySet="DATDICHVUs" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="LichSuTraPhong">
-          <Key>
-            <PropertyRef Name="MaLS" />
-          </Key>
-          <Property Name="MaLS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SoPH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HoTen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CCCD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gia" Type="Double" />
-          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
-          <Property Name="NgayTra" Type="DateTime" Precision="0" />
-        </EntityType>
-        <EntityType Name="LichSuThayDoi">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MaKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TruongThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="GiaTriCu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="GiaTriMoi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NgayThayDoi" Type="DateTime" Precision="3" />
-          <Property Name="NguoiThayDoi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TRANGTIN">
-          <Key>
-            <PropertyRef Name="MaTT" />
-          </Key>
-          <Property Name="MaTT" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TenTrang" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="NoiDung" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="NgayTao" Type="DateTime" Precision="0" />
-          <Property Name="MetaTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="MENU">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MenuName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MenuLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ParentId" Type="Int32" />
-          <Property Name="OrderNumber" Type="Int32" />
-        </EntityType>
-        <EntityType Name="DATDICHVU">
-          <Key>
-            <PropertyRef Name="MaDV" />
-            <PropertyRef Name="MaDP" />
-          </Key>
-          <Property Name="MaDV" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MaDP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NgayDat" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="DATPHONG" Relationship="QL_KhachSanModel.FK_DATDICHVU_DATPHONG" FromRole="DATDICHVU" ToRole="DATPHONG" />
-          <NavigationProperty Name="DICHVU" Relationship="QL_KhachSanModel.FK_DATDICHVU_DICHVU" FromRole="DATDICHVU" ToRole="DICHVU" />
-          <Property Name="NgayNhan" Type="DateTime" Precision="0" />
-          <Property Name="NgayTra" Type="DateTime" Precision="0" />
-        </EntityType>
-        <Association Name="FK_DATDICHVU_DATPHONG">
-          <End Type="QL_KhachSanModel.DATPHONG" Role="DATPHONG" Multiplicity="1" />
-          <End Type="QL_KhachSanModel.DATDICHVU" Role="DATDICHVU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DATPHONG">
-              <PropertyRef Name="MaDP" />
-            </Principal>
-            <Dependent Role="DATDICHVU">
-              <PropertyRef Name="MaDP" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DATDICHVU_DICHVU">
-          <End Type="QL_KhachSanModel.DICHVU" Role="DICHVU" Multiplicity="1" />
-          <End Type="QL_KhachSanModel.DATDICHVU" Role="DATDICHVU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DICHVU">
-              <PropertyRef Name="MaDV" />
-            </Principal>
-            <Dependent Role="DATDICHVU">
-              <PropertyRef Name="MaDV" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="QL_KhachSanModelStoreContainer" CdmEntityContainer="QL_KhachSanEntities">
+        <EntityContainerMapping StorageEntityContainer="QL_KhachSanModelStoreContainer" CdmEntityContainer="QL_KhachSanEntities1">
           <EntitySetMapping Name="BINHLUANs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.BINHLUAN">
               <MappingFragment StoreEntitySet="BINHLUAN">
@@ -651,13 +615,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DATDICHVUs">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.DATDICHVU">
+              <MappingFragment StoreEntitySet="DATDICHVU">
+                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+                <ScalarProperty Name="MaDP" ColumnName="MaDP" />
+                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="DATPHONGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.DATPHONG">
               <MappingFragment StoreEntitySet="DATPHONG">
                 <ScalarProperty Name="MaDP" ColumnName="MaDP" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="MaPH" ColumnName="MaPH" />
-                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
                 <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
                 <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
                 <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
@@ -670,20 +644,17 @@
           <EntitySetMapping Name="DICHVUs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.DICHVU">
               <MappingFragment StoreEntitySet="DICHVU">
-                <ScalarProperty Name="AnhDichVu" ColumnName="AnhDichVu" />
                 <ScalarProperty Name="MaDV" ColumnName="MaDV" />
                 <ScalarProperty Name="TenDV" ColumnName="TenDV" />
                 <ScalarProperty Name="Mota" ColumnName="Mota" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="AnhDichVu" ColumnName="AnhDichVu" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KHACHHANGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.KHACHHANG">
               <MappingFragment StoreEntitySet="KHACHHANG">
-                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
-                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
-                <ScalarProperty Name="EmailVerificationCode" ColumnName="EmailVerificationCode" />
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
@@ -695,6 +666,39 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailVerificationCode" ColumnName="EmailVerificationCode" />
+                <ScalarProperty Name="IsEmailVerified" ColumnName="IsEmailVerified" />
+                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuThayDois">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuThayDoi">
+              <MappingFragment StoreEntitySet="LichSuThayDoi">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="TruongThayDoi" ColumnName="TruongThayDoi" />
+                <ScalarProperty Name="GiaTriCu" ColumnName="GiaTriCu" />
+                <ScalarProperty Name="GiaTriMoi" ColumnName="GiaTriMoi" />
+                <ScalarProperty Name="NgayThayDoi" ColumnName="NgayThayDoi" />
+                <ScalarProperty Name="NguoiThayDoi" ColumnName="NguoiThayDoi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LichSuTraPhongs">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuTraPhong">
+              <MappingFragment StoreEntitySet="LichSuTraPhong">
+                <ScalarProperty Name="MaLS" ColumnName="MaLS" />
+                <ScalarProperty Name="MaPH" ColumnName="MaPH" />
+                <ScalarProperty Name="SoPH" ColumnName="SoPH" />
+                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
+                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
+                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -703,6 +707,17 @@
               <MappingFragment StoreEntitySet="LOAIPHONG">
                 <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
                 <ScalarProperty Name="TenLoai" ColumnName="TenLoai" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MENUs">
+            <EntityTypeMapping TypeName="QL_KhachSanModel.MENU">
+              <MappingFragment StoreEntitySet="MENU">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -724,10 +739,6 @@
           <EntitySetMapping Name="PHONGs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.PHONG">
               <MappingFragment StoreEntitySet="PHONG">
-                <ScalarProperty Name="NoiThat" ColumnName="NoiThat" />
-                <ScalarProperty Name="DienTich" ColumnName="DienTich" />
-                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
-                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
                 <ScalarProperty Name="MaPH" ColumnName="MaPH" />
                 <ScalarProperty Name="SoPH" ColumnName="SoPH" />
                 <ScalarProperty Name="Anh" ColumnName="Anh" />
@@ -735,6 +746,10 @@
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="MaLoai" ColumnName="MaLoai" />
+                <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+                <ScalarProperty Name="CheckOut" ColumnName="CheckOut" />
+                <ScalarProperty Name="DienTich" ColumnName="DienTich" />
+                <ScalarProperty Name="NoiThat" ColumnName="NoiThat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -749,66 +764,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LichSuTraPhongs">
-            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuTraPhong">
-              <MappingFragment StoreEntitySet="LichSuTraPhong">
-                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
-                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
-                <ScalarProperty Name="Gia" ColumnName="Gia" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
-                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
-                <ScalarProperty Name="HoTen" ColumnName="HoTen" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="SoPH" ColumnName="SoPH" />
-                <ScalarProperty Name="MaPH" ColumnName="MaPH" />
-                <ScalarProperty Name="MaLS" ColumnName="MaLS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LichSuThayDois">
-            <EntityTypeMapping TypeName="QL_KhachSanModel.LichSuThayDoi">
-              <MappingFragment StoreEntitySet="LichSuThayDoi">
-                <ScalarProperty Name="NguoiThayDoi" ColumnName="NguoiThayDoi" />
-                <ScalarProperty Name="NgayThayDoi" ColumnName="NgayThayDoi" />
-                <ScalarProperty Name="GiaTriMoi" ColumnName="GiaTriMoi" />
-                <ScalarProperty Name="GiaTriCu" ColumnName="GiaTriCu" />
-                <ScalarProperty Name="TruongThayDoi" ColumnName="TruongThayDoi" />
-                <ScalarProperty Name="MaKH" ColumnName="MaKH" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TRANGTINs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.TRANGTIN">
               <MappingFragment StoreEntitySet="TRANGTIN">
-                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
-                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
-                <ScalarProperty Name="TenTrang" ColumnName="TenTrang" />
                 <ScalarProperty Name="MaTT" ColumnName="MaTT" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MENUs">
-            <EntityTypeMapping TypeName="QL_KhachSanModel.MENU">
-              <MappingFragment StoreEntitySet="MENU">
-                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-                <ScalarProperty Name="MenuLink" ColumnName="MenuLink" />
-                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DATDICHVUs">
-            <EntityTypeMapping TypeName="QL_KhachSanModel.DATDICHVU">
-              <MappingFragment StoreEntitySet="DATDICHVU">
-                <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
-                <ScalarProperty Name="NgayNhan" ColumnName="NgayNhan" />
-                <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
-                <ScalarProperty Name="MaDP" ColumnName="MaDP" />
-                <ScalarProperty Name="MaDV" ColumnName="MaDV" />
+                <ScalarProperty Name="TenTrang" ColumnName="TenTrang" />
+                <ScalarProperty Name="NoiDung" ColumnName="NoiDung" />
+                <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="MetaTitle" ColumnName="MetaTitle" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,7 +17,6 @@ namespace WebApplication1.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DICHVU()
         {
-            this.DATPHONGs = new HashSet<DATPHONG>();
             this.DATDICHVUs = new HashSet<DATDICHVU>();
         }
     
@@ -27,8 +26,6 @@ namespace WebApplication1.Models
         public Nullable<double> Gia { get; set; }
         public string AnhDichVu { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DATPHONG> DATPHONGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DATDICHVU> DATDICHVUs { get; set; }
     }
