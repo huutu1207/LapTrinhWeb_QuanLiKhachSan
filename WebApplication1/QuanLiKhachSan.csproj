@@ -153,6 +153,7 @@
     <Compile Include="Controllers\DatPhongController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LienHeController.cs" />
     <Compile Include="Controllers\PhongController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -355,6 +356,7 @@
     <Content Include="Views\TrangChu\TrangTin.cshtml" />
     <Content Include="Views\DatPhong\PaymentConfirm.cshtml" />
     <Content Include="Views\User\QuenMatKhau.cshtml" />
+    <Content Include="Views\LienHe\GuiLienHe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
