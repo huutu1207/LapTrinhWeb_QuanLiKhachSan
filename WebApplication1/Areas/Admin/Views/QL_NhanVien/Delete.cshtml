@@ -90,8 +90,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "DanhSachNhanVien")
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            <a href="@Url.Action("DanhSachNhanVien", "QL_NhanVien")" class="btn btn-secondary">Back to List</a>
         </div>
     }
 </div>
