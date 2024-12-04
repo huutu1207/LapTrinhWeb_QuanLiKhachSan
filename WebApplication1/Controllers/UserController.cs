@@ -13,6 +13,7 @@ using System.Collections.Specialized;
 using System.Data.Entity.Validation;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Facebook;
 
 namespace WebApplication1.Controllers
 {
@@ -696,6 +697,97 @@ namespace WebApplication1.Controllers
             return verificationCode;
         }
 
+
+        public ActionResult LoginWithFacebook()
+        {
+            var appId = System.Configuration.ConfigurationManager.AppSettings["FacebookAppId"];
+            var redirectUri = Url.Action("LoginFacebookCallback", "User", null, protocol: Request.Url.Scheme);
+            var facebookLoginUrl = $"https://www.facebook.com/v21.0/dialog/oauth?client_id={appId}&redirect_uri={redirectUri}&scope=email,public_profile";
+
+            return Redirect(facebookLoginUrl);
+        }
+
+        public ActionResult LoginFacebookCallback(string code)
+        {
+            if (string.IsNullOrEmpty(code))
+            {
+                return RedirectToAction("DangNhap", "User");
+            }
+
+            var appId = System.Configuration.ConfigurationManager.AppSettings["FacebookAppId"];
+            var appSecret = System.Configuration.ConfigurationManager.AppSettings["FacebookAppSecret"];
+            var redirectUri = Url.Action("LoginFacebookCallback", "User", null, protocol: Request.Url.Scheme);
+
+            try
+            {
+                // Lấy token từ Facebook
+                var tokenUrl = $"https://graph.facebook.com/v21.0/oauth/access_token?client_id={appId}&redirect_uri={Uri.EscapeDataString(redirectUri)}&client_secret={appSecret}&code={code}";
+
+                var client = new System.Net.Http.HttpClient();
+                var response = client.GetStringAsync(tokenUrl).Result;
+                var tokenData = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response);
+
+                // Kiểm tra nếu tokenData không null và có trường access_token
+                if (tokenData == null || tokenData.access_token == null)
+                {
+                    throw new Exception("Không thể lấy mã truy cập từ Facebook.");
+                }
+
+                string accessToken = tokenData.access_token.ToString(); // Chắc chắn là chuỗi
+
+                // Kiểm tra accessToken
+                if (string.IsNullOrEmpty(accessToken))
+                {
+                    throw new Exception("Không thể lấy mã truy cập từ Facebook.");
+                }
+
+                // Dùng access token để lấy thông tin người dùng
+                var fbClient = new FacebookClient(accessToken);
+                dynamic userInfo = fbClient.Get("me?fields=id,name,email");
+
+                if (userInfo == null)
+                {
+                    throw new Exception("Không thể lấy thông tin người dùng từ Facebook.");
+                }
+
+                var name = userInfo.name;
+                string email = userInfo.email.ToString(); // Ép kiểu rõ ràng sang string
+
+                // Kiểm tra người dùng trong cơ sở dữ liệu
+                KHACHHANG kh = db.KHACHHANGs.SingleOrDefault(u => u.Email == email);
+                if (kh == null)
+                {
+                    string pass = Guid.NewGuid().ToString("N").Substring(0, 10);
+                    KHACHHANG khNew = new KHACHHANG
+                    {
+                        MaKH = "KH" + (db.KHACHHANGs.Max(k => k.MaKH.Substring(2)) + 1).ToString(),  // Tạo mã khách hàng theo định dạng KH + số tự tăng
+                        HoTen = name,
+                        Email = email,
+                        Username = email.Length > 13 ? email.Substring(0, 13) : email,  // Đảm bảo username hợp lệ
+                        Password = pass,
+                        DienThoai = "0000",
+                        NgaySinh = DateTime.Now,
+                    };
+                    db.KHACHHANGs.Add(khNew);
+                    db.SaveChanges();
+                    Session["User"] = khNew;
+                    ViewBag.ThongBao = "Chúc mừng bạn đăng nhập thành công";
+                }
+                else
+                {
+                    Session["User"] = kh;
+                }
+
+                // Điều hướng về trang chính
+                return RedirectToAction("Index", "TrangChu");
+            }
+            catch (Exception ex)
+            {
+                // Nếu có lỗi, quay lại trang đăng nhập
+                ViewBag.Error = "Đã có lỗi xảy ra khi đăng nhập bằng Facebook: " + ex.Message;
+                return RedirectToAction("DangNhap", "User");
+            }
+        }
     }
 
 }

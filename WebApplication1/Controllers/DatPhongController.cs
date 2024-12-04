@@ -93,11 +93,11 @@ namespace WebApplication1.Controllers
             db.DATPHONGs.Add(datPhong);
             db.SaveChanges();
 
-            if (selectedServices.Any())
+            // Xử lý lưu các dịch vụ được chọn
+            if (selectedServices != null && selectedServices.Any())
             {
                 foreach (var maDV in selectedServices)
                 {
-                    // Kiểm tra xem dịch vụ đã tồn tại trong cơ sở dữ liệu chưa
                     var service = db.DICHVUs.FirstOrDefault(dv => dv.MaDV == maDV);
                     if (service != null)
                     {
@@ -105,9 +105,9 @@ namespace WebApplication1.Controllers
                         {
                             MaDV = maDV,
                             MaDP = MaDP,
-                            NgayDat = DateTime.Now, // Ngày đặt dịch vụ là thời gian hiện tại
-                            NgayNhan = NgayNhan.Value,  // Đảm bảo không có null
-                            NgayTra = NgayTra.Value   // Đảm bảo không có null
+                            NgayDat = DateTime.Now,
+                            NgayNhan = NgayNhan.Value,
+                            NgayTra = NgayTra.Value
                         };
                         db.DATDICHVUs.Add(datDichVu);
                     }
@@ -115,34 +115,25 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
             }
 
+            // Tính toán giá trị tổng
+            float giaDichVu = selectedServices != null
+                ? (float)(db.DICHVUs.Where(dv => selectedServices.Contains(dv.MaDV)).Sum(dv => dv.Gia) ?? 0)
+                : 0;
 
-            // Tính giá dịch vụ sau khi lưu các dịch vụ
-            float giaDichVu = (float)(db.DATDICHVUs
-     .Where(ddv => ddv.MaDP == MaDP && ddv.NgayNhan >= NgayNhan && ddv.NgayTra <= NgayTra)  // Điều kiện lọc
-     .Join(db.DICHVUs, ddv => ddv.MaDV, dv => dv.MaDV, (ddv, dv) => dv.Gia)  // Kết nối với bảng DICHVUs và lấy giá trị Gia
-     .Sum() ?? 0);  // Tính tổng và sử dụng 0 nếu kết quả là null
-
-
-            // Tính tổng giá trị
             int soNgayO = (NgayTra.Value - NgayNhan.Value).Days;
-
-            // Tính giá phòng
             float donGiaPhong = (float)(phong.Gia ?? 0) * soNgayO + giaDichVu - 200000;
-            
+
             datPhong.DonGia = donGiaPhong;
-            db.Entry(datPhong).State = EntityState.Modified;  // Đảm bảo cập nhật lại bản ghi DATPHONG
-            db.SaveChanges(); // Lưu lại thay đổi
+            db.Entry(datPhong).State = EntityState.Modified;
+            db.SaveChanges();
 
             switch (thanhtoan)
             {
                 case "vivnpay":
-                    // Xử lý thanh toán qua VNPay
                     return RedirectToAction("PaymentVNPay", "DatPhong", new { MaDP = MaDP, NgayDat = NgayDat });
                 case "vimomo":
-                    // Xử lý thanh toán qua MoMo
-                    return RedirectToAction("PaymentMomo", "DatPhong");
+                    return RedirectToAction("PaymentMomo", "DatPhong", new { MaDP = MaDP });
                 default:
-                    // Xử lý cho trường hợp không hợp lệ
                     break;
             }
 
@@ -229,5 +220,7 @@ namespace WebApplication1.Controllers
             }
             return View();
         }
+
+
     }
 }

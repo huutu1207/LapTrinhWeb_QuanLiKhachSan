@@ -59,7 +59,6 @@
                 <div class="form-group">
                     @Html.Label("Dịch Vụ (Có thể chọn nhiều)")
                     <div class="service-container">
-
                         @if (dichVuList != null && dichVuList.Any())
                         {
                             foreach (var dichVu in dichVuList)
@@ -76,20 +75,21 @@
                         }
                     </div>
                 </div>
-                    <div class="form-group">
-                        @Html.Label("Phương Thức Thanh Toán")
-                        <div>
-                            <input type="radio" id="vivnpay" name="thanhtoan" value="vivnpay" /> VNPay
-                            <input type="radio" id="vimomo" name="thanhtoan" value="vimomo" /> MoMo
-                        </div>
-                    </div>
 
-                    <div class="center-button">
-                        <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                <div class="form-group">
+                    @Html.Label("Phương Thức Thanh Toán")
+                    <div>
+                        <input type="radio" id="vivnpay" name="thanhtoan" value="vivnpay" /> VNPay
+                        <input type="radio" id="vimomo" name="thanhtoan" value="vimomo" /> MoMo
                     </div>
+                </div>
+
+                <div class="center-button">
+                    <button type="submit" class="btn btn-primary">Đặt phòng</button>
+                </div>
             }
         }
-        </div>
+    </div>
 </section>
 
 <style>
