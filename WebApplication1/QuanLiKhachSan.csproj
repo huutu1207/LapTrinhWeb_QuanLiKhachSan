@@ -173,6 +173,7 @@
     <Compile Include="Models\DATPHONG.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatPhongInfo.cs" />
     <Compile Include="Models\DICHVU.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>

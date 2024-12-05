@@ -72,72 +72,31 @@ namespace WebApplication1.Controllers
 
             string MaKH = khachHang.MaKH;
             string MaDP = "DP" + new Random().Next(1000, 9999);
-            var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == MaPH);
-            if (phong == null)
-            {
-                return HttpNotFound("Không tìm thấy phòng.");
-            }
 
-            var datPhong = new DATPHONG
+            TempData["DatPhongInfo"] = new DatPhongInfo
             {
-                MaDP = MaDP,
-                MaKH = MaKH,
-                MaPH = MaPH,
-                NgayDat = DateTime.Now,
-                NgayNhan = NgayNhan.Value,
-                NgayTra = NgayTra.Value,
-                TinhTrang = "Đã đặt cọc",
-                DatCoc = 200000
+                MaDP = "DP" + new Random().Next(1000, 9999), // Tạo mã đặt phòng
+                MaKH = khachHang.MaKH,                      // Mã khách hàng từ Session
+                MaPH = MaPH,                                // Mã phòng từ tham số
+                NgayDat = DateTime.Now,                     // Ngày đặt hiện tại
+                NgayNhan = NgayNhan.Value,                  // Ngày nhận từ người dùng
+                NgayTra = NgayTra.Value,                    // Ngày trả từ người dùng
+                DatCoc = 200000,                            // Số tiền đặt cọc cố định
+                SelectedServices = selectedServices?.ToList() // Chuyển mảng dịch vụ thành danh sách
             };
 
-            db.DATPHONGs.Add(datPhong);
-            db.SaveChanges();
-
-            // Xử lý lưu các dịch vụ được chọn
-            if (selectedServices != null && selectedServices.Any())
-            {
-                foreach (var maDV in selectedServices)
-                {
-                    var service = db.DICHVUs.FirstOrDefault(dv => dv.MaDV == maDV);
-                    if (service != null)
-                    {
-                        var datDichVu = new DATDICHVU
-                        {
-                            MaDV = maDV,
-                            MaDP = MaDP,
-                            NgayDat = DateTime.Now,
-                            NgayNhan = NgayNhan.Value,
-                            NgayTra = NgayTra.Value
-                        };
-                        db.DATDICHVUs.Add(datDichVu);
-                    }
-                }
-                db.SaveChanges();
-            }
-
-            // Tính toán giá trị tổng
-            float giaDichVu = selectedServices != null
-                ? (float)(db.DICHVUs.Where(dv => selectedServices.Contains(dv.MaDV)).Sum(dv => dv.Gia) ?? 0)
-                : 0;
-
-            int soNgayO = (NgayTra.Value - NgayNhan.Value).Days;
-            float donGiaPhong = (float)(phong.Gia ?? 0) * soNgayO + giaDichVu - 200000;
-
-            datPhong.DonGia = donGiaPhong;
-            db.Entry(datPhong).State = EntityState.Modified;
-            db.SaveChanges();
-
+            // Điều hướng đến phương thức thanh toán
             switch (thanhtoan)
             {
                 case "vivnpay":
-                    return RedirectToAction("PaymentVNPay", "DatPhong", new { MaDP = MaDP, NgayDat = NgayDat });
+                    return RedirectToAction("PaymentVNPay", "DatPhong", new { MaDP });
                 case "vimomo":
-                    return RedirectToAction("PaymentMomo", "DatPhong", new { MaDP = MaDP });
+                    return RedirectToAction("PaymentMomo", "DatPhong", new { MaDP });
                 default:
                     break;
             }
 
-            return RedirectToAction("DatPhongConfirmation", new { MaDP = MaDP });
+            return View();
         }
 
         public ActionResult DatPhongConfirmation(string MaDP)
@@ -159,20 +118,19 @@ namespace WebApplication1.Controllers
             string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
             PayLib pay = new PayLib();
 
-            pay.AddRequestData("vnp_Version", "2.1.0"); //Phiên bản api mà merchant kết nối.Phiên bản hiện tại là 2.1.0
-            pay.AddRequestData("vnp_Command", "pay"); //Mã API sử dụng, mã cho giao dịch thanh toán là 'pay'
-            pay.AddRequestData("vnp_TmnCode", tmnCode); //Mã website của merchant trên hệ thống của VNPAY(khi đăng ký tài khoản sẽ có trong mail VNPAY gửi về)
-            pay.AddRequestData("vnp_Amount", 200000.ToString() + "00"); //số tiền cần thanh toán, công thức: số tiền *100 - ví dụ 10.000(mười nghìn đồng)-- > 1000000
-            //TotalAmount() là phương thức trả về tổng tiền của đơn hàng.
-            pay.AddRequestData("vnp_BankCode", "NCB"); //Mã Ngân hàng thanh toán (tham khảo: https://sandbox.vnpayment.vn/apis/danh-sach-ngan-hang/), có thể để trống, người dùng có thể chọn trên cổng thanh toán VNPAY
-            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss")); //ngày thanh toán theo định dạng yyyyMMddHHmmss
-            pay.AddRequestData("vnp_CurrCode", "VND"); //Đơn vị tiền tệ sử dụng thanh toán. Hiện tại chỉ hỗ trợ VND
-            pay.AddRequestData("vnp_IpAddr", PayUtil.GetIpAddress()); //Địa chỉ IP của khách hàng thực hiện giao dịch
-            pay.AddRequestData("vnp_Locale", "vn"); //Ngôn ngữ giao diện hiển thị - Tiếng Việt(vn), Tiếng Anh(en)
-            pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); //Thông tin mô tả nội dung thanh toán
-            pay.AddRequestData("vnp_OrderType", "other"); //topup: Nạp tiền điện thoại - billpayment: Thanh toán hóa đơn -fashion: Thời trang -other: Thanh toán trực tuyến
-            pay.AddRequestData("vnp_ReturnUrl", returnUrl); //URL thông báo kết quả giao dịch khi Khách hàng kết thúc thanh toán
-            pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString()); //mã hóa đơn
+            pay.AddRequestData("vnp_Version", "2.1.0");
+            pay.AddRequestData("vnp_Command", "pay");
+            pay.AddRequestData("vnp_TmnCode", tmnCode);
+            pay.AddRequestData("vnp_Amount", (200000 * 100).ToString());
+            pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            pay.AddRequestData("vnp_CurrCode", "VND");
+            pay.AddRequestData("vnp_IpAddr", PayUtil.GetIpAddress());
+            pay.AddRequestData("vnp_Locale", "vn");
+            pay.AddRequestData("vnp_OrderInfo", "Thanh toán đặt phòng");
+            pay.AddRequestData("vnp_OrderType", "other");
+            pay.AddRequestData("vnp_ReturnUrl", returnUrl);
+            pay.AddRequestData("vnp_TxnRef", MaDP);
+
             string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
             return Redirect(paymentUrl);
         }
@@ -184,7 +142,7 @@ namespace WebApplication1.Controllers
                 string hashSecret = ConfigurationManager.AppSettings["HashSecret"];
                 var vnpayData = Request.QueryString;
                 PayLib pay = new PayLib();
-                //lấy toàn bộ dữ liệu được trả về
+
                 foreach (string s in vnpayData)
                 {
                     if (!string.IsNullOrEmpty(s) && s.StartsWith("vnp_"))
@@ -192,30 +150,73 @@ namespace WebApplication1.Controllers
                         pay.AddResponseData(s, vnpayData[s]);
                     }
                 }
-                long orderId = Convert.ToInt64(pay.GetResponseData("vnp_TxnRef")); //mã hóa đơn
-                long vnpayTranId = Convert.ToInt64(pay.GetResponseData("vnp_TransactionNo")); //mã giao dịch tại hệ thống VNPAY
+
                 string vnp_ResponseCode = pay.GetResponseData("vnp_ResponseCode");
-                //response code: 00 - thành công, khác 00 - xem thêm https://sandbox.vnpayment.vn/apis/docs/bang-ma-loi/
-                string vnp_SecureHash = Request.QueryString["vnp_SecureHash"]; //hash của dữ liệu trả về
+                string vnp_SecureHash = Request.QueryString["vnp_SecureHash"];
                 bool checkSignature = pay.ValidateSignature(vnp_SecureHash, hashSecret);
-                //check chữ ký đúng hay không?
-                if (checkSignature)
+
+                if (checkSignature && vnp_ResponseCode == "00")
                 {
-                    if (vnp_ResponseCode == "00")
+                    // Thanh toán thành công -> Lưu thông tin đặt phòng
+                    var datPhongInfo = TempData["DatPhongInfo"] as DatPhongInfo;
+                    if (datPhongInfo != null)
                     {
-                        //Thanh toán thành công
-                        ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
+                        var datPhong = new DATPHONG
+                        {
+                            MaDP = datPhongInfo.MaDP,
+                            MaKH = datPhongInfo.MaKH,
+                            MaPH = datPhongInfo.MaPH,
+                            NgayDat = datPhongInfo.NgayDat,
+                            NgayNhan = datPhongInfo.NgayNhan,
+                            NgayTra = datPhongInfo.NgayTra,
+                            TinhTrang = "Đã đặt cọc",
+                            DatCoc = datPhongInfo.DatCoc
+                        };
+
+                        db.DATPHONGs.Add(datPhong);
+                        db.SaveChanges();
+
+                        // Lưu thông tin dịch vụ nếu có
+                        if (datPhongInfo.SelectedServices != null)
+                        {
+                            foreach (var maDV in datPhongInfo.SelectedServices)
+                            {
+                                var service = db.DICHVUs.FirstOrDefault(dv => dv.MaDV == maDV);
+                                if (service != null)
+                                {
+                                    var datDichVu = new DATDICHVU
+                                    {
+                                        MaDV = maDV,
+                                        MaDP = datPhongInfo.MaDP,
+                                        NgayDat = DateTime.Now,
+                                        NgayNhan = datPhongInfo.NgayNhan,
+                                        NgayTra = datPhongInfo.NgayTra
+                                    };
+                                    db.DATDICHVUs.Add(datDichVu);
+                                }
+                                else
+                                {
+                                    var datDichVu = new DATDICHVU
+                                    {
+                                        MaDV = null,
+                                        MaDP = datPhongInfo.MaDP,
+                                        NgayDat = DateTime.Now,
+                                        NgayNhan = datPhongInfo.NgayNhan,
+                                        NgayTra = datPhongInfo.NgayTra
+                                    };
+                                    db.DATDICHVUs.Add(datDichVu);
+                                }
+                            }
+                            db.SaveChanges();
+                        }
                     }
-                    else
-                    {
-                        //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
-                        ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId
-                        + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
-                    }
+
+                    ViewBag.Message = "Thanh toán thành công và thông tin đặt phòng đã được lưu.";
+                    return RedirectToAction("DatPhongConfirmation", new { MaDP = datPhongInfo.MaDP });
                 }
                 else
                 {
-                    ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
+                    ViewBag.Message = "Thanh toán không thành công. Vui lòng thử lại.";
                 }
             }
             return View();
