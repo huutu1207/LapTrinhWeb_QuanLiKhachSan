@@ -14,7 +14,9 @@ namespace WebApplication1.Models
         public DateTime NgayNhan { get; set; }
         public DateTime NgayTra { get; set; }
         public string TinhTrang { get; set; }
+        public float DonGia { get; set; }
         public float DatCoc { get; set; }
         public List<string> SelectedServices { get; set; }
+ 
     }
 }

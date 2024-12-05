@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\QuanLiPhongController.cs" />
     <Compile Include="Areas\Admin\Controllers\TrangTinController.cs" />
     <Compile Include="Areas\Admin\String.cs" />
+    <Compile Include="Areas\PhongViewModel.cs" />
     <Compile Include="Controllers\DatPhongController.cs" />
     <Compile Include="Controllers\DichVuController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

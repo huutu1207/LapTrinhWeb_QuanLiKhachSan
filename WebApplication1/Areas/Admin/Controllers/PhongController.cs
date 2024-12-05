@@ -14,42 +14,27 @@ namespace WebApplication1.Areas.Admin.Controllers
         QL_KhachSanEntities1 db = new QL_KhachSanEntities1();
         public ActionResult DanhSachPhong()
         {
-            // Lấy ngày hiện tại
             DateTime currentDate = DateTime.Now.Date;
+
+            // Lấy danh sách đặt phòng và danh sách phòng
             var datphongList = db.DATPHONGs.ToList();
-
-            foreach (var datphong in datphongList)
-            {
-                // Kiểm tra trạng thái và cập nhật cho DATPHONG
-                if (datphong.TinhTrang == "Occupied")
-                {
-                    if (datphong.NgayTra <= currentDate)
-                    {
-                        datphong.TinhTrang = "Available";
-                    }
-
-                }
-                else if (datphong.NgayNhan >= currentDate && datphong.TinhTrang!="Occupied")
-                {
-                    datphong.TinhTrang = "Booked";
-                }
-                else if (datphong.NgayNhan < currentDate && datphong.TinhTrang != "Occupied")
-                {
-                    datphong.TinhTrang = "Available";
-                }
-
-                // Cập nhật trạng thái cho PHONG dựa trên DATPHONG
-                var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == datphong.MaPH);
-                if (phong != null)
-                {
-                    phong.TrangThai = datphong.TinhTrang; // Đồng bộ trạng thái
-                }
-            }
-
-            // Lưu tất cả các thay đổi vào cơ sở dữ liệu
-            db.SaveChanges();
             var danhSachPhong = db.PHONGs.ToList();
-            return View(danhSachPhong);
+
+            // Tạo danh sách ViewModel
+            var phongViewModels = danhSachPhong.Select(phong =>
+            {
+                var datphongs = datphongList.Where(dp => dp.MaPH == phong.MaPH).ToList();
+
+                return new PhongViewModel
+                {
+                    MaPH = phong.MaPH,
+                    SoPH = phong.SoPH,
+                    SoLuongDaDat = datphongs.Count,
+                    SoLuongDangO = datphongs.Count(dp => dp.NgayNhan <= currentDate && dp.NgayTra >= currentDate)
+                };
+            }).ToList();
+
+            return View(phongViewModels);
         }
         public ActionResult Chitietphong(string MaPH)
         {
@@ -59,19 +44,51 @@ namespace WebApplication1.Areas.Admin.Controllers
                 return HttpNotFound();
             }
 
-            // Lấy thông tin đặt phòng liên quan
-            var datphong = db.DATPHONGs.FirstOrDefault(dp => dp.MaPH == MaPH);
+            // Thông tin khách hàng đang ở phòng (nếu có)
+            var datphong = db.DATPHONGs.FirstOrDefault(dp => dp.MaPH == MaPH && dp.NgayNhan <= DateTime.Now && dp.NgayTra >= DateTime.Now);
+
             if (datphong != null)
             {
-                // Lấy thông tin khách hàng liên quan
                 var khachHang = db.KHACHHANGs.FirstOrDefault(kh => kh.MaKH == datphong.MaKH);
                 if (khachHang != null)
                 {
-                    // Truyền thông tin khách hàng vào ViewBag
                     ViewBag.MaKH = khachHang.MaKH;
                     ViewBag.TenKH = khachHang.HoTen;
+                    ViewBag.NgayNhan = datphong.NgayNhan;
+                    ViewBag.NgayTra = datphong.NgayTra;
+                }
+                else
+                {
+                    ViewBag.KhachHangStatus = "Không tìm thấy thông tin khách hàng.";
                 }
             }
+            else
+            {
+                ViewBag.KhachHangStatus = "Phòng hiện đang trống.";
+            }
+
+            // Danh sách khách hàng đã đặt phòng
+            var danhSachDatPhong = db.DATPHONGs.Where(dp => dp.MaPH == MaPH).ToList();
+            var danhSachKhachHang = new List<KhachHangDatPhongViewModel>();
+
+            foreach (var dp in danhSachDatPhong)
+            {
+                var khachHang = db.KHACHHANGs.FirstOrDefault(kh => kh.MaKH == dp.MaKH);
+                if (khachHang != null)
+                {
+                    danhSachKhachHang.Add(new KhachHangDatPhongViewModel
+                    {
+                        MaKH = khachHang.MaKH,
+                        TenKH = khachHang.HoTen,
+                        DiaChi = khachHang.DiaChi,
+                        SDT = khachHang.DienThoai,
+                        NgayNhan = dp.NgayNhan?.Date,
+                        NgayTra = dp.NgayTra?.Date
+                    });
+                }
+            }
+
+            ViewBag.DanhSachKhachHang = danhSachKhachHang;
 
             return View(phong);
         }
@@ -231,11 +248,25 @@ namespace WebApplication1.Areas.Admin.Controllers
         {
             // Kiểm tra phòng tồn tại hay không
             var phong = db.PHONGs.SingleOrDefault(p => p.MaPH == MaPH);
-            var datphong = db.DATPHONGs.SingleOrDefault(d => d.MaPH == MaPH);
-            var kh = db.KHACHHANGs.SingleOrDefault(k => k.MaKH == datphong.MaKH);
-            if (phong == null&&phong.TrangThai=="Occupied")
+
+            if (phong == null)
             {
-                ModelState.AddModelError("", "Phòng không tồn tại.");
+                TempData["ErrorMessage"] = "Phòng không tồn tại hoặc không tìm thấy.";
+                return RedirectToAction("DanhSachPhong");
+            }
+
+            // Kiểm tra xem phòng có khách đang ở hay không
+            var datphong = db.DATPHONGs.SingleOrDefault(dp => dp.MaPH == MaPH && dp.NgayNhan <= DateTime.Now && dp.NgayTra >= DateTime.Now);
+            if (datphong == null)
+            {
+                TempData["ErrorMessage"] = "Phòng hiện đang trống hoặc chưa có khách đặt.";
+                return RedirectToAction("DanhSachPhong");
+            }
+
+            var kh = db.KHACHHANGs.SingleOrDefault(k => k.MaKH == datphong.MaKH);
+            if (kh == null)
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy thông tin khách hàng đang ở phòng này.";
                 return RedirectToAction("DanhSachPhong");
             }
 
@@ -246,13 +277,13 @@ namespace WebApplication1.Areas.Admin.Controllers
                 {
                     MaPH = MaPH,
                     SoPH = phong.SoPH,
-                    MaKH = kh.MaKH, 
+                    MaKH = kh.MaKH,
                     HoTen = kh.HoTen,
                     DienThoai = kh.DienThoai,
                     CCCD = kh.CCCD,
                     Email = kh.Email,
                     Gia = phong.Gia,
-                    NgayNhan = phong.CheckIn,
+                    NgayNhan = datphong.NgayNhan,
                     NgayTra = DateTime.Now
                 };
 
@@ -260,21 +291,21 @@ namespace WebApplication1.Areas.Admin.Controllers
 
                 // Cập nhật trạng thái phòng thành "Available"
                 phong.TrangThai = "Available";
-                var datPhong = db.DATPHONGs.SingleOrDefault(dp => dp.MaPH == MaPH);
-                if (datPhong != null)
-                {
-                    db.DATPHONGs.Remove(datPhong);
-                }
+
+                // Xóa thông tin đặt phòng (cho phòng trả lại)
+                db.DATPHONGs.Remove(datphong);
 
                 // Lưu thay đổi
                 db.SaveChanges();
 
+                // Thông báo trả phòng thành công
                 TempData["SuccessMessage"] = "Trả phòng thành công!";
                 return RedirectToAction("DanhSachPhong");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError("", $"Đã xảy ra lỗi: {ex.Message}");
+                // Lỗi trong quá trình trả phòng
+                TempData["ErrorMessage"] = $"Đã xảy ra lỗi khi trả phòng: {ex.Message}";
                 return RedirectToAction("DanhSachPhong");
             }
         }
