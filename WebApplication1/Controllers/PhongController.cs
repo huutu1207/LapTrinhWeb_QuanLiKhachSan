@@ -63,7 +63,12 @@ namespace WebApplication1.Controllers
                                  ThoiGian = (DateTime)bl.ThoiGian,
                                  HoTenKhachHang = kh.HoTen
                              }).ToList();
-
+            var avgRating = db.BINHLUANs
+            .Where(r => r.MaPH == id)
+            .Select(rate => rate.DanhGia)
+            .DefaultIfEmpty(0)
+            .Average();
+            ViewBag.Avg = avgRating;
             ViewBag.BinhLuans = binhLuans;
             var dichVuList = db.DICHVUs.ToList();
             ViewBag.DichVuList = dichVuList;

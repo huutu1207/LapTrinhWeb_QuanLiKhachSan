@@ -45,11 +45,44 @@ body {
 .rd-text {
     padding: 20px 0;
 }
+.danhgia {
+    margin-left: auto;
+    margin-right: 10px;
+}
+    .danhgia span i {
+        color: gray; /* Mặc định sao là màu xám */
+        font-size: 20px;
+    }
+
+    .danhgia span.full i {
+        color: gold; /* Sao đầy đủ màu vàng */
+    }
+
+    .danhgia span.half i {
+        color: gold; /* Sao một phần màu vàng */
+        background: linear-gradient(to right, gold 50%, gray 50%);
+        -webkit-background-clip: text;
+        color: transparent; /* Để chỉ phần vàng hiển thị */
+    }
+
+.danhgia {
+    display: inline-flex; /* Sử dụng inline-flex để đặt các phần tử trên cùng một dòng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+    .danhgia span {
+        margin-right: 5px; /* Khoảng cách giữa các sao */
+    }
+
+.ratingtext {
+    font-size: 16px; /* Kích thước chữ cho text */
+    color: #333; /* Màu chữ */
+    display: inline-block; /* Đảm bảo text hiển thị inline với sao */
+}
 
 .rd-title h3 {
     font-size: 28px;
     font-weight: bold;
-    
     color: #333;
     display: inline-block;
     align-items: center;
