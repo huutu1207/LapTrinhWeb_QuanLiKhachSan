@@ -14,6 +14,19 @@ namespace WebApplication1.Controllers
         QL_KhachSanEntities1 db =new QL_KhachSanEntities1();
         public ActionResult Index()
         {
+            //var lstp = (from bl in db.BINHLUANs
+            //            join p in db.PHONGs
+            //            on bl.MaPH equals p.MaPH
+            //            group bl by bl.MaPH into phonghot
+            //            select new DanhGiaPhong
+            //            {
+            //                tenphong = phonghot.FirstOrDefault().PHONG.SoPH,
+            //                danhgia = phonghot.Average(p => (double)p.DanhGia),
+            //                giatien = (double)phonghot.FirstOrDefault().PHONG.Gia
+            //            }
+            //            );
+            //var lstRoom = lstp.Take(4).ToList();
+
             return View();
         }
         public ActionResult _NavPartial()

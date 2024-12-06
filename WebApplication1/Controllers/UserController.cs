@@ -541,7 +541,8 @@ namespace WebApplication1.Controllers
                     NgayNhan = dp.NgayNhan,
                     NgayTra = dp.NgayTra,
                     ThanhTien = dp.DonGia
-                }).AsEnumerable().Select(m => 
+                })
+                .AsEnumerable().Select(m => 
                     new LichSuView()
                     {
                         MaDatPhong = m.MaDatPhong,
