@@ -70,6 +70,21 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
+            var phong = db.PHONGs.FirstOrDefault(p => p.MaPH == MaPH);
+            var dichVuList = db.DICHVUs.ToList();
+            if (phong == null)
+            {
+                return HttpNotFound("Không tìm thấy phòng.");
+            }
+
+            // Tính toán giá trị tổng
+            float giaDichVu = selectedServices != null
+                ? (float)(db.DICHVUs.Where(dv => selectedServices.Contains(dv.MaDV)).Sum(dv => dv.Gia) ?? 0)
+                : 0;
+
+            int soNgayO = (NgayTra.Value - NgayNhan.Value).Days;
+            float donGiaPhong = (float)(phong.Gia ?? 0) * soNgayO + giaDichVu - 200000;
+
             string MaKH = khachHang.MaKH;
             string MaDP = "DP" + new Random().Next(1000, 9999);
 
@@ -81,8 +96,10 @@ namespace WebApplication1.Controllers
                 NgayDat = DateTime.Now,                     // Ngày đặt hiện tại
                 NgayNhan = NgayNhan.Value,                  // Ngày nhận từ người dùng
                 NgayTra = NgayTra.Value,                    // Ngày trả từ người dùng
+                DonGia = donGiaPhong,
                 DatCoc = 200000,                            // Số tiền đặt cọc cố định
                 SelectedServices = selectedServices?.ToList() // Chuyển mảng dịch vụ thành danh sách
+                
             };
 
             // Điều hướng đến phương thức thanh toán
@@ -170,6 +187,7 @@ namespace WebApplication1.Controllers
                             NgayNhan = datPhongInfo.NgayNhan,
                             NgayTra = datPhongInfo.NgayTra,
                             TinhTrang = "Đã đặt cọc",
+                            DonGia = datPhongInfo.DonGia,
                             DatCoc = datPhongInfo.DatCoc
                         };
 
