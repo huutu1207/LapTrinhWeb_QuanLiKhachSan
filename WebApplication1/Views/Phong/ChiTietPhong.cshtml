@@ -49,7 +49,7 @@
                             </tbody>
                         </table>
                         <p class="f-para">
-                            @Model.Mota
+                                @Html.Raw(@Model.Mota.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
                         </p>
                     </div>
                 </div>

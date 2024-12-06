@@ -63,7 +63,7 @@
                 }
 
         #navbar {
-            height: 60px;
+            height: 80px;
             background-color: #2c3e50;
             color: white;
             display: flex;
@@ -111,6 +111,41 @@
         #sidebar:hover .logo img {
             transform: rotate(360deg); /* Quay logo khi hover vào sidebar */
         }
+        #navbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: #2c3e50; /* Màu nền */
+            padding: 10px;
+            color: white;
+            font-family: Arial, sans-serif; /* Phông chữ */
+        }
+
+            #navbar p {
+                margin-right: 15px;
+                font-size: 16px;
+            }
+
+            #navbar .icons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%; /* Bo tròn icon */
+                background-color: #3498db; /* Màu nền của icon */
+            }
+
+                #navbar .icons a {
+                    color: white; /* Màu của biểu tượng */
+                    font-size: 20px;
+                    text-decoration: none; /* Bỏ gạch chân */
+                }
+
+                    #navbar .icons a:hover {
+                        color: #ecf0f1; /* Màu khi hover */
+                    }
+
     </style>
 </head>
 <body>
@@ -163,13 +198,18 @@
         </ul>
 
     </div>
-    <div id="navbar">
-
-        <div class="icons" style="block-size: 100px">
-            <i class="fas fa-user"></i>
+    <div id="navbar" style="display: flex; justify-content: flex-end; align-items: center; background-color: #2c3e50; padding: 10px; color: white;">
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <div class="icons" style="display: flex; align-items: center; justify-content: center; width: 50px; height: 50px; border-radius: 50%; background-color: #3498db; margin-bottom: 5px;">
+                <a href="@Url.Action("Logout", "Admin")" style="color: white; font-size: 24px;">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+            <p style="font-size: 16px; margin: 0;">
+                Xin chào, <strong>@Session["NhanVien"]</strong>
+            </p>
         </div>
     </div>
-
 
     <div id="content">
         @RenderBody()
