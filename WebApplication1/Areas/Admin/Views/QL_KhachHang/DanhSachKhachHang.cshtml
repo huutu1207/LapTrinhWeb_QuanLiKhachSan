@@ -49,7 +49,16 @@
                 @Html.DisplayFor(modelItem => item.GioiTinh)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Avatar)
+                @if (@item.Avatar == null)
+                {
+                    <p>chưa cài đặt ảnh đại diện</p>
+                }
+                else
+                {
+                    <img style="max-width: 150px; max-height: 150px; width: auto; height: auto;"
+                         src="~/Images/@Html.DisplayFor(modelItem => item.Avatar)" />
+
+                }
             </td>
             <td>
                 <p>
