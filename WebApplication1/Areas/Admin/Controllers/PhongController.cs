@@ -79,6 +79,8 @@ namespace WebApplication1.Areas.Admin.Controllers
                     danhSachKhachHang.Add(new KhachHangDatPhongViewModel
                     {
                         MaKH = khachHang.MaKH,
+                        MaDP = dp.MaDP,
+                        MaPH = MaPH,
                         TenKH = khachHang.HoTen,
                         DiaChi = khachHang.DiaChi,
                         SDT = khachHang.DienThoai,
@@ -310,6 +312,35 @@ namespace WebApplication1.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult HuyDatPhong(string maDP, string maPH)
+        {
+            if (string.IsNullOrEmpty(maDP))
+            {
+                return HttpNotFound();
+            }
 
+            // Tìm đặt phòng theo mã MaDP
+            var room = db.DATPHONGs.FirstOrDefault(s => s.MaDP == maDP);
+            if (room == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Xóa các bản ghi trong bảng DATDICHVU liên quan đến MaDP
+            var dichVuLienQuan = db.DATDICHVUs.Where(dv => dv.MaDP == maDP).ToList();
+            if (dichVuLienQuan.Any())
+            {
+                db.DATDICHVUs.RemoveRange(dichVuLienQuan);
+            }
+
+            // Xóa bản ghi trong bảng DATPHONG
+            db.DATPHONGs.Remove(room);
+
+            // Lưu thay đổi vào cơ sở dữ liệu
+            db.SaveChanges();
+
+            // Điều hướng lại trang lịch sử
+            return RedirectToAction("Chitietphong", new { MaPH = maPH});
+        }
     }
 }

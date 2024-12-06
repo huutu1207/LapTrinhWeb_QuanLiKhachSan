@@ -14,6 +14,7 @@ using System.Data.Entity.Validation;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Facebook;
+using System.Text.RegularExpressions;
 
 namespace WebApplication1.Controllers
 {
@@ -616,22 +617,19 @@ namespace WebApplication1.Controllers
                 return View();
             }
 
-            // Mật khẩu mặc định sau khi reset
-            string newPassword = "123456";
-
-            // Mã hóa mật khẩu mới trước khi lưu vào CSDL
-            khachhang.Password = HashPassword(newPassword);
-
-            // Lưu mật khẩu mới vào CSDL
-            db.SaveChanges();
-
-            // Gửi email thông báo về việc reset mật khẩu
+            // Mã xác nhận gửi qua email
             string verificationCode = GenerateVerificationCode();
-            GuiEmaiResertMatKhau(email, verificationCode);
 
-            ViewBag.ThongBao = "Mật khẩu của bạn đã được reset. Vui lòng kiểm tra email của bạn.";
+            // Gửi mã xác nhận qua email
+            SendResetPasswordEmail(email, verificationCode);
 
-            return View();
+            // Lưu mã xác nhận vào TempData để sử dụng sau này
+            TempData["VerificationCode"] = verificationCode;
+            TempData["Email"] = email;
+
+            ViewBag.ThongBao = "Mã xác nhận đã được gửi đến email của bạn. Vui lòng kiểm tra email.";
+
+            return RedirectToAction("XacNhanEmailQuenMK");
         }
 
         // Phương thức xử lý liên kết đặt lại mật khẩu
@@ -641,20 +639,118 @@ namespace WebApplication1.Controllers
             return View(); // Trả về view để người dùng nhập mật khẩu mới
         }
 
-        private void SendResetPasswordEmail(string email, string resetLink)
+        [HttpPost]
+        public ActionResult DatLaiMatKhau(string email, string newPassword, string confirmPassword)
         {
-            var mailMessage = new MailMessage();
-            mailMessage.To.Add(email);
-            mailMessage.Subject = "Reset Your Password";
-            mailMessage.Body = $"Click the following link to reset your password: <a href='{resetLink}'>Reset Password</a>";
-            mailMessage.IsBodyHtml = true;
+            // Kiểm tra đầu vào
+            if (string.IsNullOrEmpty(newPassword))
+            {
+                TempData["ErrPassword"] = "Mật khẩu không được để trống!";
+                return View();
+            }
 
-            var smtpClient = new SmtpClient("smtp.yourserver.com");
-            smtpClient.Send(mailMessage);
+            // Kiểm tra mật khẩu nhập lại có khớp không
+            if (newPassword != confirmPassword)
+            {
+                TempData["ErrConfirmPassword"] = "Mật khẩu nhập lại không khớp!";
+                return View();
+            }
+
+            // Kiểm tra độ dài mật khẩu
+            if (newPassword.Length < 6)
+            {
+                TempData["ErrPassword"] = "Mật khẩu mới phải có ít nhất 6 ký tự!";
+                return View();
+            }
+
+            // Kiểm tra định dạng email có hợp lệ không
+            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+            {
+                TempData["ErrEmail"] = "Địa chỉ email không hợp lệ!";
+                return View();
+            }
+
+            var khachhang = db.KHACHHANGs.FirstOrDefault(k => k.Email == email);
+
+            if (khachhang != null)
+            {
+                // Mã hóa mật khẩu mới trước khi lưu vào CSDL
+                khachhang.Password = HashPassword(newPassword);
+
+                // Lưu mật khẩu mới vào CSDL
+                db.SaveChanges();
+
+                TempData["ThongBao"] = "Mật khẩu của bạn đã được thay đổi thành công!";
+                return RedirectToAction("DangNhap", "User");
+            }
+
+            TempData["ThongBao"] = "Không tìm thấy người dùng với email này!";
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ThayDoiMatKhau()
+        {
+            return View(); // Trả về view ThayDoiMatKhau.cshtml
+        }
+        [HttpPost]
+        public ActionResult ThayDoiMatKhau(string email, string oldPassword, string newPassword, string confirmPassword)
+        {
+            // Kiểm tra đầu vào
+            if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+            {
+                TempData["ErrPassword"] = "Tất cả các trường không được để trống!";
+                return View();
+            }
+
+            // Kiểm tra email có hợp lệ không
+            if (!Regex.IsMatch(email, @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"))
+            {
+                TempData["ErrEmail"] = "Địa chỉ email không hợp lệ!";
+                return View();
+            }
+
+            // Kiểm tra mật khẩu cũ
+            var khachhang = db.KHACHHANGs.FirstOrDefault(k => k.Email == email);
+            if (khachhang == null)
+            {
+                TempData["ErrEmail"] = "Không tìm thấy người dùng với email này!";
+                return View();
+            }
+
+            // So sánh mật khẩu cũ
+            if (khachhang.Password != HashPassword(oldPassword))
+            {
+                TempData["ErrOldPassword"] = "Mật khẩu cũ không đúng!";
+                return View();
+            }
+
+            // Kiểm tra mật khẩu mới và mật khẩu xác nhận có khớp không
+            if (newPassword != confirmPassword)
+            {
+                TempData["ErrConfirmPassword"] = "Mật khẩu nhập lại không khớp!";
+                return View();
+            }
+
+            // Kiểm tra độ dài mật khẩu mới
+            if (newPassword.Length < 6)
+            {
+                TempData["ErrPassword"] = "Mật khẩu mới phải có ít nhất 6 ký tự!";
+                return View();
+            }
+
+            // Mã hóa mật khẩu mới trước khi lưu vào CSDL
+            khachhang.Password = HashPassword(newPassword);
+
+            // Lưu mật khẩu mới vào CSDL
+            db.SaveChanges();
+
+            TempData["ThongBao"] = "Mật khẩu của bạn đã được thay đổi thành công!";
+            return RedirectToAction("ThongTinCaNhan", "User");
         }
 
 
-        private void GuiEmaiResertMatKhau(string emailNguoiDung, string verificationCode)
+        private void SendResetPasswordEmail(string emailNguoiDung, string verificationCode)
         {
             try
             {
@@ -665,11 +761,10 @@ namespace WebApplication1.Controllers
                 var toAddress = new MailAddress(emailNguoiDung);
 
                 const string fromPassword = "hbpk bhtz zvic aysp";
-                const string subject = "Mật khẩu của bạn đã được reset";
+                const string subject = "Mã xác nhận đặt lại mật khẩu";
 
-                string body = $"<h3>Chào bạn!</h3>" +
-                              $"<p>Mật khẩu của bạn đã được reset về: <strong>123456</strong></p>" +
-                              $"<p>Vui lòng đăng nhập lại với mật khẩu này.</p>" +
+                string body =$"<p>Mã xác nhận của bạn để đặt lại mật khẩu là: <strong>{verificationCode}</strong></p>" +
+                              $"<p>Vui lòng nhập mã xác nhận trên trang web của chúng tôi.</p>" +
                               $"<p>Trân trọng,</p>" +
                               $"<p><em>Lucky Hotel</em></p>";
 
@@ -698,6 +793,38 @@ namespace WebApplication1.Controllers
                 throw new InvalidOperationException("Có lỗi khi gửi email: " + ex.Message, ex);
             }
         }
+
+        public ActionResult XacNhanEmailQuenMK()
+        {
+            return View(); // Hiển thị form để người dùng nhập mã xác nhận
+        }
+
+        [HttpPost]
+        public ActionResult XacNhanEmailQuenMK(string verificationCode)
+        {
+            var email = TempData["Email"]?.ToString(); // Lấy email từ TempData
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                // Kiểm tra mã xác nhận
+                if (TempData["VerificationCode"]?.ToString() == verificationCode)
+                {
+                    // Mã xác nhận đúng, hiển thị form để người dùng thay đổi mật khẩu
+                    return RedirectToAction("DatLaiMatKhau", new { email = email });
+                }
+                else
+                {
+                    ViewBag.ThongBao = "Mã xác nhận không hợp lệ. Vui lòng thử lại.";
+                }
+            }
+            else
+            {
+                ViewBag.ThongBao = "Không tìm thấy thông tin email để xác nhận.";
+            }
+
+            return View();
+        }
+
 
         private string GenerateVerificationCode()
         {

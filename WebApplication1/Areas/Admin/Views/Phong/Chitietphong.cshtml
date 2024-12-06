@@ -79,6 +79,7 @@
                 <th>Số điện thoại</th>
                 <th>Ngày Nhận</th>
                 <th>Ngày Trả</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody>
@@ -93,7 +94,13 @@
                         <td>@khachHang.SDT</td>
                         <td>@khachHang.NgayNhan.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                         <td>@khachHang.NgayTra.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
-
+                        <td>
+                            <a href="@Url.Action("HuyDatPhong", "Phong", new { MaDP = khachHang.MaDP, MaPH = khachHang.MaPH})"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Bạn có chắc chắn muốn hủy đặt phòng của khách hàng này?');">
+                                Hủy Đặt
+                            </a>
+                        </td>
                     </tr>
                 }
             }

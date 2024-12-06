@@ -1,10 +1,16 @@
-﻿using NgoMinhTri;
+﻿using Newtonsoft.Json;
+using NgoMinhTri;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.EnterpriseServices;
 using System.Linq;
+using System.Net.Http;
 using System.Net.NetworkInformation;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
@@ -76,14 +82,17 @@ namespace WebApplication1.Controllers
             {
                 return HttpNotFound("Không tìm thấy phòng.");
             }
-
             // Tính toán giá trị tổng
-            float giaDichVu = selectedServices != null
-                ? (float)(db.DICHVUs.Where(dv => selectedServices.Contains(dv.MaDV)).Sum(dv => dv.Gia) ?? 0)
+            decimal giaDichVu = selectedServices != null
+                ? (decimal)(db.DICHVUs.Where(dv => selectedServices.Contains(dv.MaDV)).Sum(dv => dv.Gia) ?? 0)
                 : 0;
 
             int soNgayO = (NgayTra.Value - NgayNhan.Value).Days;
-            float donGiaPhong = (float)(phong.Gia ?? 0) * soNgayO + giaDichVu - 200000;
+       
+            decimal giaDichVuDecimal = (decimal)giaDichVu; // Convert giaDichVu to decimal
+            decimal soNgayODecimal = (decimal)soNgayO; // Convert soNgayO to decimal
+
+            decimal donGiaPhong = (((decimal)(phong.Gia ?? 0) * soNgayODecimal + giaDichVuDecimal)) - (((decimal)(phong.Gia ?? 0) * soNgayODecimal + giaDichVuDecimal)) * 0.2M;
 
             string MaKH = khachHang.MaKH;
             string MaDP = "DP" + new Random().Next(1000, 9999);
@@ -97,7 +106,7 @@ namespace WebApplication1.Controllers
                 NgayNhan = NgayNhan.Value,                  // Ngày nhận từ người dùng
                 NgayTra = NgayTra.Value,                    // Ngày trả từ người dùng
                 DonGia = donGiaPhong,
-                DatCoc = 200000,                            // Số tiền đặt cọc cố định
+                DatCoc = (((decimal)(phong.Gia ?? 0) * soNgayODecimal + giaDichVuDecimal)) * 0.2M,
                 SelectedServices = selectedServices?.ToList() // Chuyển mảng dịch vụ thành danh sách
                 
             };
@@ -108,7 +117,7 @@ namespace WebApplication1.Controllers
                 case "vivnpay":
                     return RedirectToAction("PaymentVNPay", "DatPhong", new { MaDP });
                 case "vimomo":
-                    return RedirectToAction("PaymentMomo", "DatPhong", new { MaDP });
+                    return RedirectToAction("CreatePayment", "DatPhong", new { MaDP });
                 default:
                     break;
             }
@@ -138,7 +147,7 @@ namespace WebApplication1.Controllers
             pay.AddRequestData("vnp_Version", "2.1.0");
             pay.AddRequestData("vnp_Command", "pay");
             pay.AddRequestData("vnp_TmnCode", tmnCode);
-            pay.AddRequestData("vnp_Amount", (200000 * 100).ToString());
+            pay.AddRequestData("vnp_Amount", ((TempData["DatPhongInfo"] as DatPhongInfo).DonGia * 100).ToString());
             pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             pay.AddRequestData("vnp_CurrCode", "VND");
             pay.AddRequestData("vnp_IpAddr", PayUtil.GetIpAddress());
@@ -187,8 +196,8 @@ namespace WebApplication1.Controllers
                             NgayNhan = datPhongInfo.NgayNhan,
                             NgayTra = datPhongInfo.NgayTra,
                             TinhTrang = "Đã đặt cọc",
-                            DonGia = datPhongInfo.DonGia,
-                            DatCoc = datPhongInfo.DatCoc
+                            DonGia = (float)datPhongInfo.DonGia,
+                            DatCoc = (float)datPhongInfo.DatCoc
                         };
 
                         db.DATPHONGs.Add(datPhong);
@@ -238,6 +247,189 @@ namespace WebApplication1.Controllers
                 }
             }
             return View();
+        }
+        public async Task<ActionResult> CreatePayment()
+        {
+            // Lấy thông tin số tiền từ session hoặc sử dụng giá trị cố định
+            decimal Amount = (TempData["DatPhongInfo"] as DatPhongInfo).DatCoc;// Tiền thanh toán là 200000 VND
+            double? amountInCents = (double?)Amount; // where Amount is a decimal
+
+            string requestId = MomoConfig.PartnerCode + DateTime.Now.Ticks;
+            string orderId = requestId;
+            string amount = amountInCents.ToString(); // Số tiền thanh toán tính theo đơn vị cents
+            string orderInfo = "Thanh toán thử nghiệm MoMo";
+            string extraData = ""; // Không có dữ liệu thêm
+            string requestType = "payWithMethod"; // Loại thanh toán
+
+            // Tạo chuỗi raw signature
+            string rawSignature = $"accessKey={MomoConfig.AccessKey}&amount={amount}&extraData={extraData}&ipnUrl={MomoConfig.NotifyUrl}&orderId={orderId}&orderInfo={orderInfo}&partnerCode={MomoConfig.PartnerCode}&redirectUrl={MomoConfig.ReturnUrl}&requestId={requestId}&requestType={requestType}";
+            string signature = GenerateSignature(rawSignature, MomoConfig.SecretKey);
+
+            // Tạo dữ liệu gửi đi
+            var jsonData = new
+            {
+                partnerCode = MomoConfig.PartnerCode,
+                accessKey = MomoConfig.AccessKey,
+                requestId = requestId,
+                amount = amount,
+                orderId = orderId,
+                orderInfo = orderInfo,
+                redirectUrl = MomoConfig.ReturnUrl,
+                ipnUrl = MomoConfig.NotifyUrl,
+                extraData = extraData,
+                requestType = requestType,
+                signature = signature,
+                lang = "en"
+            };
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    // Gửi request POST đến MoMo
+                    var content = new StringContent(JsonConvert.SerializeObject(jsonData), Encoding.UTF8, "application/json");
+                    var response = await client.PostAsync(MomoConfig.Endpoint, content);
+                    var responseContent = await response.Content.ReadAsStringAsync();
+
+                    // Log phản hồi để kiểm tra
+                    Console.WriteLine("Phản hồi từ MoMo: " + responseContent);
+
+                    // Phân tích phản hồi JSON thành object
+                    var momoResponse = JsonConvert.DeserializeObject<MomoResponse>(responseContent);
+
+                    if (momoResponse != null)
+                    {
+                        if (momoResponse.errorCode == 0)
+                        {
+                            // Thành công, chuyển hướng đến URL thanh toán
+                            if (!string.IsNullOrEmpty(momoResponse.payUrl))
+                            {
+                                return Redirect(momoResponse.payUrl);
+                            }
+                            else
+                            {
+                                ViewBag.ErrorMessage = "Không tìm thấy payUrl trong phản hồi từ MoMo.";
+                                return View("Error");
+                            }
+                        }
+                        else
+                        {
+                            // Hiển thị lỗi từ MoMo
+                            ViewBag.ErrorMessage = $"Lỗi từ MoMo: Mã lỗi {momoResponse.errorCode}, Thông báo: {momoResponse.message}";
+                            return View("Error");
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.ErrorMessage = "Không nhận được phản hồi từ API MoMo.";
+                        return View("Error");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = $"Lỗi: {ex.Message}";
+                return View("Error");
+            }
+        }
+
+
+
+        // Phương thức tạo chữ ký HMAC SHA256
+        private string GenerateSignature(string data, string key)
+        {
+            using (HMACSHA256 hmac = new HMACSHA256(Encoding.UTF8.GetBytes(key)))
+            {
+                byte[] hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
+                return BitConverter.ToString(hash).Replace("-", "").ToLower();
+            }
+        }
+
+        public ActionResult ReturnUrl()
+        {
+            string resultCode = Request.QueryString["resultCode"];
+            string orderId = Request.QueryString["orderId"];
+            string message = Request.QueryString["message"];
+
+            if (resultCode == "0")
+            {
+                // Thanh toán thành công, lưu thông tin đặt phòng vào CSDL
+                var datPhongInfo = TempData["DatPhongInfo"] as DatPhongInfo;
+                if (datPhongInfo != null)
+                {
+                    var datPhong = new DATPHONG
+                    {
+                        MaDP = datPhongInfo.MaDP,
+                        MaKH = datPhongInfo.MaKH,
+                        MaPH = datPhongInfo.MaPH,
+                        NgayDat = datPhongInfo.NgayDat,
+                        NgayNhan = datPhongInfo.NgayNhan,
+                        NgayTra = datPhongInfo.NgayTra,
+                        TinhTrang = "Đã đặt cọc",
+                        DonGia = (float)datPhongInfo.DonGia,
+                        DatCoc = (float)datPhongInfo.DatCoc
+                    };
+
+                    db.DATPHONGs.Add(datPhong);
+                    db.SaveChanges();
+
+                    // Lưu thông tin dịch vụ nếu có
+                    if (datPhongInfo.SelectedServices != null)
+                    {
+                        foreach (var maDV in datPhongInfo.SelectedServices)
+                        {
+                            var datDichVu = new DATDICHVU
+                            {
+                                MaDV = maDV,
+                                MaDP = datPhongInfo.MaDP,
+                                NgayDat = DateTime.Now,
+                                NgayNhan = datPhongInfo.NgayNhan,
+                                NgayTra = datPhongInfo.NgayTra
+                            };
+                            db.DATDICHVUs.Add(datDichVu);
+                        }
+                        db.SaveChanges();
+                    }
+                }
+
+                ViewBag.Message = "Thanh toán thành công! Thông tin đặt phòng đã được lưu.";
+                return RedirectToAction("DatPhongConfirmation", new { MaDP = datPhongInfo.MaDP });
+            }
+            else
+            {
+                ViewBag.Message = $"Thanh toán thất bại: {message}";
+            }
+
+            return View();
+        }
+        public ActionResult NotifyUrl()
+        {
+            try
+            {
+                var requestParams = Request.Form;
+                string signature = requestParams["signature"];
+
+                // Tạo chuỗi raw signature để kiểm tra
+                string rawSignature = $"accessKey={MomoConfig.AccessKey}&amount={requestParams["amount"]}&extraData={requestParams["extraData"]}&message={requestParams["message"]}&orderId={requestParams["orderId"]}&orderInfo={requestParams["orderInfo"]}&partnerCode={requestParams["partnerCode"]}&requestId={requestParams["requestId"]}&responseTime={requestParams["responseTime"]}&resultCode={requestParams["resultCode"]}";
+
+                string generatedSignature = GenerateSignature(rawSignature, MomoConfig.SecretKey);
+
+                if (signature == generatedSignature)
+                {
+                    if (requestParams["resultCode"] == "0")
+                    {
+                        // Xử lý thanh toán thành công
+                        Console.WriteLine("Giao dịch thành công: " + requestParams["orderId"]);
+                        return new HttpStatusCodeResult(200);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi NotifyUrl: " + ex.Message);
+            }
+
+            return new HttpStatusCodeResult(400); // Báo lỗi nếu không xử lý được
         }
 
 

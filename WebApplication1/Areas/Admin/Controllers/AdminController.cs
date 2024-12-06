@@ -13,8 +13,39 @@ namespace WebApplication1.Areas.Admin.Controllers
         QL_KhachSanEntities1 db =new QL_KhachSanEntities1();
         public ActionResult Index()
         {
+            // Kiểm tra nếu người dùng đã đăng nhập
+            if (Session["NhanVien"] != null && Session["UserChucVu"] != null)
+            {
+                string tenDangNhap = Session["NhanVien"].ToString();
+                string chucVu = Session["UserChucVu"].ToString();
+
+                // Lấy thông tin nhân viên từ cơ sở dữ liệu
+                var nhanVien = db.NHANVIENs.SingleOrDefault(n => n.HoTen == tenDangNhap);
+
+                if (nhanVien != null)
+                {
+                    // Truyền thông tin nhân viên vào ViewBag
+                    ViewBag.ThongTinNhanVien = nhanVien;
+
+                    // Nếu là quản lý, truyền thêm thông tin vai trò
+                    if (chucVu.ToLower() == "quản lý" || chucVu.ToLower() == "manager")
+                    {
+                        ViewBag.VaiTro = "Quản lý";
+                    }
+                    else
+                    {
+                        ViewBag.VaiTro = "Nhân viên";
+                    }
+                }
+            }
+            else
+            {
+                // Nếu chưa đăng nhập, chuyển hướng đến trang đăng nhập
+                return RedirectToAction("DangNhap");
+            }
 
             return View();
+
         }
         [HttpGet]
         public ActionResult DangNhap()

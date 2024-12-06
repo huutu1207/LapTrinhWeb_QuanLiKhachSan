@@ -14,10 +14,20 @@ namespace WebApplication1.Models
     
     public partial class MENU
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MENU()
+        {
+            this.MENU1 = new HashSet<MENU>();
+        }
+    
         public int Id { get; set; }
         public string MenuName { get; set; }
         public string MenuLink { get; set; }
         public Nullable<int> ParentId { get; set; }
         public Nullable<int> OrderNumber { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MENU> MENU1 { get; set; }
+        public virtual MENU MENU2 { get; set; }
     }
 }

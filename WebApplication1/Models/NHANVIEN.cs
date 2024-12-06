@@ -23,5 +23,6 @@ namespace WebApplication1.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string ChucVu { get; set; }
+        public string DienThoai { get; set; }
     }
 }
