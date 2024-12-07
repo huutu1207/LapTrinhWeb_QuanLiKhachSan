@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Globalization;
 
-namespace NgoMinhTri
+namespace WebApplication1
 {
     public class PayCompare:IComparer<string>
     {

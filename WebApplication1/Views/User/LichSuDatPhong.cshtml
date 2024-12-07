@@ -23,7 +23,7 @@
                         <tr><th>Đặt Vào Ngày:</th><th><span>@lsv.NgayDat</span></th></tr>
                         <tr><th>Ở Từ Ngày:</th><th><span>@lsv.NgayNhan</span></th></tr>
                         <tr><th>Đến Ngày:</th><th><span>@lsv.NgayTra</span></th></tr>
-                        <tr><th>Thành Tiền:</th><th><span>@lsv.ThanhTien đ/dêm</span></th></tr>
+                        <tr><th>Thành Tiền:</th><th><span>@(lsv.ThanhTien.HasValue ? lsv.ThanhTien.Value.ToString("#,0") : "0") VND</span></th></tr>
                     </tbody>
                 </table>
                 <div style="text-align: center;" class="btnHuy">

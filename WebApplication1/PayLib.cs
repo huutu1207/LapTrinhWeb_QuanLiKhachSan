@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using WebApplication1;
-namespace NgoMinhTri
+namespace WebApplication1
 {
     public class PayLib
     {
