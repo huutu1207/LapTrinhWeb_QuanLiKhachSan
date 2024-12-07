@@ -16,7 +16,6 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <!-- Mã phòng (readonly) -->
         <div class="form-group">
             @Html.LabelFor(model => model.MaPH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,7 +24,6 @@
             </div>
         </div>
 
-        <!-- Số phòng -->
         <div class="form-group">
             @Html.LabelFor(model => model.SoPH, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -34,7 +32,6 @@
             </div>
         </div>
 
-        <!-- Ngày CheckIn -->
         <div class="form-group">
             @Html.Label("Ngày CheckIn", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -43,7 +40,6 @@
             </div>
         </div>
 
-        <!-- Ngày CheckOut -->
         <div class="form-group">
             @Html.Label("Ngày CheckOut", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -64,7 +60,6 @@
             </div>
         </div>
 
-        <!-- Mô tả -->
         <div class="form-group">
             <textarea name="MoTa" id="mota">@ViewBag.MoTa</textarea>
             <script>
@@ -76,7 +71,6 @@
 
         </div>
 
-        <!-- Trạng thái -->
         <div class="form-group">
             @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -87,8 +81,6 @@
             </div>
         </div>
 
-
-        <!-- Giá -->
         <div class="form-group">
             @Html.LabelFor(model => model.Gia, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -97,7 +89,6 @@
             </div>
         </div>
 
-        <!-- Loại phòng -->
         <div class="form-group">
             @Html.LabelFor(model => model.MaLoai, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -119,7 +110,7 @@
                 @Html.ValidationMessageFor(model => model.DienTich, "", new { @class = "text-danger" })
             </div>
         </div>
-        <!-- Nút Lưu và Quay lại -->
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary text-white" />
