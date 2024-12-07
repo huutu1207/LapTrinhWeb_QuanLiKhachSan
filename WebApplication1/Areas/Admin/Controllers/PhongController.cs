@@ -416,7 +416,7 @@ namespace WebApplication1.Areas.Admin.Controllers
             db.SaveChanges();
 
             // Điều hướng lại trang lịch sử
-            return RedirectToAction("Chitietphong", new { MaPH = maPH});
+            return RedirectToAction("Chitietphong", new { MaPH = maPH });
         }
     }
 }
