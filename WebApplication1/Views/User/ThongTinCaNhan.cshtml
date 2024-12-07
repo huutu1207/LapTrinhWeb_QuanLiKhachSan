@@ -32,7 +32,14 @@
     </div>
 
     <div class="profile-actions">
-        <a href="@Url.Action("SuaProfile", new { id = Model.MaKH })" class="btn-edit-profile">Edit Profile</a>
+       <table>
+           <tr>
+               <a href="@Url.Action("SuaProfile", new { id = Model.MaKH })" class="btn-edit-profile">Sửa thông tin</a>
+           </tr>
+           <tr>
+               <a href="@Url.Action("ThayDoiMatKhau", new { id = Model.MaKH })" class="btn-edit-profile">Đổi mật khẩu</a>
+           </tr>
+       </table>
     </div>
 </div>
 

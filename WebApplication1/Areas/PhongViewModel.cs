@@ -17,6 +17,9 @@ namespace WebApplication1.Areas
     public class KhachHangDatPhongViewModel
     {
         public string MaKH { get; set; }
+        public string MaDP { get; set; }
+        public string MaPH { get; set; }
+
         public string TenKH { get; set; }
         public string DiaChi { get; set; }
         public string SDT { get; set; }

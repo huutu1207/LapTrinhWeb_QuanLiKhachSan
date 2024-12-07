@@ -128,6 +128,7 @@
           <Property Name="Username" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="ChucVu" Type="nvarchar" MaxLength="50" />
+          <Property Name="DienThoai" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PHONG">
           <Key>
@@ -237,6 +238,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MENU_MENU">
+          <End Role="MENU" Type="Self.MENU" Multiplicity="0..1" />
+          <End Role="MENU1" Type="Self.MENU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MENU1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_PHONG_LOAIPHONG">
           <End Role="LOAIPHONG" Type="Self.LOAIPHONG" Multiplicity="0..1" />
           <End Role="PHONG" Type="Self.PHONG" Multiplicity="*" />
@@ -286,6 +299,10 @@
           <AssociationSet Name="FK_DATPHONG_PHONG" Association="Self.FK_DATPHONG_PHONG">
             <End Role="PHONG" EntitySet="PHONG" />
             <End Role="DATPHONG" EntitySet="DATPHONG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MENU_MENU" Association="Self.FK_MENU_MENU">
+            <End Role="MENU" EntitySet="MENU" />
+            <End Role="MENU1" EntitySet="MENU" />
           </AssociationSet>
           <AssociationSet Name="FK_PHONG_LOAIPHONG" Association="Self.FK_PHONG_LOAIPHONG">
             <End Role="LOAIPHONG" EntitySet="LOAIPHONG" />
@@ -416,6 +433,8 @@
           <Property Name="MenuLink" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="OrderNumber" Type="Int32" />
+          <NavigationProperty Name="MENU1" Relationship="QL_KhachSanModel.FK_MENU_MENU" FromRole="MENU" ToRole="MENU1" />
+          <NavigationProperty Name="MENU2" Relationship="QL_KhachSanModel.FK_MENU_MENU" FromRole="MENU1" ToRole="MENU" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -430,6 +449,7 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ChucVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DienThoai" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PHONG">
           <Key>
@@ -596,7 +616,23 @@
             <End Role="LOAIPHONG" EntitySet="LOAIPHONGs" />
             <End Role="PHONG" EntitySet="PHONGs" />
           </AssociationSet>
+          <AssociationSet Name="FK_MENU_MENU" Association="QL_KhachSanModel.FK_MENU_MENU">
+            <End Role="MENU" EntitySet="MENUs" />
+            <End Role="MENU1" EntitySet="MENUs" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_MENU_MENU">
+          <End Type="QL_KhachSanModel.MENU" Role="MENU" Multiplicity="0..1" />
+          <End Type="QL_KhachSanModel.MENU" Role="MENU1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MENU">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MENU1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -724,6 +760,7 @@
           <EntitySetMapping Name="NHANVIENs">
             <EntityTypeMapping TypeName="QL_KhachSanModel.NHANVIEN">
               <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
                 <ScalarProperty Name="MaNV" ColumnName="MaNV" />
                 <ScalarProperty Name="HoTen" ColumnName="HoTen" />
                 <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />

@@ -223,6 +223,8 @@
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserProfileViewModel.cs" />
+    <Compile Include="MomoConfig.cs" />
+    <Compile Include="MomoResponse.cs" />
     <Compile Include="PayCompare.cs" />
     <Compile Include="PayLib.cs" />
     <Compile Include="PayUtil.cs" />
@@ -365,6 +367,11 @@
     <Content Include="Views\DatPhong\PaymentConfirm.cshtml" />
     <Content Include="Views\User\QuenMatKhau.cshtml" />
     <Content Include="Views\LienHe\GuiLienHe.cshtml" />
+    <Content Include="Views\DatPhong\ReturnUrl.cshtml" />
+    <Content Include="Views\DatPhong\Error.cshtml" />
+    <Content Include="Views\User\DatLaiMatKhau.cshtml" />
+    <Content Include="Views\User\XacNhanEmailQuenMK.cshtml" />
+    <Content Include="Views\User\ThayDoiMatKhau.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
