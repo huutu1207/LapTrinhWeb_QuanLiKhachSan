@@ -23,13 +23,20 @@
             <tr>
                 <th>Ảnh</th>
                 <td>
-                    <img src="~/Images/@Model.Anh" alt=" @Model.SoPH" style="max-width: 200px;" />
+                    <img src="~/Images/Sliders/@Model.Anh" alt=" @Model.SoPH" style="max-width: 200px;" />
                 </td>
             </tr>
             <tr>
                 <th>Mô tả</th>
                 <td>
-                    @Html.Raw(@Model.Mota.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+                    @if (string.IsNullOrEmpty(Model.Mota?.Trim()))
+                    {
+                        <p> </p>
+                    }
+                    else
+                    {
+                        @Html.Raw(Model.Mota.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+                    }
                 </td>
             </tr>
             <tr>
