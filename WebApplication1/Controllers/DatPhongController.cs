@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using NgoMinhTri;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -147,7 +146,8 @@ namespace WebApplication1.Controllers
             pay.AddRequestData("vnp_Version", "2.1.0");
             pay.AddRequestData("vnp_Command", "pay");
             pay.AddRequestData("vnp_TmnCode", tmnCode);
-            pay.AddRequestData("vnp_Amount", ((TempData["DatPhongInfo"] as DatPhongInfo).DonGia * 100).ToString());
+            pay.AddRequestData("vnp_Amount", ((Int32)(TempData["DatPhongInfo"] as DatPhongInfo).DatCoc * 100).ToString());
+            //pay.AddRequestData("vnp_Amount", (200000 * 100).ToString());
             pay.AddRequestData("vnp_CreateDate", DateTime.Now.ToString("yyyyMMddHHmmss"));
             pay.AddRequestData("vnp_CurrCode", "VND");
             pay.AddRequestData("vnp_IpAddr", PayUtil.GetIpAddress());

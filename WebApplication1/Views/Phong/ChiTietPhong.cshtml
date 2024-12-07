@@ -26,14 +26,14 @@
                             <a href="@Url.Action("DatPhong", "DatPhong", new { MaPH = Model.MaPH })" class="booking-now-btn">Booking Now</a>
                         </div>
                         <div class="danhgia">
-                            <span  data-value="1"><i class="fas fa-star"></i></span>
-                            <span  data-value="2"><i class="fas fa-star"></i></span>
-                            <span  data-value="3"><i class="fas fa-star"></i></span>
-                            <span  data-value="4"><i class="fas fa-star"></i></span>
-                            <span  data-value="5"><i class="fas fa-star"></i></span>
+                            <span data-value="1"><i class="fas fa-star"></i></span>
+                            <span data-value="2"><i class="fas fa-star"></i></span>
+                            <span data-value="3"><i class="fas fa-star"></i></span>
+                            <span data-value="4"><i class="fas fa-star"></i></span>
+                            <span data-value="5"><i class="fas fa-star"></i></span>
                         </div>
-                        
-                        <p class="ratingtext"> (@Math.Round(ViewBag.Avg, 1)/ 5.0)</p>
+
+                        <p class="ratingtext"> (@(Math.Round(ViewBag.Avg, 1)) / 5.0)</p>
                         <h2>@(Model.Gia.HasValue ? Model.Gia.Value.ToString("#,0") : "0") VND <span>/Pernight</span></h2>
                         <table>
                             <tbody>
@@ -49,9 +49,16 @@
                             </tbody>
                         </table>
                         <p class="f-para">
-                                @Html.Raw(@Model.Mota.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
-                        </p>
-                    </div>
+                            @if (string.IsNullOrEmpty(Model.Mota?.Trim()))
+                            {
+                            <p> </p>
+                        }
+                        else
+                        {
+                            @Html.Raw(Model.Mota.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+                        }
+                            </p>
+                        </div>
                 </div>
                 <!-- Phần đánh giá -->
                 <div class="rd-reviews">
