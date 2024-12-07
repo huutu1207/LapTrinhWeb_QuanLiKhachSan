@@ -241,6 +241,82 @@ namespace WebApplication1.Areas.Admin.Controllers
             return View(phong);
         }
 
+        [HttpGet]
+        public ActionResult HuyDatPhong(string MaPH)
+        {
+            // Kiểm tra phòng tồn tại
+            var phong = db.PHONGs.SingleOrDefault(p => p.MaPH == MaPH);
+            if (phong == null)
+            {
+                TempData["ErrorMessage"] = "Phòng không tồn tại.";
+                return RedirectToAction("DanhSachPhong");
+            }
+
+            // Lấy danh sách khách hàng đã đặt phòng
+            var danhSachDatPhong = db.DATPHONGs.Where(dp => dp.MaPH == MaPH).ToList();
+            var danhSachKhachHang = new List<HuyDatPhongViewModel>();
+
+            foreach (var dp in danhSachDatPhong)
+            {
+                var khachHang = db.KHACHHANGs.FirstOrDefault(kh => kh.MaKH == dp.MaKH);
+                if (khachHang != null)
+                {
+                    danhSachKhachHang.Add(new HuyDatPhongViewModel
+                    {
+                        MaKH = khachHang.MaKH,
+                        TenKH = khachHang.HoTen,
+                        MaPH = phong.MaPH,
+                        SoPH = phong.SoPH,
+                        NgayNhan = dp.NgayNhan,
+                        NgayTra = dp.NgayTra
+                    });
+                }
+            }
+
+            ViewBag.DanhSachKhachHang = danhSachKhachHang;
+            return View(phong);
+        }
+
+
+
+        [HttpPost]
+        public ActionResult HuyDatPhong(string MaPH, string MaKH)
+        {
+            try
+            {
+                // Kiểm tra đặt phòng
+                var datphong = db.DATPHONGs.SingleOrDefault(dp => dp.MaPH == MaPH && dp.MaKH == MaKH);
+                if (datphong == null)
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy thông tin đặt phòng.";
+                    return RedirectToAction("DanhSachPhong");
+                }
+
+                // Xóa thông tin đặt phòng
+                db.DATPHONGs.Remove(datphong);
+
+                // Nếu không còn đặt phòng nào liên quan đến phòng này, cập nhật trạng thái phòng
+                if (!db.DATPHONGs.Any(dp => dp.MaPH == MaPH))
+                {
+                    var phong = db.PHONGs.SingleOrDefault(p => p.MaPH == MaPH);
+                    if (phong != null)
+                    {
+                        phong.TrangThai = "Available";
+                    }
+                }
+
+                // Lưu thay đổi
+                db.SaveChanges();
+
+                TempData["SuccessMessage"] = "Hủy đặt phòng thành công!";
+                return RedirectToAction("DanhSachPhong");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Đã xảy ra lỗi: {ex.Message}";
+                return RedirectToAction("DanhSachPhong");
+            }
+        }
 
 
         [HttpGet]

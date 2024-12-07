@@ -23,6 +23,15 @@ namespace WebApplication1.Areas
         public DateTime? NgayNhan { get; set; }
         public DateTime? NgayTra { get; set; }
     }
+    public class HuyDatPhongViewModel
+    {
+        public string MaKH { get; set; } 
+        public string TenKH { get; set; }
+        public string MaPH { get; set; }
+        public string SoPH { get; set; }
+        public DateTime? NgayNhan { get; set; }
+        public DateTime? NgayTra { get; set; }
+    }
 
 
 }
