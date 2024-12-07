@@ -168,6 +168,7 @@
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CMMD.cs" />
+    <Compile Include="Models\DanhGiaPhong.cs" />
     <Compile Include="Models\DATDICHVU.cs">
       <DependentUpon>QL_KhachSan.tt</DependentUpon>
     </Compile>

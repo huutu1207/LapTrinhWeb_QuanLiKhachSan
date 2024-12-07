@@ -3,6 +3,7 @@
     Layout = null;
 }
 <link rel="stylesheet" href="~/StyleCSS/DangNhap.css" />
+
 <div class="login-page">
     <div class="login-container">
         <div class="form-container">
@@ -42,7 +43,7 @@
                     </div>
                     <a href="@Url.Action("QuenMatKhau", "User")" class="forgot-password">Forgot password?</a>
                 </div>
-
+                <h4 style="color:red; text-align:center;">@ViewBag.ThongBao</h4>
                 <div class="nut">
                     <button type="submit" class="btn-login">Log in</button>
                     <button type="button" class="btn-google">
@@ -52,7 +53,7 @@
                     </button>
                     <button type="button" class="btn-google">
                         <a href="@Url.Action("LoginWithFacebook", "User")" class="aaa" onclick="login();">
-                        <img src="~/Images/facebook.png" alt="Icon" class="btn-icon"> Login with Facebook
+                            <img src="~/Images/facebook.png" alt="Icon" class="btn-icon"> Login with Facebook
                         </a>
                     </button>
                 </div>
