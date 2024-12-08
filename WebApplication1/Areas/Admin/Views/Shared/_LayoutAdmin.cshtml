@@ -201,6 +201,12 @@
                     <a class="nav-link active" href="@Url.Action("DanhSachKhachHang", "QL_KhachHang", new { area = "Admin" })">Quản lý khách hàng</a>
                 </li>
             }
+            @if (Session["UserChucVu"] != null && (Session["UserChucVu"].ToString() == "Le tan" || Session["UserChucVu"].ToString() == "Quan ly"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("LichSuTraPhong", "Phong", new { area = "Admin" })">Lịch sử trả phòng</a>
+                </li>
+            }
         </ul>
 
     </div>

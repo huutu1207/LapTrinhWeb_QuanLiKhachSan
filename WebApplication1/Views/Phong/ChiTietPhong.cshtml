@@ -177,14 +177,13 @@
         }
     });
 
-    // Kiểm tra tính khả dụng của phòng khi form được submit
     $("#reservation-form").submit(function (event) {
-        event.preventDefault(); // Ngừng hành động mặc định của form (không tải lại trang)
+        event.preventDefault(); 
 
         // Lấy dữ liệu từ form
         var checkIn = $("#date-in").val();
         var checkOut = $("#date-out").val();
-        var maPH = "@Model.MaPH";  // Giả sử bạn truyền mã phòng từ View
+        var maPH = "@Model.MaPH";  
 
         // Kiểm tra nếu ngày chưa được chọn
         if (!checkIn || !checkOut) {
