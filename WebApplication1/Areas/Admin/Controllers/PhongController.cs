@@ -340,5 +340,11 @@ namespace WebApplication1.Areas.Admin.Controllers
             return RedirectToAction("Chitietphong", new { MaPH = maPH });
         }
 
+        public ActionResult LichSuTraPhong()
+        {
+            var lstraphong = db.LichSuTraPhongs.ToList();
+            return View(lstraphong);
+        }
     }
+
 }
