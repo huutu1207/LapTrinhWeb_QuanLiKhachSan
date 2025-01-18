@@ -74,7 +74,26 @@ namespace WebApplication1.Areas.Admin.Controllers
             foreach (var dp in danhSachDatPhong)
             {
                 var khachHang = db.KHACHHANGs.FirstOrDefault(kh => kh.MaKH == dp.MaKH);
-                if (khachHang != null && dp.MaDP != datphong.MaDP)
+                if (datphong != null)
+                {
+
+                    if (khachHang != null && dp.MaDP != datphong.MaDP)
+                    {
+                        danhSachKhachHang.Add(new KhachHangDatPhongViewModel
+                        {
+                            MaKH = khachHang.MaKH,
+                            MaDP = dp.MaDP,
+                            MaPH = MaPH,
+                            TenKH = khachHang.HoTen,
+                            DiaChi = khachHang.DiaChi,
+                            SDT = khachHang.DienThoai,
+                            NgayNhan = dp.NgayNhan.HasValue ? dp.NgayNhan.Value.Date : (DateTime?)null,
+                            NgayTra = dp.NgayTra.HasValue ? dp.NgayTra.Value.Date : (DateTime?)null
+                        });
+                    }
+
+                }
+                else
                 {
                     danhSachKhachHang.Add(new KhachHangDatPhongViewModel
                     {
@@ -84,10 +103,11 @@ namespace WebApplication1.Areas.Admin.Controllers
                         TenKH = khachHang.HoTen,
                         DiaChi = khachHang.DiaChi,
                         SDT = khachHang.DienThoai,
-                        NgayNhan = dp.NgayNhan?.Date,
-                        NgayTra = dp.NgayTra?.Date
+                        NgayNhan = dp.NgayNhan.HasValue ? dp.NgayNhan.Value.Date : (DateTime?)null,
+                        NgayTra = dp.NgayTra.HasValue ? dp.NgayTra.Value.Date : (DateTime?)null
                     });
                 }
+                
             }
 
             ViewBag.DanhSachKhachHang = danhSachKhachHang;
@@ -288,7 +308,11 @@ namespace WebApplication1.Areas.Admin.Controllers
                 };
 
                 db.LichSuTraPhongs.Add(lichSuTraPhong);
-
+                var dichVuLienQuan = db.DATDICHVUs.Where(dv => dv.MaDP == datphong.MaDP).ToList();
+                if (dichVuLienQuan.Any())
+                {
+                    db.DATDICHVUs.RemoveRange(dichVuLienQuan);
+                }
                 // Cập nhật trạng thái phòng thành "Available"
                 phong.TrangThai = "Available";
 
