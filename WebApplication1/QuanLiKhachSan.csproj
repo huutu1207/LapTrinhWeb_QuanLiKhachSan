@@ -252,9 +252,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Images\anh-sale-2.jpg" />
-    <Content Include="Images\anh-sale-3.png" />
-    <Content Include="Images\anh-sale-hang-1.jpg" />
     <Content Include="Images\AnhPhong\Phong101.jpg" />
     <Content Include="Images\facebook.png" />
     <Content Include="Images\google-icon.png" />
